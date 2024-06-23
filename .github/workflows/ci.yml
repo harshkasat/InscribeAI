@@ -16,7 +16,7 @@ jobs:
       env:
         DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
         DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-      run: docker login -u Zedmate -p bentensmall
+      run: docker login -u $Zedmate -p $bentensmall
     - name: Build the Docker image
       run: docker build -t inscribeai-ci-pipeline .
     - name: Push to Dockerhub
