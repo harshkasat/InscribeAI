@@ -20,4 +20,4 @@ jobs:
     - name: Build the Docker image
       run: docker build -t inscribeai-ci-pipeline .
     - name: Push to Dockerhub
-      run: docker push zedmate/inscribeai-ci-pipeline:latest
+      run: docker push zedmate/inscribeai-ci-pipeline
