@@ -18,6 +18,6 @@ jobs:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: echo "bentensmall" | docker login docker.pkg.github.com -u "Zedmate" --password-stdin
     - name: Build the Docker image
-      run: docker build -t inscribeai-ci-pipeline .
+      run: docker build -t inscribeai-ci-pipeline:latest .
     - name: Push to Dockerhub
       run: docker push zedmate/inscribeai-ci-pipeline:latest
