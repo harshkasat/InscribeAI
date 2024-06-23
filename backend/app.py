@@ -5,7 +5,6 @@ from Redis.LimitingAlgo.limiting_algo import RateLimitExceeded
 from main import Main
 
 app = FastAPI()
-ip_addresses = {}
 
 
 class BlogAiRequest(BaseModel):
@@ -75,13 +74,11 @@ def create_blog(request: BlogAiRequest):
 
 @app.get('/limited')
 def limited(request: Request):
-
-    client = request.client.host
+    ip_address = request.client.host
 
     try:
-        if client not in ip_addresses:
-            ip_addresses[client] = RateLimiter.get_instance('SlidingWindow')
-        if ip_addresses[client].allow_request():
-            return "This is a limited use API"
+        noice = RateLimiter.get_instance('SlidingWindow')
+        noice.allow_request(ip_address)
+        
     except RateLimitExceeded as e:
         raise e

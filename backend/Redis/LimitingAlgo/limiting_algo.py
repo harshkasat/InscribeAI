@@ -8,15 +8,13 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '.
 from Redis.Cache.cache import Cache
 
 
-redis = Cache()
-
 class RateLimiter:
 
     def __init__(self):
-        self.interval = 86400
+        self.interval = 10
         self.limit_per_interval = 3
         self.lock = threading.Lock()
-        self.redi_client = redis.redis_client()
+        self.cache = Cache()
 
 
 class RateLimitExceeded(HTTPException):
@@ -52,15 +50,22 @@ class SlidingWindow(RateLimiter):
         super().__init__()
         self.logs = []
 
-    
-    def allow_request(self):
-        while self.lock:
-            curr = datetime.now()
-            while len(self.logs)>0 and (curr-self.logs[0]).total_seconds()>self.interval:
-                self.logs.pop(0)
+    def allow_request(self, ip):
+        with self.lock:
+            current_time = datetime.now().timestamp()
+            window_start = current_time - self.interval
 
-            if len(self.logs)>=self.limit_per_interval:
+            # Clean up old requests
+            print(ip)
+            boole = self.cache.clean_old_requests(ip, window_start)
+            print(boole)
+            # Count current requests within the window
+            request_count = self.cache.get_request_count(ip, window_start, current_time)
+            print("request_count", request_count)
+            
+            if request_count >= self.limit_per_interval:
                 raise RateLimitExceeded()
             
-            self.logs.append(curr)
+            # Log the current request
+            self.cache.add_request(ip, current_time)
             return True
