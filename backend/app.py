@@ -1,8 +1,11 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException,Request
 from pydantic import BaseModel, Field, ValidationError, field_validator
+from Redis.RateLimiter.rate_limiter import RateLimiter
+from Redis.LimitingAlgo.limiting_algo import RateLimitExceeded
 from main import Main
 
 app = FastAPI()
+ip_addresses = {}
 
 
 class BlogAiRequest(BaseModel):
@@ -68,3 +71,17 @@ def create_blog(request: BlogAiRequest):
 
     except ValidationError as e:
         HTTPException(status_code=400, detail=f'Error when creating blog: {e[0].msg}')
+
+
+@app.get('/limited')
+def limited(request: Request):
+
+    client = request.client.host
+
+    try:
+        if client not in ip_addresses:
+            ip_addresses[client] = RateLimiter.get_instance('SlidingWindow')
+        if ip_addresses[client].allow_request():
+            return "This is a limited use API"
+    except RateLimitExceeded as e:
+        raise e
