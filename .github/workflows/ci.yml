@@ -16,7 +16,7 @@ jobs:
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-      run: echo "dckr_pat_Cy7cSR1_yIu1WTToSWi-gFpFSas" | docker login docker.io -u "Zedmate" --password-stdin
+      run: echo "dckr_pat_Cy7cSR1_yIu1WTToSWi-gFpFSas" | docker login docker.pkg.github.com -u "Zedmate" --password-stdin
     - name: Build the Docker image
       run: docker build -t zedmate/inscribeai-ci-pipeline:latest .
     - name: Push to Dockerhub
