@@ -8,7 +8,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '.
 class Cache:
     def __init__(self):
         self.redis_client = redis.StrictRedis(host='127.0.0.1', port=6379, db=0)
-        self.expiration_time_seconds = 60
+        self.expiration_time_seconds = 86400 # 24 hours
     
     def add_request(self, ip, timestamp):
         key = f"request_log:{ip}"
@@ -21,6 +21,4 @@ class Cache:
     
     def clean_old_requests(self, ip, window_start):
         key = f"request_log:{ip}"
-        boole = self.redis_client.zremrangebyscore(key, '-inf', window_start)
-        return boole
-
+        self.redis_client.zremrangebyscore(key, '-inf', window_start)

@@ -52,21 +52,23 @@ def read_root():
     return {"message": "InscribeAi server is working"}
 
 @app.post('/create_blog/')
-def create_blog(request: BlogAiRequest):
+def create_blog(request: BlogAiRequest, request_ip:Request):
     try:
-        blog_ai = {
-            "blog_name": request.blog_name,
-            "add_website_link": request.add_website_link,
-            "target_audience": request.target_audience,
-            "desired_tone": request.desired_tone,
-        }
+        ip_address = request_ip.client.host
+        if RateLimiter.get_instance('SlidingWindow').allow_request(ip_address):
+            blog_ai = {
+                "blog_name": request.blog_name,
+                "add_website_link": request.add_website_link,
+                "target_audience": request.target_audience,
+                "desired_tone": request.desired_tone,
+            }
 
-        blog_response = Main.main(blog_title=blog_ai["blog_name"], 
-                                  website_url_list=blog_ai["add_website_link"],
-                                  target_audience=blog_ai["target_audience"],
-                                  desired_tone=blog_ai["desired_tone"])
+            blog_response = Main.main(blog_title=blog_ai["blog_name"], 
+                                    website_url_list=blog_ai["add_website_link"],
+                                    target_audience=blog_ai["target_audience"],
+                                    desired_tone=blog_ai["desired_tone"])
 
-        return blog_response
+            return blog_response
 
     except ValidationError as e:
         HTTPException(status_code=400, detail=f'Error when creating blog: {e[0].msg}')
