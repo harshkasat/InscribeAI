@@ -8,7 +8,8 @@ class ConfigLLM():
 
     def __init__(self):
         try:
-            self.gemini_api_key = os.getenv('GEMINI_API_KEY')
+            # self.gemini_api_key = os.getenv('GEMINI_API_KEY')
+            self.gemini_api_key = "AIzaSyCn65BTEOXQSASU111_j0chBZtY8le4laM"
 
             if self.gemini_api_key is None:
                 raise ValueError ("Gemini API key is not given")
