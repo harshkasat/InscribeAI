@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 8080
 
 # Run the FastAPI application using uvicorn server
-CMD ["fastapi", "run", "app/app.py", "--proxy-headers", "--port", "8080"]
+CMD ["fastapi", "run", "app.py", "--proxy-headers", "--port", "8080"]
