@@ -51,6 +51,10 @@ class BlogAiRequest(BaseModel):
 def read_root():
     return {"message": "InscribeAi server is working"}
 
+@app.get("/health")
+def get_health():
+    return {'message': "200"}
+
 @app.post('/create_blog/')
 def create_blog(request: BlogAiRequest, request_ip:Request):
     try:
