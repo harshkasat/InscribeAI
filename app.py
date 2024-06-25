@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException,Request
+from fastapi import FastAPI, HTTPException,Request, status
 from pydantic import BaseModel, Field, ValidationError, field_validator
 from Redis.RateLimiter.rate_limiter import RateLimiter
 from Redis.LimitingAlgo.limiting_algo import RateLimitExceeded
@@ -51,9 +51,9 @@ class BlogAiRequest(BaseModel):
 def read_root():
     return {"message": "InscribeAi server is working"}
 
-@app.get("/health")
+@app.get("/health", status_code=status.HTTP_200_OK)
 def get_health():
-    return {'message': "200"}
+    return {'message': status.HTTP_200_OK}
 
 @app.post('/create_blog/')
 def create_blog(request: BlogAiRequest, request_ip:Request):
