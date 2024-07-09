@@ -1,26 +1,29 @@
-import sys
-import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
-from LLM.Config.llm_config import ConfigLLM
+import markdown
 
 
-class Template(ConfigLLM):
-
-    def __init__(self):
-        super().__init__()
+class Template:
     
-    def generate_template(self, raw_content:str):
+    def generate_template(self, title:str, raw_content:str):
+        html_content = markdown.markdown(raw_content)
 
         try:
-            prompt = f"Can you provide HTML and CSS code for a simple website that displays content? \
-            The website should have a header, a main content area, and a footer. \
-            The header should have a navigation menu with links to different sections of the website. \
-            The main content area should have a section for articles or posts, and the footer should contain contact information. \
-            Please make the design clean and responsive. Here is the content: {raw_content}"
+            index = f"""<!DOCTYPE html> 
+                    <html lang='en'> 
+                    <head> 
+                    <meta charset='UTF-8> 
+                    <meta name='viewport' content='width=device-width, initial-scale=1.0'> 
+                    <title>{title}</title> 
+                    <link rel='stylesheet' href='templates/style.css'> 
+                    </head>
+                    <body>
+                    {html_content}
+                    </body>
+                    </html>
+                    """
 
-            generate_content = self.llm.generate_content(prompt)
+            with open('templates/index.html', 'w') as file:
+                file.write(index)
+                return index
 
-            result +=  generate_content.text +  "\\n"
-            return result
         except Exception as e:
             print(f"When trying to generate HTML template error found: {e}")

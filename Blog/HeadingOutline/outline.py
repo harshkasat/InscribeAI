@@ -2,6 +2,8 @@ import os
 import sys
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+from Blog.Title.title import CreateTitle
+
 
 from LLM.Config.llm_config import ConfigLLM
 
@@ -21,135 +23,49 @@ class CreateHeading(ConfigLLM):
     try:
 
       prompt = f"""Title: {self.title}
-        I have given you some more extentral information: {self.description}. Also use This SEO keyword: {self.keywords} to get more hits.      
-        Create a JSON representation of a blog post based on the provided title. The JSON should contain the main sections, each with multiple subsections, and descriptions. The structure of the JSON should be as follows:
-
+        I'm given you some more context information about blog: {self.description}. 
+        Also use This SEO keyword: {self.keywords} to get more hits.      
+        Create a JSON representation of a blog post based on the provided title.
+        The generated JSON representation must use context information and SEO keywords
+        The structure of the JSON should be as follows:
         {{
           "title": "{self.title}",
           "sections": [
             {{
-              "main_heading": "Main Section 1 Heading",
-              "subsections": [
-                {{
-                  "sub_heading": "Subsection 1.1 Heading",
-                  "description": "Description of Subsection 1.1"
-                }},
-                {{
-                  "sub_heading": "Subsection 1.2 Heading",
-                  "description": "Description of Subsection 1.2"
-                }},
-                {{
-                  "sub_heading": "Subsection 1.3 Heading",
-                  "description": "Description of Subsection 1.3"
-                }}
-              ]
+              "Heading": "Introduction",
+              "Description": "Hook: Start with a captivating sentence, such as a surprising fact, question, or anecdote.
+                              Context: Provide some background information on the topic.
+                              Purpose: Clearly state the goal of the blog post.
+                              Preview: Briefly outline what the reader can expect to learn.",
             }},
             {{
-              "main_heading": "Main Section 2 Heading",
-              "subsections": [
-                {{
-                  "sub_heading": "Subsection 2.1 Heading",
-                  "description": "Description of Subsection 2.1"
-                }},
-                {{
-                  "sub_heading": "Subsection 2.2 Heading",
-                  "description": "Description of Subsection 2.2"
-                }},
-                {{
-                  "sub_heading": "Subsection 2.3 Heading",
-                  "description": "Description of Subsection 2.3"
-                }}
-              ]
+              "Heading":"Section 1: Understanding the Topic"
+              "Description": "Introduce the main concept.
+                              Provide definitions or explanations
+                              Use examples ot illustrate points"
             }},
             {{
-              "main_heading": "Main Section 3 Heading",
-              "subsections": [
-                {{
-                  "sub_heading": "Subsection 3.1 Heading",
-                  "description": "Description of Subsection 3.1"
-                }},
-                {{
-                  "sub_heading": "Subsection 3.2 Heading",
-                  "description": "Description of Subsection 3.2"
-                }},
-                {{
-                  "sub_heading": "Subsection 3.3 Heading",
-                  "description": "Description of Subsection 3.3"
-                }}
-              ]
+              "Heading": "Section 2: Key Components or Skills"
+              "Description": "Break down the main components or skills related to the topics.
+                              Include detailed explanations and relevant examples
+                              Use visuals like charts, graphsm or iamge if applicable"
             }},
             {{
-              "main_heading": "Main Section 4 Heading",
-              "subsections": [
-                {{
-                  "sub_heading": "Subsection 4.1 Heading",
-                  "description": "Description of Subsection 4.1"
-                }},
-                {{
-                  "sub_heading": "Subsection 4.2 Heading",
-                  "description": "Description of Subsection 4.2"
-                }},
-                {{
-                  "sub_heading": "Subsection 4.3 Heading",
-                  "description": "Description of Subsection 4.3"
-                }}
-              ]
+              "Heading": "Section 3: Practical Applications or Steps"
+              "Description": "Explain how to apply the informations or steps to achieve a specific goal.
+                              Porvide a step by step guide or actionable advice.
+                              Include tips, trick and best practices."
             }},
             {{
-              "main_heading": "Main Section 5 Heading",
-              "subsections": [
-                {{
-                  "sub_heading": "Subsection 5.1 Heading",
-                  "description": "Description of Subsection 5.1"
-                }},
-                {{
-                  "sub_heading": "Subsection 5.2 Heading",
-                  "description": "Description of Subsection 5.2"
-                }},
-                {{
-                  "sub_heading": "Subsection 5.3 Heading",
-                  "description": "Description of Subsection 5.3"
-                }}
-              ]
-            }},
-            {{
-              "main_heading": "Main Section 6 Heading",
-              "subsections": [
-                {{
-                  "sub_heading": "Subsection 6.1 Heading",
-                  "description": "Description of Subsection 6.1"
-                }},
-                {{
-                  "sub_heading": "Subsection 6.2 Heading",
-                  "description": "Description of Subsection 6.2"
-                }},
-                {{
-                  "sub_heading": "Subsection 6.3 Heading",
-                  "description": "Description of Subsection 6.3"
-                }}
-              ]
-            }},
-            {{
-              "main_heading": "Main Section 7 Heading",
-              "subsections": [
-                {{
-                  "sub_heading": "Subsection 7.1 Heading",
-                  "description": "Description of Subsection 7.1"
-                }},
-                {{
-                  "sub_heading": "Subsection 7.2 Heading",
-                  "description": "Description of Subsection 7.2"
-                }},
-                {{
-                  "sub_heading": "Subsection 7.3 Heading",
-                  "description": "Description of Subsection 7.3"
-                }}
-              ]
+              "Heading": "Section 4: Challenges and Solutions"
+              "Description": "Discuss common challenges or misconceptions.
+                              Offer solutions or strategies ot overcome these challenges.
+                              User real life examples or case studies to add credibility"
             }}
-          ],
+          ]
           "conclusion": "Conclude your blog post, summarizing key points or providing closing thoughts."
         }}
-        ONLY GIVE A RESPONSE IN JSON FORMAT ONLY WITHOUT USING ```json
+        ONLY GIVE A RESPONSE IN JSON FORMAT ONLY WITHOUT```json
         """
 
       response = self.llm.generate_content(prompt)
@@ -163,5 +79,5 @@ class CreateHeading(ConfigLLM):
 # if __name__ == '__main__':
 
 #   title = CreateTitle(title="Machine Learning", target_audience="Kids", Desired_tone="Professional").create_title()
-#   res = CreateHeading(title=title, description=title).create_heading()
+#   res = CreateHeading(title=title, description=title, keywords=title).create_heading()
 #   print(res)

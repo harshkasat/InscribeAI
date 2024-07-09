@@ -63,9 +63,9 @@ class ScrapeWebsite(ConfigLLM):
         try:
             # Extract headers and paragraphs in order
             data = ''
-            for element in self.parse_content().find_all(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p']):
+            for element in self.parse_content().find_all(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'pre']):
                 text = element.get_text(strip=True)
-                data += (text)
+                data += text + '\n'
             return data
 
         except Exception as e:

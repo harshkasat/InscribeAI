@@ -9,10 +9,11 @@ from LLM.Config.llm_config import ConfigLLM
 # from Blog.Title.title import CreateTitle
 class BlogGeneration(ConfigLLM):
 
-    def __init__(self, json_response:json, title:str) -> None:
+    def __init__(self, json_response:json, title:str,  web_scrape) -> None:
         
         self.json_response = json.loads(json_response)
         self.blog_title = title
+        self.context = web_scrape
         super().__init__()
 
         self.sections = self.json_response['sections']
@@ -20,19 +21,20 @@ class BlogGeneration(ConfigLLM):
 
     def creating_blog(self):
 
-        result = f"** Blog Title: {self.blog_title} ** \n\n "
+        result = f'<h1> {self.blog_title} </h1> \n\n'
+
         try:
             for section in self.sections:
-                main_heading = section['main_heading']
-                subsections = section['subsections']
-                for subsection in subsections:
-                    sub_heading = subsection['sub_heading']
-                    description = subsection['description']
 
-                    description = self.llm.generate_content(f"Use max token you have{description}")
+                blog_prompt = f"I want to write a Content. Below are the headers, context information,\
+                    and key points for each paragraph. Please generate a Content based on this Markdown. \
+                    Heading: {section['Heading']} and key points for each paragraph: {section['Description']}, \
+                    Context:{self.context}." 
 
-                    result +=  f"Main Heading: {main_heading}\n\n Sub Heading: {sub_heading}\n\n Descriptive: {description.text}\n\n\n"
-        
+
+                generate_blog = self.llm.generate_content(blog_prompt)
+
+                result +=  generate_blog.text +  "\\n"
             return result
                     
         except Exception as e:

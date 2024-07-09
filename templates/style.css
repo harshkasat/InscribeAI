@@ -1,67 +1,30 @@
-/* Style for the body */
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    background-color: #f4f4f4;
     margin: 0;
-    padding: 0;
-}
-
-/* Style for the container */
-.container {
-    max-width: 800px;
-    margin: 0 auto;
     padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Style for headings */
-h1, h2, h3 {
+    background-color: #f9f9f9;
+  }
+  h1, h2, h3 {
     color: #333;
-}
-
-/* Style for paragraphs */
-p {
-    margin: 1em 0;
-}
-
-/* Style for ordered lists */
-ol {
-    margin: 1em 0;
-    padding-left: 20px;
-}
-
-/* Style for unordered lists */
-ul {
-    margin: 1em 0;
-    padding-left: 20px;
-}
-
-/* Style for list items */
-li {
-    margin: 0.5em 0;
-}
-
-/* Style for strong text */
-strong {
-    font-weight: bold;
-}
-
-/* Style for code blocks */
-pre, code {
-    background-color: #f4f4f4;
-    padding: 10px;
-    border-radius: 5px;
-    overflow-x: auto;
-    font-family: 'Courier New', Courier, monospace;
-}
-
-/* Style for the footer */
-.footer {
-    text-align: center;
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #333;
-    color: #fff;
-}
+  }
+  h1 {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+  }
+  h2 {
+    font-size: 2em;
+    margin-bottom: 0.75em;
+  }
+  h3 {
+    font-size: 1.5em;
+    margin-bottom: 1em;
+  }
+  p {
+    margin-bottom: 1em;
+  }
+  ol, ul {
+    margin-bottom: 1em;
+    padding-left: 40px;
+  }
+  

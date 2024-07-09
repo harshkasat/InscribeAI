@@ -12,12 +12,12 @@ jobs:
 
     runs-on: self-hosted
 
-    steps:
-    - name: Pull Docker Image
-      run: sudo docker pull zedmate/inscribeai-ci-pipeline:latest
+    # steps:
+    # - name: Pull Docker Image
+    #   run: sudo docker pull zedmate/inscribeai-ci-pipeline:latest
 
-    - name: Delete old Docker Container
-      run: sudo docker rm -f inscribeai-ci-pipeline-container || true
+    # - name: Delete old Docker Container
+    #   run: sudo docker rm -f inscribeai-ci-pipeline-container || true
 
-    - name: Run Docker Container
-      run: sudo docker run -d -p 80:80 --name inscribeai-ci-pipeline-container zedmate/inscribeai-ci-pipeline
+    # - name: Run Docker Container
+    #   run: sudo docker run -d -p 80:80 --name inscribeai-ci-pipeline-container zedmate/inscribeai-ci-pipeline

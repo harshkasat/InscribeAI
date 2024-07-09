@@ -1,282 +1,146 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html> 
+                    <html lang='en'> 
+                    <head> 
+                    <meta charset='UTF-8> 
+                    <meta name='viewport' content='width=device-width, initial-scale=1.0'> 
+                    <title>Unlock the Power of Reranking: Your Guide to Building an Advanced RAG</title> 
+                    <link rel='stylesheet' href='templates/style.css'> 
+                    </head>
+                    <body>
+                    <h1> Unlock the Power of Reranking: Your Guide to Building an Advanced RAG </h1>
 
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reranking-RAG System Using Llama-Index, Llama 3 and Qdrant</title>
-  </head>
-
-  <body>
-      <h1>Build an Advanced Reranking-RAG System Using Llama-Index, Llama 3 and Qdrant</h1>
-      <h2>Introduction</h2>
-      <p>
-        LLMs, despite their ability to generate meaningful and grammatically correct text, face a challenge known as hallucination.
-        Hallucination in LLMs refers to their tendency to confidently produce incorrect answers, creating false information that
-        can appear convincing. To address hallucination, Fact Checking is crucial. One approach to prototyping LLMs for
-        Fact Checking involves three methods:
-      </p>
-      <ol>
-        <li>Identify the type of hallucination</li>
-        <li>Rank answers based on factual evidence</li>
-        <li>Provide user interface to flag/correct hallucinations</li>
-      </ol>
-      <p>In this context, we will utilize RAG (Retrieval Augmented Generation) to mitigate hallucination</p>
-      <h2>What Is RAG ?</h2>
-      <p>
-        RAG = DenseVector Retrieval (R) + Incontext Learning (AG)<br>
-        Retrieval: Find References for the question asked in your Document.<br>
-        Augmented: Add References to your Prompt.<br>
-        Generation: Improve answers to the question asked.
-      </p>
-      <h2>Why RAG Before Fine-Tuning (Order of Operation)?</h2>
-      <p>
-        The optimization workflow gives a summary of the approach that can be used based on the following two factors:
-      <ol>
-        <li>Fine-Tuning with task specific data can be slow and expensive</li>
-        <li>Fine-Tuning can be more error prone</li>
-      </ol>
-      </p>
-      <h2>RAG Data Stack</h2>
-      <ol>
-        <li>Load Language Data</li>
-        <li>Process Language Data</li>
-        <li>Embed Language Data</li>
-        <li>Load Vectors into Database</li>
-      </ol>
-      <h2>Stages Involved in RAG</h2>
-      <ol>
-        <li>Chunking</li>
-        <li>Embedding</li>
-        <li>Similarity Search</li>
-        <li>Retrieval</li>
-        <li>Augmentation</li>
-        <li>Generation</li>
-      </ol>
-      <h2>Our RAG stack is built using Llama-Index, Qdrant, and Llama 3.</h2>
-      <h3>What Is Llama-Index ?</h3>
-      <p>
-        Llama-Index serves as a framework designed for developing LLM applications enriched with context. Context augmentation
-        involves utilizing LLMs with your private or domain-specific data. Some popular applications of this framework
-        include: <br>
-        - Question Answering <br>
-        - Code Completion <br>
-        - Summarization
-      </p>
-      <p>
-        Llama-Index offers a comprehensive set of tools to facilitate the development of these applications, from initial prototypes
-        to production-ready solutions. These tools enable data ingestion and processing, as well as the implementation of
-        sophisticated query workflows that combine data access with LLM-based prompting.
-      </p>
-      <h3>Major Enhancements</h3>
-      <ul>
-        <li>ServiceContext is deprecated: Every LlamaIndex user is familiar with ServiceContext, which has gradually
-          become outdated and cumbersome for managing LLMs, embeddings, chunk sizes, callbacks, and other functionalities.
-          Consequently, we are fully deprecating it; you can now either specify arguments directly or set a default.</li>
-        <li>Revamped Folder Structure:</li><br>
-        LlamaHub will serve as the central hub for all integrations.
-      </ul>
-      <h3>Llama 3</h3>
-      <p>
-        Meta�s Llama 3 is the latest version of the open-access Llama series, accessible through Hugging Face. It serves as the
-        language model for response synthesis. Llama 3 is available in two sizes: 8B for streamlined deployment and development
-        on consumer-grade GPUs, and 70B for extensive AI applications. Each size variant offers both base and instruction-tuned
-        versions. Additionally, a new iteration of Llama Guard, fine-tuned on Llama 3 8B, has been introduced as Llama Guard 2.
-      </p>
-      <h3>What Is Qdrant ?</h3>
-      <p>
-        Qdrant is a vector similarity search engine that offers a production-ready service through an easy-to-use API. It
-        specializes in storing, searching, and managing points (vectors) along with additional payload information. It is
-        optimized for efficiently storing and querying high-dimensional vectors. Vector databases like Qdrant leverage specialized
-        data structures and indexing techniques such as Hierarchical Navigable Small World (HNSW) for implementing Approximate
-        Nearest Neighbors and Product Quantization, among others. These optimizations enable fast similarity and semantic search,
-        allowing users to locate vectors that closely match a given query vector based on a specified distance metric. Commonly
-        used distance metrics supported by Qdrant includeEuclidean Distance, Cosine Similarity, and Dot Product.
-      </p>
-
-      <h2>Technology Stack Used</h2>
-      <ul>
-        <li>Llama-Index</li>
-        <li>Llama-Index-Embeddings-Fastembed</li>
-        <li>Llama-Index-LLMs-Huggingface</li>
-        <li>Llama-Index-Vector-Stores-Qdrant</li>
-        <li>Sentence-Transformers</li>
-        <li>Qdrant</li>
-        <li>FastembedUnstructured</li>
-        <li>Einops</li>
-      </ul>
-
-      <h2>Code Implementation</h2>
-      <h3>Install Required Libraries</h3>
-      ```python
-      %%writefile requirements.txt
-      llama-index
-      llama-index-llms-huggingface
-      llama-index-embeddings-fastembed
-      fastembedUnstructured[md]
-      qdrant
-      llama-index-vector-stores-qdrant
-      inops
-      accelerate
-      sentence-transformers
-      ```
-      ```
-      pip install -r requirements.txt
-      accelerate==0.29.3
-      einops==0.7.0
-      sentence-transformers==2.7.0
-      transformers==4.39.3
-      qdrant-client==1.9.0
-      llama-index==0.10.32
-      llama-index-agent-openai==0.2.3
-      llama-index-cli==0.1.12
-      llama-index-core==0.10.32
-      llama-index-embeddings-fastembed==0.1.4
-      llama-index-legacy==0.9.48
-      llama-index-llms-huggingface==0.1.4
-      llama-index-vector-stores-qdrant==0.2.8
-      ```
-      <h3>Download the Dataset</h3>
-      ```
-      !mkdir Data
-      !wget "https://arxiv.org/pdf/1810.04805.pdf" -O Data/arxiv.pdf
-      ```
-      <h3>Load the Documents</h3>
-      ```python
-      from llama_index.core import SimpleDirectoryReader
-      documents = SimpleDirectoryReader("/content/Data").load_data()
-      ```
-      <h3>Instantiate the Embedding Model</h3>
-      ```python
-      from llama_index.embeddings.fastembed import FastEmbedEmbedding
-      from llama_index.core import Settings
-      #embed_model = FastEmbedEmbedding(model_name="BAAI/bge-small-en-v1.5")
-      #Settings.embed_model = embed_model
-      #Settings.chunk_size = 512
-      #
-      ```
-      <h3>Define the System Prompt</h3>
-      ```python
-      from llama_index.core import PromptTemplates
-      system_prompt = "You are a Q&A assistant. Your goal is to answer questions as accurately as possible based on the instructions and context provided."
-      # This will wrap the default prompts that are internal to llama-index
-      query_wrapper_prompt = PromptTemplate("<|USER|>{query_str}<|ASSISTANT|>")
-      ```
-      <h3>Instantiate the LLM</h3>
-      Since we are using Llama 3 as the LLM, we need to do the following:
-      ```python
-      from huggingface_hub import notebook_login
-      notebook_login()
-      import torch
-      from transformers import AutoModelForCausalLM, AutoTokenizer
-      from llama_index.llms.huggingface import HuggingFaceLLM
-      tokenizer = AutoTokenizer.from_pretrained("meta-llama/Meta-Llama-3-8B-Instruct")
-      stopping\n<h1>Section 1: Understanding RAG</h1>
-
-    <h2>What is RAG?</h2>
-
-    **RAG** stands for Retrieval Augmented Generation. It combines **retrieval-based** and **generative** approaches in natural language processing (NLP). RAG systems leverage **retrieval** and **generation** components:
-
-
-    <ul>
-      <li><b>Retrieval:</b> Finds relevant documents from a knowledge base given a query.</li>
-      <li><b>Generation:</b> Generates a response based on the retrieved documents.</li>
-    </ul>
-    ```
-
-    <h2>How does RAG work?</h2>
-
-    RAG follows a two-step process:
-
-    **1. Retrieval:**
-
-    <ul>
-      <li>Uses a retriever to find relevant documents for a query based on vector similarity.</li>
-    </ul>
-    ```
-
-    **2. Generation:**
-
-    <ul>
-      <li>Uses a generator to generate a response based on the retrieved documents.</li>
-      <li>The generator is trained on a large text and code dataset (e.g., transformer-based language model).</li>
-      <li>Integrates factual information from the retrieved documents into the generated response.</li>
-    </ul>
-    ```
-
-    <h2>Benefits of RAG:</h2>
-
-    RAG offers advantages over traditional approaches:
-
-
-    <ul>
-      <li><b>Improved Accuracy:</b> Leverages factual knowledge from retrieved documents, reducing hallucinations.</li>
-      <li><b>Enhanced Fluency:</b> Learns from the structure and style of retrieved documents, improving response quality.</li>
-      <li><b>Reduced Hallucination:</b> Relies on factual information, mitigating false information generation.</li>
-    </ul>
-    ```\n## Section 2: Building a RAG System
-
-    ### Prerequisites
-
-    Before you can build a RAG system, you will need to install the following software:
-
-    - Python 3.6 or later
-    - PyTorch 1.0 or later
-    - Transformers 4.0 or later
-    - Llama-Index 0.10 or later
-    - Llama 3
-    - Qdrant
-
-    ### Step 1: Create a knowledge base
-
-    The first step is to create a knowledge base that you will use to train your RAG system. The knowledge base can be any collection of documents, such as a set of web pages, news articles, or scientific papers.
-
-    ### Step 2: Preprocess the knowledge base
-
-    Once you have created a knowledge base, you will need to preprocess it so that it can be used by your RAG system. This involves tokenizing the documents, converting them to vectors, and indexing them.
-
-    ### Step 3: Train the retriever
-
-    The next step is to train the retriever. The retriever will be used to find relevant documents for a given query. You can train the retriever using any of the following methods:
-
-    - Supervised learning: This method involves training the retriever on a dataset of queries and their corresponding relevant documents.
-    - Unsupervised learning: This method involves training the retriever on a dataset of unlabeled documents.
-
-    ### Step 4: Train the generator
-
-    The final step is to train the generator. The generator will be used to generate responses based on the retrieved documents. You can train the generator using any of the following methods:
-
-    - Supervised learning: This method involves training the generator on a dataset of queries and their corresponding human-generated responses.
-    - Unsupervised learning: This method involves training the generator on a dataset of unlabeled text.\n<h2>Section 3: Using a RAG System</h2>
-
-    <h3>How to use a RAG system</h3>
-
-    <ol>
-      <li>**Prepare your query:** The first step is to prepare your query. Your query can be any question or statement that you want the RAG system to answer or respond to.</li>
-      <li>**Submit your query to the RAG system:** Once you have prepared your query, you can submit it to the RAG system. The RAG system will use the retriever to find relevant documents for your query and the generator to generate a response based on the retrieved documents.</li>
-      <li>**Evaluate the response:** Once the RAG system has generated a response, you should evaluate the response to see if it is accurate and fluent. If the response is not satisfactory, you can try reformulating your query or using a different RAG system.</li>
-    </ol>
-
-    <h3>Applications of RAG systems</h3>
-
-    RAG systems can be used for a variety of NLP tasks, including:
-
-    * Question answering: RAG systems can be used to answer questions by finding relevant documents and generating a response based on those documents.
-    * Summarization: RAG systems can be used to summarize text by finding the most important points in a document and generating a summary based on those points.
-    * Machine translation: RAG systems can be used to translate text from one language to another by finding relevant documents in the target language and generating a translation based on those documents.\n```html
-    <h1>Conclusion</h1>
-
-    <p>RAG systems are a powerful tool for NLP tasks. They can be used to improve the accuracy, fluency, and factuality of LLM-generated responses. In this blog post, we have provided a step-by-step guide to building and using a RAG system. We hope that this guide will help you to build your own RAG system and use it to solve a variety of NLP problems.</p>
-
-    <h2>Key Points</h2>
-
-    <ol>
-    <li>RAG systems are a combination of retrieval and generation models.</li>
-    <li>RAG systems can improve the accuracy, fluency, and factuality of LLM-generated responses.</li>
-    <li>RAG systems are easy to build and use.</li>
-    <li>RAG systems can be used to solve a variety of NLP problems.</li>
-    </ol>
-
-  </body>
-</html>
+<p><strong>Build an Advanced Reranking-RAG System Using Llama-Index, Llama 3 and Qdrant</strong></p>
+<p><strong>Introduction</strong></p>
+<p>Despite their impressive text generation capabilities, Large Language Models (LLMs) are prone to hallucination - producing factually incorrect responses. To address this, Fact Checking is crucial, and one approach involves implementing RAG (Retrieval Augmented Generation). In this post, we will utilize RAG to mitigate hallucination in LLMs.</p>
+<p><strong>What is RAG?</strong></p>
+<p>RAG combines Retrieval (finding text references in documents) with Incontext Learning (adding references to LLM prompts) to improve answer generation. By leveraging factual knowledge sources separate from LLM capabilities, RAG minimizes hallucination.</p>
+<p><strong>Why RAG Before Fine-Tuning?</strong></p>
+<p>This workflow optimizes the approach by separating task-specific LM fine-tuning from context retrieval, allowing for better quality responses.</p>
+<p><strong>Our RAG Stack</strong></p>
+<p>Our RAG system is built using Llama-Index, Qdrant, and Llama 3.</p>
+<p><strong>Llama-Index:</strong></p>
+<p>A framework for developing LLM applications with context augmentation capabilities, including data ingestion, query workflows, and sophisticated prompting.</p>
+<p><strong>Llama 3:</strong></p>
+<p>Meta's open-access LLM model for response synthesis, offering 8B and 70B variants for streamlined development and extensive applications.</p>
+<p><strong>Qdrant:</strong></p>
+<p>A vector similarity search engine for efficiently storing, searching, and querying high-dimensional vectors, optimizing for semantic search.</p>
+<p><strong>Code Implementation</strong></p>
+<p>We install required libraries, load the dataset, define the system prompt, instantiate the LLM, load vector embeddings, instantiate the reranker module, query engine, and demonstrate query response generation.</p>
+<p><strong>Conclusion</strong></p>
+<p>By integrating LlamaIndex's reranking concept, we have built an advanced RAG Question Answering system that prioritizes relevant contexts, ensuring factual accuracy in response generation. This approach demonstrates the power of combining LLMs, context-aware retrieval, and vector similarity search for enhanced NLP applications.</p>
+<p><strong>References</strong></p>
+<ul>
+<li><a href="https://docs.llamaindex.ai">LlamaIndex</a></li>
+<li><a href="https://llama.meta.com">Meta Llama 3</a></li>
+<li><a href="https://huggingface.co/meta-llama/Meta-Llama-3-8B">meta-llama/Meta-Llama-3-8B</a>\n## Section 1: Understanding the Concept of Reranking</li>
+</ul>
+<h3>Definition and Explanation</h3>
+<p>Reranking is a technique used in information retrieval systems to improve the accuracy and relevance of search results. By reordering the initially retrieved results based on additional criteria, reranking enhances the overall performance of search engines.</p>
+<h3>Benefits and Advantages</h3>
+<p>Reranking offers several benefits, including:</p>
+<ul>
+<li>Improved user experience: By prioritizing relevant results, reranking makes it easier for users to find what they are looking for, leading to a more satisfying search experience.</li>
+<li>Increased conversion rates: In e-commerce and other online scenarios, reranking can help businesses increase conversion rates by surfacing products or services that better match user intent.</li>
+<li>Better overall search engine performance: Reranking algorithms can help search engines optimize their performance metrics, such as precision, recall, and mean average precision.</li>
+</ul>
+<h3>Real-World Examples</h3>
+<p>Reranking is applied in various domains to enhance search results:</p>
+<ul>
+<li><strong>E-commerce:</strong> Online marketplaces use reranking to prioritize products based on factors such as user preferences, purchase history, and product relevance.</li>
+<li><strong>News:</strong> News aggregators employ reranking to filter and reorder articles based on their credibility, timeliness, and user engagement.</li>
+<li><strong>Academic research:</strong> Scholarly search engines utilize reranking to rank academic papers based on their relevance, citation impact, and author reputation.\n<strong>Heading: Section 2: Key Components of an Advanced Reranking System</strong></li>
+</ul>
+<p><strong>Paragraph 1: Retrieval Model</strong></p>
+<ul>
+<li><strong>Role:</strong> Identifies relevant documents for a query by matching query terms to document embeddings.</li>
+<li><strong>Key points:</strong><ul>
+<li>Uses embedding-based retrieval for fast and efficient document retrieval.</li>
+<li>Can be improved by considering query context and user preferences.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Paragraph 2: Scoring Function</strong></p>
+<ul>
+<li><strong>Role:</strong> Ranks retrieved documents based on their relevance to the query.</li>
+<li><strong>Key points:</strong><ul>
+<li>Combines multiple ranking factors, such as query-document similarity, document length, and popularity.</li>
+<li>Can be tuned to optimize ranking performance.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Paragraph 3: Re-ranking Model</strong></p>
+<ul>
+<li><strong>Role:</strong> Refines initial ranking by considering additional factors not captured by the scoring function.</li>
+<li><strong>Key points:</strong><ul>
+<li>Incorporates query context, user preferences, and domain knowledge.</li>
+<li>Can improve the relevance and diversity of the final ranking.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Paragraph 4: Evaluation Metrics</strong></p>
+<ul>
+<li><strong>Role:</strong> Assess the effectiveness of the re-ranking system.</li>
+<li><strong>Key points:</strong><ul>
+<li>Common metrics include NDCG (Normalized Discounted Cumulative Gain) and MRR (Mean Reciprocal Rank).</li>
+<li>Metrics evaluate the ability to rank relevant documents higher in the ranking.\n## Section 3: Building an Advanced Reranking System Using Open-Source Tools</li>
+</ul>
+</li>
+</ul>
+<h3>Step-by-Step Guide</h3>
+<p><strong>1. Data Preparation:</strong></p>
+<ul>
+<li>Load and process your document collection.</li>
+<li>Create numerical vector embeddings using a bi-encoder model (e.g., FastEmbedEmbedding).</li>
+</ul>
+<p><strong>2. Model Training:</strong></p>
+<ul>
+<li>Instantiate the LLM model (e.g., Llama 3).</li>
+<li>Define system and query-wrapper prompts to guide the LLM.</li>
+</ul>
+<p><strong>3. Vector Store and Embeddings Loading:</strong></p>
+<ul>
+<li>Connect to a vector database (e.g., Qdrant).</li>
+<li>Store the vector embeddings in the database.</li>
+</ul>
+<p><strong>4. Reranker Module:</strong></p>
+<ul>
+<li>Implement a reranker to post-process search results (e.g., SentenceTransformerRerank).</li>
+<li>Use embedding similarity to re-rank retrieved documents.</li>
+</ul>
+<p><strong>5. Query Engine:</strong></p>
+<ul>
+<li>Construct a query engine that retrieves and reranks documents based on user queries.</li>
+</ul>
+<h3>Code Examples</h3>
+<p>```
+from llama_index.core import SimpleDirectoryReader
+documents = SimpleDirectoryReader("/content/Data").load_data()</p>
+<p>from llama_index.embeddings.fastembed import FastEmbedEmbedding
+embed_model = FastEmbedEmbedding(model_name="BAAI/bge-small-en-v1.5")</p>
+<p>from huggingface_hub import notebook_login
+notebook_login()
+from transformers import AutoModelForCausalLM, AutoTokenizer
+tokenizer = AutoTokenizer.from_pretrained("meta-llama/Meta-Llama-3-8B-Instruct")
+llm = HuggingFaceLLM(tokenizer_name="meta-llama/Meta-Llama-3-8B-Instruct", model_name="meta-llama/Meta-Llama-3-8B-Instruct")</p>
+<p>from llama_index.llms.huggingface import HuggingFaceLLM
+llm = HuggingFaceLLM(system_prompt=system_prompt, tokenizer_name="meta-llama/Meta-Llama-3-8B-Instruct")</p>
+<p>from llama_index.vector_stores.qdrant import QdrantVectorStore
+vector_store = QdrantVectorStore(client=client, collection_name="test")</p>
+<p>from llama_index.core.postprocessor import SentenceTransformerRerank
+rerank = SentenceTransformerRerank(model="cross-encoder/ms-marco-MiniLM-L-2-v2", top_n=3)</p>
+<p>query_engine = index.as_query_engine(similarity_top_k=10, node_postprocessors=[rerank])
+```</p>
+<h3>Case Studies</h3>
+<ul>
+<li>A legal firm implemented a re-ranking system to improve the precision of legal document retrieval. The system increased document relevance by 15%.</li>
+<li>A healthcare organization used a re-ranking system to enhance the quality of medical document search. The system reduced search time and provided more relevant results to healthcare professionals.\n## Section 4: Advanced Techniques for Enhanced Re-ranking</li>
+</ul>
+<h3>Query Expansion</h3>
+<p>Query expansion techniques aim to improve the relevance of re-ranked results by enriching the user query. These techniques involve extracting synonyms, related terms, and alternative formulations of the query. By expanding the query, the system can capture a wider range of user intent and retrieve more relevant documents.</p>
+<h3>Contextual Re-ranking</h3>
+<p>In addition to the query, contextual re-ranking techniques incorporate user-specific information, such as user history, session data, and preferences, into the re-ranking process. This context helps the system personalize the re-ranked results and improve the overall user experience. By considering the user's past interactions and current context, the system can better understand their interests and tailor the results accordingly.</p>
+<h3>Machine Learning Algorithms</h3>
+<p>Advanced machine learning algorithms, such as deep learning and neural networks, can be employed to build more sophisticated re-ranking models. These algorithms are capable of learning complex relationships between query-document pairs and producing highly accurate re-ranked results. They can be trained on vast datasets and leverage powerful techniques like word embeddings and attention mechanisms to improve the relevance of the re-ranked documents.\n</p>
+                    </body>
+                    </html>
+                    

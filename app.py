@@ -86,5 +86,6 @@ def limited(request: Request):
         noice = RateLimiter.get_instance('SlidingWindow')
         noice.allow_request(ip_address)
         
+        return {"message": "You are allowed to request"}
     except RateLimitExceeded as e:
         raise e
