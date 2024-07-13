@@ -17,7 +17,7 @@ app = FastAPI()
 @app.middleware("http")
 async def add_subdomain_to_request(request: Request, call_next):
     host = request.headers.get('host')
-    subdomain = host.split('.')[0] if host and len(host.split('.')) > 2 else None
+    subdomain = host.split('.')[1] if host and len(host.split('.')) > 2 else None
     request.state.subdomain = subdomain
     response = await call_next(request)
     return response
