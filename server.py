@@ -27,9 +27,10 @@ async def add_subdomain_to_request(request: Request, call_next):
 @app.get("/", response_class=HTMLResponse)
 async def read_blog(request: Request):
     subdomain = request.state.subdomain
+    print(subdomain)
 
     if subdomain is None or subdomain == 'www':
-        return JSONResponse(content={"message": "Welcome to the main page"})
+        return JSONResponse(content={"message": "Welcome to the main page"}, status_code=200)
     else:
         subdomain = subdomain[8:]
 
