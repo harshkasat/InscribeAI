@@ -35,6 +35,7 @@ async def read_blog(request: Request):
         subdomain = subdomain[8:]
 
         response = supabase.from_("blog_posts").select("*").eq("subdomain", subdomain).execute()
+        print(response)
         if not response.data:
             raise HTTPException(status_code=404, detail="Blog post not found!")
 
