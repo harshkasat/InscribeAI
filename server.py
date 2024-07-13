@@ -19,7 +19,7 @@ app = FastAPI()
 @app.middleware("http")
 async def add_subdomain_to_request(request: Request, call_next):
     host = request.headers.get('host')
-    subdomain = host.split('.')[0] if host and len(host.split('.')) > 2 else 'None'
+    subdomain = host.split('.')[0] if host and len(host.split('.')) > 2 else None
     request.state.subdomain = subdomain
     response = await call_next(request)
     return response
@@ -28,8 +28,8 @@ async def add_subdomain_to_request(request: Request, call_next):
 async def read_blog(request: Request):
     subdomain = request.state.subdomain
 
-    if subdomain == '' or subdomain == 'www':
-        return {"message": "Welcome to the main site!"}
+    if subdomain is None or subdomain == 'www':
+        return JSONResponse(content={"message": "Welcome to the main page"})
     else:
         subdomain = subdomain[8:]
 
