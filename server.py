@@ -27,36 +27,33 @@ async def add_subdomain_to_request(request: Request, call_next):
 @app.get("/", response_class=HTMLResponse)
 async def read_blog(request: Request):
     subdomain = request.state.subdomain
-    print(subdomain)
 
     if subdomain is None or subdomain == 'www':
         return JSONResponse(content={"message": "Welcome to the main page"}, status_code=200)
-    else:
-        subdomain = subdomain[8:]
 
-        response = supabase.from_("blog_posts").select("*").eq("subdomain", subdomain).execute()
-        print(response)
-        if not response.data:
-            raise HTTPException(status_code=404, detail="Blog post not found!")
+    print(subdomain)
+    response = supabase.from_("blog_posts").select("*").eq("subdomain", subdomain).execute()
+    if not response.data:
+        raise HTTPException(status_code=404, detail="Blog post not found!")
 
-        blog_post = response.data[0]
+    blog_post = response.data[0]
 
-        html_content = blog_post["html_content"]
-        css_content = blog_post["css_content"]
+    html_content = blog_post["html_content"]
+    css_content = blog_post["css_content"]
 
-        combined_content = f"""
-        <html>
-            <head>
-                <style>
-                    {css_content}
-                </style>
-            </head>
-            <body>
-                {html_content}
-            </body>
-        </html>
-        """
-        return HTMLResponse(content=combined_content)
+    combined_content = f"""
+    <html>
+        <head>
+            <style>
+                {css_content}
+            </style>
+        </head>
+        <body>
+            {html_content}
+        </body>
+    </html>
+    """
+    return HTMLResponse(content=combined_content)
 
 @app.post("/create_blog/")
 async def create_blog_post(
