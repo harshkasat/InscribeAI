@@ -45,11 +45,16 @@ class CreateTitle(ConfigLLM):
             but you don't want to use this subdomain: {except_subdomain} because this are already used by other users"""
 
             response = self.llm.generate_content(prompt)
-
-            return response.text
+            for value in except_subdomain.data:
+                if value['subdomain'] == response.text:
+                    print(value['subdomain'] + ' ' + response.text)
+                    self.create_subdomain()
+                else:
+                    print(response.text)
+                    return response.text
         except Exception as e:
             print(f'When trying to create subdomain error found: {e}')
 
 # if __name__ == '__main__':
-#     title = CreateTitle(title="Machine Learning", target_audience="Kids", Desired_tone="Professional")
-#     print(title.create_title())
+#     title = CreateTitle(title="Build an Advanced Reranking RAG", target_audience="Beginner", Desired_tone="Informative")
+#     (title.create_subdomain())
