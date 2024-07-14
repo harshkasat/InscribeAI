@@ -42,7 +42,7 @@ class CreateTitle(ConfigLLM):
 
             prompt = f"""I need a sub-domain around the title{self.title}. 
             It does not have any -, space, _ or anything just simple lowercase subdomain
-            but you have execpt this subdomain: {except_subdomain}"""
+            but you have execpt this subdomain: {except_subdomain} because this are already used by other users"""
 
             response = self.llm.generate_content(prompt)
 
