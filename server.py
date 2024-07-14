@@ -7,17 +7,14 @@ from Redis.LimitingAlgo.limiting_algo import RateLimitExceeded
 
 from main import Main
 
-from supabase import create_client, Client
+from database import SupabaseConfig
 from schemas import BlogAiRequest
 from dotenv import load_dotenv
 import os
 
 load_dotenv()
 
-SUPABASE_URL = os.environ.get('SUPABASE_URL')
-SUPABASE_KEY = os.environ.get('SUPABASE_API_KEY')
-
-supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+supabase = SupabaseConfig().get_config()
 
 app = FastAPI()
 
@@ -28,6 +25,10 @@ async def add_subdomain_to_request(request: Request, call_next):
     request.state.subdomain = subdomain
     response = await call_next(request)
     return response
+
+@app.get("/health")
+async def get_health():
+    return JSONResponse(content={"message": "Server working fine"}, status_code=200)
 
 @app.get("/", response_class=HTMLResponse)
 async def read_blog(request: Request):

@@ -4,6 +4,7 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
 from LLM.Config.llm_config import ConfigLLM
+from database import SupabaseConfig
 
 class CreateTitle(ConfigLLM):
     
@@ -11,6 +12,7 @@ class CreateTitle(ConfigLLM):
         self.title = title
         self.target_audience = target_audience
         self.desired_tone = Desired_tone
+        self.supabase = SupabaseConfig().get_config()
         super().__init__()
     
     def create_title(self):
@@ -36,9 +38,11 @@ class CreateTitle(ConfigLLM):
     def create_subdomain(self):
         # Creating subdomain for blog using Ai
         try:
+            except_subdomain = self.supabase.from_("blog_posts").select("subdomain").execute()
 
             prompt = f"""I need a sub-domain around the title{self.title}. 
-            It does not have any -, space, _ or anything just simple lowercase subdomain"""
+            It does not have any -, space, _ or anything just simple lowercase subdomain
+            but you have execpt this subdomain: {except_subdomain}"""
 
             response = self.llm.generate_content(prompt)
 
