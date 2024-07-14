@@ -46,13 +46,7 @@ class CreateTitle(ConfigLLM):
             if it's none then create a new subdomain"""
 
             response = self.llm.generate_content(prompt)
-            for value in except_subdomain.data:
-                if value['subdomain'] == response.text or response.text is None:
-                    print(value['subdomain'] + ' ' + response.text)
-                    self.create_subdomain()
-                else:
-                    print(response.text)
-                    return response.text
+            return response.text
         except Exception as e:
             print(f'When trying to create subdomain error found: {e}')
 
