@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Request, HTTPException
-from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
 from pydantic import ValidationError
 
 from Redis.RateLimiter.rate_limiter import RateLimiter
@@ -71,18 +71,20 @@ async def create_blog_post(request: Request, blog_request: BlogAiRequest):
         except FileNotFoundError:
             return "File not found."
 
-
         ip_address = request.client.host
         host = request.headers.get("host")
-        if RateLimiter.get_instance('SlidingWindow').allow_request(ip_address):
-            blog_ai = {
-                "blog_name": blog_request.blog_name,
-                "add_website_link": blog_request.add_website_link,
-                "target_audience": blog_request.target_audience,
-                "desired_tone": blog_request.desired_tone,
-            }
+        try:
+            if RateLimiter.get_instance('SlidingWindow').allow_request(ip_address):
+                blog_ai = {
+                    "blog_name": blog_request.blog_name,
+                    "add_website_link": blog_request.add_website_link,
+                    "target_audience": blog_request.target_audience,
+                    "desired_tone": blog_request.desired_tone,
+                }
+        except RateLimitExceeded as e:
+            raise e
 
-            blog_response, subdomain = Main.main(blog_title=blog_ai["blog_name"], 
+        blog_response, subdomain = Main.main(blog_title=blog_ai["blog_name"], 
                                     website_url_list=blog_ai["add_website_link"],
                                     target_audience=blog_ai["target_audience"],
                                     desired_tone=blog_ai["desired_tone"])
@@ -98,4 +100,4 @@ async def create_blog_post(request: Request, blog_request: BlogAiRequest):
     if not response.data:
         raise HTTPException(status_code=400, detail="Error creating blog post")
 
-    return JSONResponse(f"https://{subdomain}.{host[8:]}")
+    return RedirectResponse(url=f"https://{subdomain}.{host[4:]}/")
