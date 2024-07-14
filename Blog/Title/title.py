@@ -42,11 +42,12 @@ class CreateTitle(ConfigLLM):
 
             prompt = f"""I need a sub-domain around the title{self.title}. 
             It does not have any -, space, _ or anything just simple lowercase subdomain
-            but you don't want to use this subdomain: {except_subdomain} because this are already used by other users"""
+            but you don't want to use this subdomain: {except_subdomain} because this are already used.
+            if it's none then create a new subdomain"""
 
             response = self.llm.generate_content(prompt)
             for value in except_subdomain.data:
-                if value['subdomain'] == response.text:
+                if value['subdomain'] == response.text or response.text is None:
                     print(value['subdomain'] + ' ' + response.text)
                     self.create_subdomain()
                 else:
