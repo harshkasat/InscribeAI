@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Request, HTTPException
-from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
+from fastapi.responses import HTMLResponse, JSONResponse, Response
 from pydantic import ValidationError
 
 from Redis.RateLimiter.rate_limiter import RateLimiter
@@ -100,4 +100,4 @@ async def create_blog_post(request: Request, blog_request: BlogAiRequest):
     if not response.data:
         raise HTTPException(status_code=400, detail="Error creating blog post")
 
-    return RedirectResponse(url=f"https://{subdomain}.{host[4:]}/")
+    return Response(url=f"https://{subdomain}.{host[4:]}/")
