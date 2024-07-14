@@ -32,6 +32,19 @@ class CreateTitle(ConfigLLM):
             return response.text
         except Exception as e:
             print(f'When trying to create title error found: {e}')
+    
+    def create_subdomain(self):
+        # Creating subdomain for blog using Ai
+        try:
+
+            prompt = f"""I need a sub-domain around the title{self.title}. 
+            It does not have any -, space, _ or anything just simple lowercase subdomain"""
+
+            response = self.llm.generate_content(prompt)
+
+            return response.text
+        except Exception as e:
+            print(f'When trying to create subdomain error found: {e}')
 
 # if __name__ == '__main__':
 #     title = CreateTitle(title="Machine Learning", target_audience="Kids", Desired_tone="Professional")

@@ -30,6 +30,16 @@ class Main():
 
         except Exception as e:
             print(f'When trying to create title {self.title} error found: {e}')
+
+    def create_subdomain(self):
+        # Creating subdomain for blog
+        try:
+            subdomain = CreateTitle(title=self.title, target_audience=self.target_audience, Desired_tone=self.desired_tone).create_subdomain()
+            print("Subdomain created")
+            return subdomain
+        
+        except Exception as e:
+            print(f'When trying to create subdomain {self.title} error found: {e}')
     
     def scrape_keyword(self):
         # Scraping keywords for SEO
@@ -90,6 +100,8 @@ class Main():
         
         title = res.create_title()
 
+        subdomain = res.create_subdomain()
+
         keywords = res.scrape_keyword()
 
         website_content = res.scrape_website()
@@ -100,7 +112,7 @@ class Main():
 
         blog = res.create_blog(title=title, content=result)
 
-        return blog
+        return blog, subdomain
 
 if __name__ == '__main__':
     res = Main.main(blog_title="Build an Advanced Reranking RAG", target_audience="Beginner", website_url_list=["https://nayakpplaban.medium.com/build-an-advanced-reranking-rag-system-using-llama-index-llama-3-and-qdrant-a8b8654174bc"], desired_tone="Informative")

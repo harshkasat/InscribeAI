@@ -13,7 +13,7 @@ class BlogAiRequest(BaseModel):
     target_audience: str = Field(..., title="Target Audience")
     desired_tone: str = Field(..., title="Desired Tone")
 
-    
+
     @field_validator("blog_name", "desired_tone", "target_audience")
     @classmethod
     def validate_blog_name(cls, value:str):
@@ -23,7 +23,7 @@ class BlogAiRequest(BaseModel):
             raise ValueError("Blog name must be between 3 and 30 characters")
         
         return value
-    
+
     @field_validator("add_website_link")
     @classmethod
     def validate_add_website_link(cls, value:list):
@@ -36,7 +36,7 @@ class BlogAiRequest(BaseModel):
                 raise ValueError("Add website link must start with http:// or https://")
 
         return value
-    
+
     class Config:
         json_schema_extra = {
             "example": {
@@ -46,6 +46,7 @@ class BlogAiRequest(BaseModel):
                 "desired_tone": "Informative"
             }
         }
+
 
 @app.get("/")
 def read_root():

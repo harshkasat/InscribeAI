@@ -20,10 +20,7 @@ class Template:
                     </body>
                     </html>
                     """
-
-            with open('templates/index.html', 'w') as file:
-                file.write(index)
-                return index
+            return index
 
         except Exception as e:
             print(f"When trying to generate HTML template error found: {e}")
