@@ -100,4 +100,4 @@ async def create_blog_post(request: Request, blog_request: BlogAiRequest):
     if not response.data:
         raise HTTPException(status_code=400, detail="Error creating blog post")
 
-    return Response(f"https://{subdomain}.{host[4:]}/")
+    return JSONResponse(f"www.{subdomain}.{host[4:]}/")
