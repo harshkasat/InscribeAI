@@ -11,20 +11,25 @@ class BlogGeneration(ConfigLLM):
 
     def __init__(self, json_response:json, title:str,  web_scrape) -> None:
         
-        self.json_response = json.loads(json_response)
+        self.json_response = json_response
         self.blog_title = title
         self.context = web_scrape
         super().__init__()
 
-        self.sections = self.json_response['sections']
-
 
     def creating_blog(self):
+
+        try:
+            json_response = json.loads(self.json_response)
+        except Exception as e:
+            print(f'When trying to load JSON data error found: {e}')
+        
+        sections = json_response['sections']
 
         result = f'<h1> {self.blog_title} </h1> \n\n'
 
         try:
-            for section in self.sections:
+            for section in sections:
 
                 blog_prompt = f"I want to write a Content. Below are the headers, context information,\
                     and key points for each paragraph. Please generate a Content based on this Markdown. \
