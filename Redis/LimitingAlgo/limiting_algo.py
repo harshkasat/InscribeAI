@@ -12,7 +12,7 @@ class RateLimiter:
 
     def __init__(self):
         self.interval = 86400 # 24 hours
-        self.limit_per_interval = 10 # ten requests per 24 hour interval
+        self.limit_per_interval = 1000 # ten requests per 24 hour interval
         self.lock = threading.Lock()
         self.cache = Cache()
 

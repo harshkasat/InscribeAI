@@ -40,7 +40,7 @@ class CreateTitle(ConfigLLM):
         try:
             except_subdomain = self.supabase.from_("blog_posts").select("subdomain").execute()
 
-            prompt = f"Create a new subdomain with lowecase without using \
+            prompt = f"Create a new subdomain with reference to {self.title} in lowecase without using \
             this set of subdomains {except_subdomain} because this already exists \
             ONLY GIVE ME SUBDOMAIN"
 
@@ -48,7 +48,3 @@ class CreateTitle(ConfigLLM):
             return response.text
         except Exception as e:
             print(f'When trying to create subdomain error found: {e}')
-
-# if __name__ == '__main__':
-#     title = CreateTitle(title="Build an Advanced Reranking RAG", target_audience="Beginner", Desired_tone="Informative")
-#     print(title.create_subdomain())

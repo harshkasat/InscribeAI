@@ -18,53 +18,46 @@ class CreateHeading(ConfigLLM):
       super().__init__()
 
 
-  def create_heading(self):
+  def create_outline(self):
 
     try:
 
-      prompt = f"""Title: {self.title}
-        I'm given you some more context information about blog: {self.description}. 
-        Also use This SEO keyword: {self.keywords} to get more hits.      
-        Create a JSON representation of a blog post based on the provided title.
-        The generated JSON representation must use context information and SEO keywords
-        The structure of the JSON should be as follows:
-        {{
-          "title": "{self.title}",
-          "sections": [
-            {{
-              "Heading": "Introduction",
-              "Description": "Hook: Start with a captivating sentence, such as a surprising fact, question, or anecdote.
-                              Context: Provide some background information on the topic.
-                              Purpose: Clearly state the goal of the blog post.
-                              Preview: Briefly outline what the reader can expect to learn.",
-            }},
-            {{
-              "Heading":"Section 1: Breif about the Topic"
-              "Description": "Introduce the main concept.
-                              Provide definitions or explanations
-                              Use examples ot illustrate points"
-            }},
-            {{
-              "Heading": "Section 2: Key Components"
-              "Description": "Break down the main components related to the topics.
-                              Include detailed explanations and relevant examples"
-            }},
-            {{
-              "Heading": "Section 3: Steps"
-              "Description": "Explain how to steps to achieve a specific goal.
-                              Porvide a step by step guide or actionable advice.
-                              Include tips, trick and best practices."
-            }},
-            {{
-              "Heading": "Section 4: Overview"
-              "Description": "Discuss common misconceptions.
-                              Offer solutions or strategies of overview."
-            }}
-          ]
-          "conclusion": "Conclude your blog post, summarizing key points or providing closing thoughts."
-        }}
-        ONLY GIVE A RESPONSE IN JSON FORMAT ONLY WITHOUT```json
-        """
+      prompt = f"""
+Title: {self.title}
+I'm giving you some more context information about the blog: {self.description}. 
+Also use this SEO keyword: {self.keywords} to get more hits.      
+Create a JSON representation of a blog post based on the provided title.
+The generated JSON representation must use context information and SEO keywords.
+The structure of the JSON should be as follows:
+{{
+  "title": "{self.title}",
+  "sections": [
+    {{
+      "Heading": "Introduction",
+      "Description": "Hook: Start with a captivating sentence, such as a surprising fact, question, or anecdote.\\nContext: Provide some background information on the topic.\\nPurpose: Clearly state the goal of the blog post.\\nPreview: Briefly outline what the reader can expect to learn."
+    }},
+    {{
+      "Heading": "Section 1: Brief about the Topic",
+      "Description": "Introduce the main concept.\\nProvide definitions or explanations.\\nUse examples to illustrate points."
+    }},
+    {{
+      "Heading": "Section 2: Key Components",
+      "Description": "Break down the main components related to the topics.\\nInclude detailed explanations and relevant examples."
+    }},
+    {{
+      "Heading": "Section 3: Steps",
+      "Description": "Explain how to steps to achieve a specific goal.\\nProvide a step by step guide or actionable advice.\\nInclude tips, tricks, and best practices."
+    }},
+    {{
+      "Heading": "Section 4: Overview",
+      "Description": "Discuss common misconceptions.\\nOffer solutions or strategies for overview."
+    }}
+  ],
+  "conclusion": "Conclude your blog post, summarizing key points or providing closing thoughts."
+}}
+ONLY GIVE A RESPONSE IN JSON FORMAT WITHOUT```json .
+"""
+
 
       response = self.llm.generate_content(prompt)
 
@@ -74,8 +67,3 @@ class CreateHeading(ConfigLLM):
     except Exception as e:
       print(f'When trying to create the heading error found: {e}')
 
-# if __name__ == '__main__':
-
-#   title = CreateTitle(title="Machine Learning", target_audience="Kids", Desired_tone="Professional").create_title()
-#   res = CreateHeading(title=title, description=title, keywords=title).create_heading()
-#   print(res)

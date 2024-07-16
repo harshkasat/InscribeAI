@@ -80,10 +80,3 @@ class ScrapeWebsite(ConfigLLM):
             return summary_content.text
         except Exception as e:
             print(f'When trying to generate summary content error: {e}')
-            
-
-# if __name__ == '__main__':
-#     url = 'https://dev.to/emma_donery/python-dotenv-keep-your-secrets-safe-4ocn'
-#     res = ScrapeWebsite(url=url)
-#     # print(res.summary_website_content())
-#     print(res.extract_data())

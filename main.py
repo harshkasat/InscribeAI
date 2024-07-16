@@ -69,7 +69,7 @@ class Main():
     def create_outline(self, title, description, keywords):
         # Creating outline blog using Ai
         try:
-            generate_outline = CreateHeading(title=title, description=description, keywords=keywords).create_heading()
+            generate_outline = CreateHeading(title=title, description=description, keywords=keywords).create_outline()
             print("Outline created")
             return generate_outline
         
@@ -77,7 +77,7 @@ class Main():
             print(f'When trying to create outline of blog title: {title} with description: {description}  error found: {e}')
     
     def content_generation(self, content, blog_title, web_content):
-        content_generation = BlogGeneration(json_response=content, title=blog_title, web_scrape=web_content).creating_blog()
+        content_generation = BlogGeneration(json_response=content, title=blog_title, web_scrape=web_content).create_blog()
         print("Content created")
         return content_generation
     
@@ -113,7 +113,3 @@ class Main():
         blog = res.create_blog(title=title, content=result)
 
         return blog, subdomain
-
-if __name__ == '__main__':
-    res = Main.main(blog_title="Build an Advanced Reranking RAG", target_audience="Beginner", website_url_list=["https://nayakpplaban.medium.com/build-an-advanced-reranking-rag-system-using-llama-index-llama-3-and-qdrant-a8b8654174bc"], desired_tone="Informative")
-    print(res)

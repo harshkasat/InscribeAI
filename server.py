@@ -105,7 +105,6 @@ async def create_blog_post(request: Request, blog_request: BlogAiRequest):
     response = supabase.from_("blog_posts").insert(
         {"title": blog_request.blog_name, "subdomain": subdomain, "html_content": blog_response, "css_content": css_content}
     ).execute()
-    print(host)
 
     if not response.data:
         raise HTTPException(status_code=400, detail="Error creating blog post")

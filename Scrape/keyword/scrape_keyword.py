@@ -38,8 +38,3 @@ class ScrapKeyword(object):
 
         except Exception as e:
             print("Error from scraping keyword for SEO found: ",e)
-
-
-# if __name__ == '__main__':
-#     scraper = ScrapKeyword()
-#     print(scraper.scrape_keyword_pytrends("machine learning"))
