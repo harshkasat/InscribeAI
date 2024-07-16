@@ -40,11 +40,12 @@ class CreateTitle(ConfigLLM):
         try:
             except_subdomain = self.supabase.from_("blog_posts").select("subdomain").execute()
 
-            prompt = f"Create a new subdomain with reference to {self.title} in lowecase without using \
-            this set of subdomains {except_subdomain} because this already exists \
-            ONLY GIVE ME SUBDOMAIN"
+            prompt = f"""
+            Create a subdomain text with reference to "{self.title}" in lowercase without using this set of subdomains: {except_subdomain} because these already exist.
+            ONLY GIVE ME SUBDOMAIN TEXT, NOTHING ELSE, NO ".com" OR ".net OR _ OR - , OR not even space".
+            """
 
-            response = self.llm.generate_content(prompt)
-            return response.text
+            response = self.llm.generate_content(prompt).text.strip().replace('\n', '')
+            return response
         except Exception as e:
             print(f'When trying to create subdomain error found: {e}')

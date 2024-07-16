@@ -12,7 +12,7 @@ class BlogGeneration(ConfigLLM):
 
     def __init__(self, json_response:json, title:str,  web_scrape) -> None:
         
-        self.json_response = json.loads(json_response)
+        self.json_response = json_response
         self.blog_title = title
         self.context = web_scrape
         super().__init__()
