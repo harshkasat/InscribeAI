@@ -30,6 +30,16 @@ async def add_subdomain_to_request(request: Request, call_next):
 async def get_health():
     return JSONResponse(content={"message": "Server working fine"}, status_code=200)
 
+@app.get('/limited')
+def limited(request: Request):
+    ip_address = request.client.host
+
+    try:
+        RateLimiter.get_instance('SlidingWindow').allow_request(ip_address)
+        return {"message": "You are allowed to request"}
+    except RateLimitExceeded as e:
+        raise e
+
 @app.get("/", response_class=HTMLResponse)
 async def read_blog(request: Request):
     subdomain = request.state.subdomain

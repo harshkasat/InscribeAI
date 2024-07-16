@@ -2,13 +2,16 @@ import redis
 from datetime import datetime
 import os
 import sys
+from dotenv import load_dotenv
+
+load_dotenv()
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
 class Cache:
     def __init__(self):
         # self.redis_client = redis.StrictRedis(host='172.17.0.2', port=6379, db=0)
-        self.redis_client = redis.Redis(host='ec2-13-55-161-183.ap-southeast-2.compute.amazonaws.com', port=6379, db=0)
+        self.redis_client = redis.Redis(host=os.environ.get('AWS_REDIS_HOST_URL'), port=6379, db=0)
         self.expiration_time_seconds = 86400 # 24 hours
     
     def add_request(self, ip, timestamp):
