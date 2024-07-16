@@ -39,28 +39,26 @@ class CreateHeading(ConfigLLM):
                               Preview: Briefly outline what the reader can expect to learn.",
             }},
             {{
-              "Heading":"Section 1: Understanding the Topic"
+              "Heading":"Section 1: Breif about the Topic"
               "Description": "Introduce the main concept.
                               Provide definitions or explanations
                               Use examples ot illustrate points"
             }},
             {{
-              "Heading": "Section 2: Key Components or Skills"
-              "Description": "Break down the main components or skills related to the topics.
-                              Include detailed explanations and relevant examples
-                              Use visuals like charts, graphsm or iamge if applicable"
+              "Heading": "Section 2: Key Components"
+              "Description": "Break down the main components related to the topics.
+                              Include detailed explanations and relevant examples"
             }},
             {{
-              "Heading": "Section 3: Practical Applications or Steps"
-              "Description": "Explain how to apply the informations or steps to achieve a specific goal.
+              "Heading": "Section 3: Steps"
+              "Description": "Explain how to steps to achieve a specific goal.
                               Porvide a step by step guide or actionable advice.
                               Include tips, trick and best practices."
             }},
             {{
-              "Heading": "Section 4: Challenges and Solutions"
-              "Description": "Discuss common challenges or misconceptions.
-                              Offer solutions or strategies ot overcome these challenges.
-                              User real life examples or case studies to add credibility"
+              "Heading": "Section 4: Overview"
+              "Description": "Discuss common misconceptions.
+                              Offer solutions or strategies of overview."
             }}
           ]
           "conclusion": "Conclude your blog post, summarizing key points or providing closing thoughts."
