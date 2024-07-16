@@ -49,6 +49,6 @@ class CreateTitle(ConfigLLM):
         except Exception as e:
             print(f'When trying to create subdomain error found: {e}')
 
-if __name__ == '__main__':
-    title = CreateTitle(title="Build an Advanced Reranking RAG", target_audience="Beginner", Desired_tone="Informative")
-    print(title.create_subdomain())
+# if __name__ == '__main__':
+#     title = CreateTitle(title="Build an Advanced Reranking RAG", target_audience="Beginner", Desired_tone="Informative")
+#     print(title.create_subdomain())
