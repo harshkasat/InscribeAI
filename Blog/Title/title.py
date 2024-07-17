@@ -42,7 +42,7 @@ class CreateTitle(ConfigLLM):
 
             prompt = f"""
             Create a subdomain text with reference to "{self.title}" in lowercase without using this set of subdomains: {except_subdomain} because these already exist.
-            ONLY GIVE ME SUBDOMAIN TEXT, NOTHING ELSE, NO ".com" OR ".net OR _ OR - , OR not even space".
+            ONLY GIVE ME SUBDOMAIN TEXT, NOTHING ELSE, NO ".com" OR ".net OR _ OR - , OR not even space. give me one subdomain only".
             """
 
             response = self.llm.generate_content(prompt).text.strip().replace('\n', '')
