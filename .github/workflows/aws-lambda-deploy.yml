@@ -47,4 +47,4 @@ jobs:
             SUPABASE_API_KEY=${{ secrets.SUPABASE_API_KEY }},
             SUPABASE_URL=${{ secrets.SUPABASE_URL }},
             AWS_REDIS_HOST_URL=${{ secrets.AWS_REDIS_HOST_URL }}
-          }" --region ap-southeast-2
+          }"
