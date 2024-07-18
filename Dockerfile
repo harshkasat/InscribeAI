@@ -1,20 +1,18 @@
 # Use the official Python base image
-FROM python:3.9-slim
-
-# Set the working directory inside the container
-WORKDIR /app
+FROM public.ecr.aws/lambda/python:3.10
 
 # Copy the requirements file to the working directory
-COPY requirements.txt .
+COPY requirements.txt ${LAMBDA_TASK_ROOT}
 
 # Install the Python dependencies
 RUN pip install -r requirements.txt
 
 # Copy the application code to the working directory
-COPY . .
+COPY . ${LAMBDA_TASK_ROOT}
 
-# # Expose the port on which the application will run
+# Expose the port on which the application will run
 EXPOSE 6379
+EXPOSE 8000
 
 # Run the FastAPI application using uvicorn server
-CMD ["uvicorn", "app:app", "--host=0.0.0.0", "--port=80"]
+CMD ["server.handler"]

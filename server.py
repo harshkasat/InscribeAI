@@ -10,13 +10,19 @@ from main import Main
 from database import SupabaseConfig
 from schemas import BlogAiRequest
 from dotenv import load_dotenv
-import os
+from mangum import Mangum
 
 load_dotenv()
 
 supabase = SupabaseConfig().get_config()
 
-app = FastAPI()
+app = FastAPI(
+    title="BlogAI",
+    description="A serverless platform for generating engaging blog posts using AI",
+    version="1.0.0",
+    openapi_url="/api/docs",
+    redoc_url="/api/redoc",
+)
 
 @app.middleware("http")
 async def add_subdomain_to_request(request: Request, call_next):
@@ -110,3 +116,6 @@ async def create_blog_post(request: Request, blog_request: BlogAiRequest):
         raise HTTPException(status_code=400, detail="Error creating blog post")
 
     return JSONResponse(f"https://{subdomain}.{host}/")
+
+# added mangum adapter
+handler = Mangum(app)
