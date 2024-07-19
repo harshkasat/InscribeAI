@@ -31,10 +31,10 @@ jobs:
             # Build a docker container 
             echo "Registry: ${{ vars.ECR_REGISTRY }}"
             aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin ${{ vars.ECR_REGISTRY }}
-            docker build -t ${{ vars.ECR_REGISTRY }}/${{ vars.ECR_REGISTRY }}:latest .
+            docker build -t ${{ vars.ECR_REGISTRY }}/${{ vars.ECR_REPOSITORY }}:latest .
             echo "Pushing image to ECR"
             docker push ${{ vars.ECR_REGISTRY }}/${{ vars.ECR_REPOSITORY }}:latest
-            echo "name = image::${{ vars.ECR_REGISTRY }}/${{ vars.ECR_REGISTRY }}:latest" >> $GITHUB_OUTPUT
+            echo "name = image::${{ vars.ECR_REGISTRY }}/${{ vars.ECR_REPOSITORY }}:latest" >> $GITHUB_OUTPUT
 
       - name: Update Lambda Function
         run: |
