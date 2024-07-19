@@ -45,7 +45,7 @@ jobs:
 
       - name: Update Lambda Environment Variables
         run: |
-          aws lambda update-function-code \
+          aws lambda update-function-configuration \
           --function-name ${{ vars.LAMBDA_FUNCTION_NAME }} \
           --environment "Variables={
             GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }},
