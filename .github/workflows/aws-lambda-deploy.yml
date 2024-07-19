@@ -43,6 +43,9 @@ jobs:
           --function-name ${{ vars.LAMBDA_FUNCTION_NAME }} \
           --image-uri ${{ vars.ECR_REGISTRY }}/${{ vars.ECR_REPOSITORY }}:latest
 
+      - name: Wait for Lambda code update to complete
+        run: sleep 60  # Wait for 60 seconds to ensure the function code update is complete
+
       - name: Update Lambda Environment Variables
         run: |
           aws lambda update-function-configuration \
