@@ -30,7 +30,8 @@ jobs:
         run: |
             # Build a docker container 
             echo "Registry: ${{ vars.ECR_REGISTRY }}"
-            aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin ${{ vars.ECR_REGISTRY }}
+            aws ecr get-login-password --region ap-southeast-2 | \
+            docker login --username AWS --password-stdin ${{ vars.ECR_REGISTRY }}
             docker build -t ${{ vars.ECR_REGISTRY }}/${{ vars.ECR_REPOSITORY }}:latest .
             echo "Pushing image to ECR"
             docker push ${{ vars.ECR_REGISTRY }}/${{ vars.ECR_REPOSITORY }}:latest
@@ -38,10 +39,15 @@ jobs:
 
       - name: Update Lambda Function
         run: |
-          aws lambda update-function-configuration --function-name ${{ vars.LAMBDA_FUNCTION_NAME }} --image-uri ${{ vars.ECR_REGISTRY }}/${{ vars.ECR_REPOSITORY }}:latest
+          aws lambda update-function-code \
+          --function-name ${{ vars.LAMBDA_FUNCTION_NAME }} \
+          --image-uri ${{ vars.ECR_REGISTRY }}/${{ vars.ECR_REPOSITORY }}:latest
+
       - name: Update Lambda Environment Variables
         run: |
-          aws lambda update-function-configuration --function-name ${{ vars.LAMBDA_FUNCTION_NAME }} --environment "Variables={
+          aws lambda update-function-code \
+          --function-name ${{ vars.LAMBDA_FUNCTION_NAME }} \
+          --environment "Variables={
             GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }},
             SUPABASE_PASS=${{ secrets.SUPABASE_PASS }},
             SUPABASE_API_KEY=${{ secrets.SUPABASE_API_KEY }},
