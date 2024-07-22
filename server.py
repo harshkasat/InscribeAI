@@ -1,6 +1,8 @@
 from fastapi import FastAPI, Request, HTTPException
-from fastapi.responses import HTMLResponse, JSONResponse, Response
+from fastapi.responses import HTMLResponse, JSONResponse
 from pydantic import ValidationError
+from fastapi.middleware.cors import CORSMiddleware
+
 
 from Redis.RateLimiter.rate_limiter import RateLimiter
 from Redis.LimitingAlgo.limiting_algo import RateLimitExceeded
@@ -23,6 +25,21 @@ app = FastAPI(
     openapi_url="/api/docs",
     redoc_url="/api/redoc",
 )
+
+origins = [
+    "http://localhost:3000",  # Your React app URL
+    "https://your-react-app-domain.com", # Your deployed React app URL
+    "http://localhost:5173"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 @app.middleware("http")
 async def add_subdomain_to_request(request: Request, call_next):
