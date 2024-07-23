@@ -107,7 +107,7 @@ async def create_blog_post(request: Request, blog_request: BlogAiRequest):
         ip_address = request.client.host
         host = request.headers.get("host")
         try:
-            if RateLimiter.get_instance('SlidingWindow').allow_request(ip_address):
+            # if RateLimiter.get_instance('SlidingWindow').allow_request(ip_address):
                 blog_ai = {
                     "blog_name": blog_request.blog_name,
                     "add_website_link": blog_request.add_website_link,
