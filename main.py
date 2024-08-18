@@ -76,8 +76,8 @@ class Main():
         except Exception as e:
             print(f'When trying to create outline of blog title: {title} with description: {description}  error found: {e}')
     
-    def content_generation(self, content, blog_title, web_content):
-        content_generation = BlogGeneration(json_response=content, title=blog_title, web_scrape=web_content).create_blog()
+    def content_generation(self, content, web_content):
+        content_generation = BlogGeneration(json_response=content, web_scrape=web_content).create_blog()
         print("Content created")
         return content_generation
     
@@ -108,7 +108,7 @@ class Main():
 
         outline = res.create_outline(title=title, description=website_content, keywords=keywords)
         
-        result = res.content_generation(content=outline, blog_title=title, web_content=website_content)
+        result = res.content_generation(content=outline, web_content=website_content)
 
         blog = res.create_blog(title=title, content=result)
 

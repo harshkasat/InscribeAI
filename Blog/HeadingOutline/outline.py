@@ -22,23 +22,23 @@ class CreateHeading():
         "sections": [
           {{
             "Heading": "Introduction",
-            "Description": "Hook: Start with a captivating sentence, such as a surprising fact, question, or anecdote.\\nContext: Provide some background information on the topic.\\nPurpose: Clearly state the goal of the blog post.\\nPreview: Briefly outline what the reader can expect to learn."
+            "Description": "Start with a simple and clear sentence.\\nProvide necessary background on the topic.\\nState the goal of the blog post.\\nBriefly mention what the reader will learn."
           }},
           {{
-            "Heading": "Section 1: Brief about the Topic",
-            "Description": "Introduce the main concept.\\nProvide definitions or explanations.\\nUse examples to illustrate points."
+            "Heading": "Section 1: Topic Overview",
+            "Description": "Give a brief overview of the topic.\\nDefine key terms or concepts.\\nUse basic examples."
           }},
           {{
-            "Heading": "Section 2: Key Components",
-            "Description": "Break down the main components related to the topics.\\nInclude detailed explanations and relevant examples."
+            "Heading": "Section 2: Important Components",
+            "Description": "List and explain the main components related to the topic.\\nProvide straightforward explanations and simple examples."
           }},
           {{
-            "Heading": "Section 3: Steps",
-            "Description": "Explain how to steps to achieve a specific goal.\\nProvide a step by step guide or actionable advice.\\nInclude tips, tricks, and best practices."
+            "Heading": "Section 3: How-To Steps",
+            "Description": "Describe the steps to achieve a specific outcome.\\nOffer a clear step-by-step guide.\\nInclude basic tips."
           }},
           {{
-            "Heading": "Section 4: Overview",
-            "Description": "Discuss common misconceptions.\\nOffer solutions or strategies for overview."
+            "Heading": "Section 4: Common Issues",
+            "Description": "Mention common problems or misconceptions.\\nProvide easy-to-follow solutions or advice."
           }}
         ]
       }}
