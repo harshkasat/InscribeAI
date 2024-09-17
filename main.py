@@ -66,18 +66,18 @@ class Main():
         except Exception as e:
             print(f"When trying to scrape website {self.url_list} error found: {e}")
     
-    def create_outline(self, title, description, keywords):
+    def create_outline(self, title, description):
         # Creating outline blog using Ai
         try:
-            generate_outline = CreateHeading(title=title, description=description, keywords=keywords).create_outline()
+            generate_outline = CreateHeading(title=title, description=description).create_outline()
             print("Outline created")
             return generate_outline
         
         except Exception as e:
             print(f'When trying to create outline of blog title: {title} with description: {description}  error found: {e}')
     
-    def content_generation(self, content, web_content):
-        content_generation = BlogGeneration(json_response=content, web_scrape=web_content).create_blog()
+    def content_generation(self, content, web_content, keywords):
+        content_generation = BlogGeneration(json_response=content, web_scrape=web_content, seo_keyword=keywords).create_blog()
         print("Content created")
         return content_generation
     
@@ -88,7 +88,7 @@ class Main():
             print("Blog created")
             return template
         except Exception as e:
-            print(f'When trying to create blog {content} error found: {e}')
+            print(f'When trying to create blog error found: {e}')
     
 
     @staticmethod
@@ -106,9 +106,9 @@ class Main():
 
         website_content = res.scrape_website()
 
-        outline = res.create_outline(title=title, description=website_content, keywords=keywords)
+        outline = res.create_outline(title=title, description=website_content)
         
-        result = res.content_generation(content=outline, web_content=website_content)
+        result = res.content_generation(content=outline, web_content=website_content, keywords=keywords)
 
         blog = res.create_blog(title=title, content=result)
 

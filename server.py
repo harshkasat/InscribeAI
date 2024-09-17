@@ -12,7 +12,7 @@ from main import Main
 from database import SupabaseConfig
 from schemas import BlogAiRequest
 from dotenv import load_dotenv
-from mangum import Mangum
+# from mangum import Mangum
 
 load_dotenv()
 
@@ -30,6 +30,7 @@ origins = [
     "http://localhost:3000",  # Your React app URL
     "https://your-react-app-domain.com", # Your deployed React app URL
     "http://localhost:5173"
+    "*"
 ]
 
 app.add_middleware(
@@ -45,7 +46,7 @@ app.add_middleware(
 async def add_subdomain_to_request(request: Request, call_next):
     host = request.headers.get('host')
     subdomain = host.split('.')[0] if host and len(host.split('.')) > 2 else None
-    request.state.subdomain = subdomain
+    request.state.subdomain = subdomain[8:]
     response = await call_next(request)
     return response
 
@@ -135,4 +136,4 @@ async def create_blog_post(request: Request, blog_request: BlogAiRequest):
     return JSONResponse(f"https://{subdomain}.{host}/")
 
 # added mangum adapter
-handler = Mangum(app)
+# handler = Mangum(app)

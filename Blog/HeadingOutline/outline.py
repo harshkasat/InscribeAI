@@ -4,11 +4,10 @@ import json
 
 class CreateHeading():
 
-  def __init__(self, title:str, description:str, keywords:list):
+  def __init__(self, title:str, description:str):
 
       self.title = title
       self.description = description
-      self.keywords = keywords
 
       super().__init__()
 
