@@ -1,8 +1,9 @@
 from pydantic import BaseModel, Field, ValidationError, field_validator
+from typing import List
 
 class BlogAiRequest(BaseModel):
     blog_name: str = Field(..., title="Blog Name")
-    add_website_link: list = Field(..., title="Add Website Link")
+    add_website_link: List[str] = Field(..., title="Add Website Link")
     target_audience: str = Field(..., title="Target Audience")
     desired_tone: str = Field(..., title="Desired Tone")
 
