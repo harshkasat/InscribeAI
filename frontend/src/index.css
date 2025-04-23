@@ -1,5 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
 @import "tailwindcss";
 @import "tw-animate-css";
+/* @import "src/TipTap/simple-editor.scss"; */
 
 /* @custom-variant dark (&:is(.dark *)); */
 
@@ -16,10 +19,61 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-bold leading-tight;
   }
+  ::selection {
+    @apply bg-white text-black;
+  }
+  .dark ::selection {
+    @apply bg-blue-700 text-black;
+  }
+
+  /* You might also need this for Firefox */
+  ::-moz-selection {
+    @apply bg-blue-200 text-blue-900;
+  }
+  
+  .dark ::-moz-selection {
+    @apply bg-blue-700 text-white;
+  }
+
 }
 
 @layer components {
   .container-custom {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .content-wrapper {
+    @apply h-[calc(100%-var(--tt-toolbar-height))] overflow-y-auto;
+  }
+
+  .content-wrapper::-webkit-scrollbar {
+    @apply block w-2;
+  }
+
+  .content-wrapper::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  .content-wrapper::-webkit-scrollbar-thumb {
+    @apply bg-[var(--tt-scrollbar-color)] rounded;
+  }
+
+  .content-wrapper {
+    scrollbar-width: thin;
+    scrollbar-color: var(--tt-scrollbar-color) transparent;
+  }
+
+  .simple-editor-content {
+    @apply max-w-2xl w-full mx-auto;
+  }
+
+  .simple-editor-content .tiptap.ProseMirror {
+    @apply p-12;
+  }
+
+  @media screen and (max-width: 480px) {
+    .simple-editor-content .tiptap.ProseMirror {
+      @apply p-4 px-6;
+    }
   }
 }

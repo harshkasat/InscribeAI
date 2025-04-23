@@ -17,7 +17,10 @@ const HeroSection: React.FC = () => {
         each month to adapt quickly and hit your goals.
       </p>
       
-      <button className="mt-8 bg-[#9AE66E] hover:bg-[#8BD562] text-black font-medium px-6 py-3 rounded-md transition-colors">
+      <button 
+        onClick={() => window.location.href = '/editor'}
+        className="mt-8 bg-[#9AE66E] hover:bg-[#8BD562] text-black font-medium px-6 py-3 rounded-md transition-colors cursor-pointer"
+      >
         Book a Free Consultation
       </button>
     </section>
