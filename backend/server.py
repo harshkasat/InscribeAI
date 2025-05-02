@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import HTMLResponse, JSONResponse
 from pydantic import ValidationError
 from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
 
 
 # from Redis.RateLimiter.rate_limiter import RateLimiter
@@ -9,14 +10,10 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from main import Main
 
-from database import SupabaseConfig
-# from schemas import BlogAiRequest
-from dotenv import load_dotenv
-# from mangum import Mangum
+from schemas import BlogAiRequest
 
 load_dotenv()
 
-supabase = SupabaseConfig().get_config()
 
 app = FastAPI(
     title="BlogAI",
@@ -29,7 +26,7 @@ app = FastAPI(
 origins = [
     "http://localhost:3000",  # Your React app URL
     "https://your-react-app-domain.com", # Your deployed React app URL
-    "http://localhost:5173"
+    "http://localhost:5173",
     "*"
 ]
 
@@ -41,14 +38,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-@app.middleware("http")
-async def add_subdomain_to_request(request: Request, call_next):
-    host = request.headers.get('host')
-    subdomain = host.split('.')[0] if host and len(host.split('.')) > 2 else None
-    request.state.subdomain = subdomain[8:]
-    response = await call_next(request)
-    return response
 
 @app.get("/health")
 async def get_health():
@@ -67,73 +56,39 @@ async def get_health():
 @app.get("/", response_class=HTMLResponse)
 async def read_blog(request: Request):
     try:
-        subdomain = request.state.subdomain
+        return HTMLResponse(content="Welcome to BlogAI API", status_code=200)
+    except ValidationError as e:
+        raise HTTPException(status_code=400, detail=f'Error when creating blog: {e}')
 
-        if subdomain is None or subdomain == 'www':
-            return JSONResponse(content={"message": "Welcome to the main page"}, status_code=200)
+@app.post("/create_blog/", status_code=200)
+async def create_blog_post(request: Request, blog_request: BlogAiRequest):
+    try:
 
-        response = supabase.from_("blog_posts").select("*").eq("subdomain", subdomain).execute()
-        if not response.data:
-            raise HTTPException(status_code=404, detail=f"Blog post not found!")
-    except ValidationError as ve:
-        raise HTTPException(status_code=400, detail=f'Error when creating blog: {ve[0].msg}')
+        blog_ai = {
+            "blog_name": blog_request.blog_name,
+            "add_website_link": blog_request.add_website_link,
+            "target_audience": blog_request.target_audience,
+            "desired_tone": blog_request.desired_tone,
+        }
 
-    blog_post = response.data[0]
+        # Assuming the rate limiter should be active
+        # RateLimiter.get_instance('SlidingWindow').allow_request(request.client.host)
 
-    html_content = blog_post["html_content"]
-    css_content = blog_post["css_content"]
+        blog_response = await Main.main(blog_title=blog_ai["blog_name"],
+                                        website_url_list=blog_ai["add_website_link"],
+                                        target_audience=blog_ai["target_audience"],
+                                        desired_tone=blog_ai["desired_tone"])
 
-    combined_content = f"""
-    <html>
-        <head>
-            <style>
-                {css_content}
-            </style>
-        </head>
-        <body>
-            {html_content}
-        </body>
-    </html>
-    """
-    return HTMLResponse(content=combined_content)
+        return JSONResponse(
+            content={
+                "message": "Blog post created successfully",
+                "blog_post": blog_response
+            },
+            status_code=200)
 
-# @app.post("/create_blog/", status_code=200)
-# async def create_blog_post(request: Request, blog_request: BlogAiRequest):
-#     try:
-#         try:
-#             with open('templates/style.css', 'r') as file:
-#                 css_content = file.read()
-#         except FileNotFoundError:
-#             raise HTTPException(status_code=404, detail="CSS file not found")
+    except ValidationError as e:
+        raise HTTPException(status_code=400, detail=f'Error when creating blog: {e}')
 
-#         host = request.headers.get("host")
-
-#         blog_ai = {
-#             "blog_name": blog_request.blog_name,
-#             "add_website_link": blog_request.add_website_link,
-#             "target_audience": blog_request.target_audience,
-#             "desired_tone": blog_request.desired_tone,
-#         }
-
-#         # Assuming the rate limiter should be active
-#         # RateLimiter.get_instance('SlidingWindow').allow_request(request.client.host)
-
-#         blog_response, subdomain = Main.main(blog_title=blog_ai["blog_name"],
-#                                         website_url_list=blog_ai["add_website_link"],
-#                                         target_audience=blog_ai["target_audience"],
-#                                         desired_tone=blog_ai["desired_tone"])
-
-#     except ValidationError as e:
-#         raise HTTPException(status_code=400, detail=f'Error when creating blog: {e}')
-
-#     response = supabase.from_("blog_posts").insert(
-#         {"title": blog_request.blog_name, "subdomain": subdomain, "html_content": blog_response, "css_content": css_content}
-#     ).execute()
-
-#     if not response.data:
-#         raise HTTPException(status_code=400, detail="Error creating blog post")
-
-#     return JSONResponse(content={"url": f"https://{subdomain}.{host}/"})
-
-# added mangum adapter
-# handler = Mangum(app)
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)

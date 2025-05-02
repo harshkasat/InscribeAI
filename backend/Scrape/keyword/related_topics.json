@@ -1,0 +1,479 @@
+{
+  "rising": [
+    {
+      "topic": {
+        "value": "/g/11w2hkn8vj",
+        "title": "Retrieval-augmented generation",
+        "type": "Topic"
+      },
+      "value": "Breakout",
+      "extracted_value": 107800,
+      "link": "https://trends.google.com/trends/explore?q=/g/11w2hkn8vj&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11w2hkn8vj&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/g/11wvrb0s91",
+        "title": "DeepSeek",
+        "type": "Artificial intelligence company"
+      },
+      "value": "Breakout",
+      "extracted_value": 75150,
+      "link": "https://trends.google.com/trends/explore?q=/g/11wvrb0s91&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11wvrb0s91&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/m/06mfbd",
+        "title": "Cursor",
+        "type": "User interface"
+      },
+      "value": "+1,000%",
+      "extracted_value": 1000,
+      "link": "https://trends.google.com/trends/explore?q=/m/06mfbd&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F06mfbd&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/g/11srz3p4bt",
+        "title": "Microsoft Copilot",
+        "type": "Software"
+      },
+      "value": "+700%",
+      "extracted_value": 700,
+      "link": "https://trends.google.com/trends/explore?q=/g/11srz3p4bt&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11srz3p4bt&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/g/11ldlzv8sz",
+        "title": "Ollama",
+        "type": "Software"
+      },
+      "value": "+650%",
+      "extracted_value": 650,
+      "link": "https://trends.google.com/trends/explore?q=/g/11ldlzv8sz&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11ldlzv8sz&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/m/07zhjx",
+        "title": "Intelligent agent",
+        "type": "Topic"
+      },
+      "value": "+500%",
+      "extracted_value": 500,
+      "link": "https://trends.google.com/trends/explore?q=/m/07zhjx&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F07zhjx&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/g/11kq5ghr35",
+        "title": "Claude",
+        "type": "Language model"
+      },
+      "value": "+400%",
+      "extracted_value": 400,
+      "link": "https://trends.google.com/trends/explore?q=/g/11kq5ghr35&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11kq5ghr35&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/m/03dbq0",
+        "title": "Best practice",
+        "type": "Topic"
+      },
+      "value": "+350%",
+      "extracted_value": 350,
+      "link": "https://trends.google.com/trends/explore?q=/m/03dbq0&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F03dbq0&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/m/06d5f",
+        "title": "Risk | Brilliant Math & Science Wiki",
+        "type": "Topic"
+      },
+      "value": "+300%",
+      "extracted_value": 300,
+      "link": "https://trends.google.com/trends/explore?q=/m/06d5f&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F06d5f&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/m/07b7r",
+        "title": "Strategy",
+        "type": "Topic"
+      },
+      "value": "+250%",
+      "extracted_value": 250,
+      "link": "https://trends.google.com/trends/explore?q=/m/07b7r&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F07b7r&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/m/0g_fl",
+        "title": "Investment",
+        "type": "Topic"
+      },
+      "value": "+200%",
+      "extracted_value": 200,
+      "link": "https://trends.google.com/trends/explore?q=/m/0g_fl&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0g_fl&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/g/11g1ppfghx",
+        "title": "Virtual environment",
+        "type": "Topic"
+      },
+      "value": "+170%",
+      "extracted_value": 170,
+      "link": "https://trends.google.com/trends/explore?q=/g/11g1ppfghx&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11g1ppfghx&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/g/1217cmvr",
+        "title": "Open source",
+        "type": "Topic"
+      },
+      "value": "+130%",
+      "extracted_value": 130,
+      "link": "https://trends.google.com/trends/explore?q=/g/1217cmvr&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F1217cmvr&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/m/02_7t",
+        "title": "Finance",
+        "type": "Discipline"
+      },
+      "value": "+110%",
+      "extracted_value": 110,
+      "link": "https://trends.google.com/trends/explore?q=/m/02_7t&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F02_7t&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/m/06cs1",
+        "title": "Research",
+        "type": "Organization type"
+      },
+      "value": "+100%",
+      "extracted_value": 100,
+      "link": "https://trends.google.com/trends/explore?q=/m/06cs1&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F06cs1&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/g/11kc9956b3",
+        "title": "Large language model",
+        "type": "Topic"
+      },
+      "value": "+90%",
+      "extracted_value": 90,
+      "link": "https://trends.google.com/trends/explore?q=/g/11kc9956b3&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11kc9956b3&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/m/04g0kcw",
+        "title": "GitHub",
+        "type": "Software"
+      },
+      "value": "+80%",
+      "extracted_value": 80,
+      "link": "https://trends.google.com/trends/explore?q=/m/04g0kcw&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F04g0kcw&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/g/11txdn_sy7",
+        "title": "Perplexity AI",
+        "type": "Company"
+      },
+      "value": "+70%",
+      "extracted_value": 70,
+      "link": "https://trends.google.com/trends/explore?q=/g/11txdn_sy7&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11txdn_sy7&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/g/11khkg2rwf",
+        "title": "Generative artificial intelligence",
+        "type": "Topic"
+      },
+      "value": "+50%",
+      "extracted_value": 50,
+      "link": "https://trends.google.com/trends/explore?q=/g/11khkg2rwf&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11khkg2rwf&tz=420"
+    }
+  ],
+  "top": [
+    {
+      "topic": {
+        "value": "/m/05z1_",
+        "title": "Python",
+        "type": "Programming language"
+      },
+      "value": "100",
+      "extracted_value": 100,
+      "link": "https://trends.google.com/trends/explore?q=/m/05z1_&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F05z1_&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/m/0mkz",
+        "title": "Artificial intelligence",
+        "type": "Topic"
+      },
+      "value": "95",
+      "extracted_value": 95,
+      "link": "https://trends.google.com/trends/explore?q=/m/0mkz&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0mkz&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/m/026sq",
+        "title": "Data",
+        "type": "Topic"
+      },
+      "value": "13",
+      "extracted_value": 13,
+      "link": "https://trends.google.com/trends/explore?q=/m/026sq&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F026sq&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/g/11qg_c03j7",
+        "title": "create",
+        "type": "Topic"
+      },
+      "value": "12",
+      "extracted_value": 12,
+      "link": "https://trends.google.com/trends/explore?q=/g/11qg_c03j7&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11qg_c03j7&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/m/01mf_",
+        "title": "Computer programming",
+        "type": "Topic"
+      },
+      "value": "9",
+      "extracted_value": 9,
+      "link": "https://trends.google.com/trends/explore?q=/m/01mf_&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F01mf_&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/m/01hyh_",
+        "title": "Machine learning",
+        "type": "Field of study"
+      },
+      "value": "9",
+      "extracted_value": 9,
+      "link": "https://trends.google.com/trends/explore?q=/m/01hyh_&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F01hyh_&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/m/0z5n",
+        "title": "Application programming interface",
+        "type": "Type of software"
+      },
+      "value": "9",
+      "extracted_value": 9,
+      "link": "https://trends.google.com/trends/explore?q=/m/0z5n&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0z5n&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/m/01lt2",
+        "title": "Code",
+        "type": "Topic"
+      },
+      "value": "9",
+      "extracted_value": 9,
+      "link": "https://trends.google.com/trends/explore?q=/m/01lt2&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F01lt2&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/g/120vhg3f",
+        "title": "Learning",
+        "type": "Topic"
+      },
+      "value": "8",
+      "extracted_value": 8,
+      "link": "https://trends.google.com/trends/explore?q=/g/120vhg3f&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F120vhg3f&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/m/0156dy",
+        "title": "Project",
+        "type": "Topic"
+      },
+      "value": "8",
+      "extracted_value": 8,
+      "link": "https://trends.google.com/trends/explore?q=/m/0156dy&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0156dy&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/m/07hs4p",
+        "title": "Course",
+        "type": "Education"
+      },
+      "value": "8",
+      "extracted_value": 8,
+      "link": "https://trends.google.com/trends/explore?q=/m/07hs4p&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F07hs4p&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/g/11khcfz0y2",
+        "title": "ChatGPT",
+        "type": "Computer program"
+      },
+      "value": "7",
+      "extracted_value": 7,
+      "link": "https://trends.google.com/trends/explore?q=/g/11khcfz0y2&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11khcfz0y2&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/m/0dkw5",
+        "title": "Machine",
+        "type": "Topic"
+      },
+      "value": "7",
+      "extracted_value": 7,
+      "link": "https://trends.google.com/trends/explore?q=/m/0dkw5&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0dkw5&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/g/11bxc656v6",
+        "title": "OpenAI",
+        "type": "Artificial intelligence company"
+      },
+      "value": "7",
+      "extracted_value": 7,
+      "link": "https://trends.google.com/trends/explore?q=/g/11bxc656v6&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11bxc656v6&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/g/11khkg2rwf",
+        "title": "Generative artificial intelligence",
+        "type": "Topic"
+      },
+      "value": "7",
+      "extracted_value": 7,
+      "link": "https://trends.google.com/trends/explore?q=/g/11khkg2rwf&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11khkg2rwf&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/m/0ryppmg",
+        "title": "GitHub",
+        "type": "Software company"
+      },
+      "value": "7",
+      "extracted_value": 7,
+      "link": "https://trends.google.com/trends/explore?q=/m/0ryppmg&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F0ryppmg&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/m/020s1",
+        "title": "Computer file",
+        "type": "Topic"
+      },
+      "value": "7",
+      "extracted_value": 7,
+      "link": "https://trends.google.com/trends/explore?q=/m/020s1&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F020s1&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/g/11rxks0wp5",
+        "title": "install",
+        "type": "Topic"
+      },
+      "value": "5",
+      "extracted_value": 5,
+      "link": "https://trends.google.com/trends/explore?q=/g/11rxks0wp5&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11rxks0wp5&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/g/11my1t41tp",
+        "title": "good",
+        "type": "Topic"
+      },
+      "value": "5",
+      "extracted_value": 5,
+      "link": "https://trends.google.com/trends/explore?q=/g/11my1t41tp&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11my1t41tp&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/m/04g7d",
+        "title": "Language",
+        "type": "Topic"
+      },
+      "value": "5",
+      "extracted_value": 5,
+      "link": "https://trends.google.com/trends/explore?q=/m/04g7d&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F04g7d&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/g/11nm_6fr9g",
+        "title": "used",
+        "type": "Topic"
+      },
+      "value": "5",
+      "extracted_value": 5,
+      "link": "https://trends.google.com/trends/explore?q=/g/11nm_6fr9g&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fg%2F11nm_6fr9g&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/m/07s6nbt",
+        "title": "Text",
+        "type": "Literary theory"
+      },
+      "value": "5",
+      "extracted_value": 5,
+      "link": "https://trends.google.com/trends/explore?q=/m/07s6nbt&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F07s6nbt&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/m/06mq7",
+        "title": "Science",
+        "type": "Discipline"
+      },
+      "value": "4",
+      "extracted_value": 4,
+      "link": "https://trends.google.com/trends/explore?q=/m/06mq7&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F06mq7&tz=420"
+    },
+    {
+      "topic": {
+        "value": "/m/017kpc",
+        "title": "Online chat",
+        "type": "Topic"
+      },
+      "value": "4",
+      "extracted_value": 4,
+      "link": "https://trends.google.com/trends/explore?q=/m/017kpc&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_TOPICS&date=today+12-m&engine=google_trends&hl=en&q=%2Fm%2F017kpc&tz=420"
+    }
+  ]
+}

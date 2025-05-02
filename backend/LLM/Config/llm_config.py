@@ -45,6 +45,6 @@ class ConfigLLM():
 
         # Configure the gemini pro model Content Creation
         try:
-            self.llm = genai.GenerativeModel('models/gemini-1.5-flash')
+            self.llm = genai.GenerativeModel('models/gemini-2.0-flash')
         except Exception as e:
             print(f'When trying to configure the gemini pro model error found: {e}')

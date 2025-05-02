@@ -1,0 +1,349 @@
+{
+  "rising": [
+    {
+      "query": "agentic ai",
+      "value": "Breakout",
+      "extracted_value": 41950,
+      "link": "https://trends.google.com/trends/explore?q=agentic+ai&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=agentic+ai&tz=420"
+    },
+    {
+      "query": "uv python",
+      "value": "Breakout",
+      "extracted_value": 27100,
+      "link": "https://trends.google.com/trends/explore?q=uv+python&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=uv+python&tz=420"
+    },
+    {
+      "query": "n8n",
+      "value": "Breakout",
+      "extracted_value": 20350,
+      "link": "https://trends.google.com/trends/explore?q=n8n&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=n8n&tz=420"
+    },
+    {
+      "query": "humanize ai",
+      "value": "Breakout",
+      "extracted_value": 13250,
+      "link": "https://trends.google.com/trends/explore?q=humanize+ai&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=humanize+ai&tz=420"
+    },
+    {
+      "query": "deepseek",
+      "value": "+4,300%",
+      "extracted_value": 4300,
+      "link": "https://trends.google.com/trends/explore?q=deepseek&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=deepseek&tz=420"
+    },
+    {
+      "query": "deepseek ai",
+      "value": "+2,550%",
+      "extracted_value": 2550,
+      "link": "https://trends.google.com/trends/explore?q=deepseek+ai&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=deepseek+ai&tz=420"
+    },
+    {
+      "query": "cursor",
+      "value": "+2,150%",
+      "extracted_value": 2150,
+      "link": "https://trends.google.com/trends/explore?q=cursor&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=cursor&tz=420"
+    },
+    {
+      "query": "cursor ai",
+      "value": "+1,000%",
+      "extracted_value": 1000,
+      "link": "https://trends.google.com/trends/explore?q=cursor+ai&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=cursor+ai&tz=420"
+    },
+    {
+      "query": "crewai",
+      "value": "+700%",
+      "extracted_value": 700,
+      "link": "https://trends.google.com/trends/explore?q=crewai&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=crewai&tz=420"
+    },
+    {
+      "query": "spring ai",
+      "value": "+650%",
+      "extracted_value": 650,
+      "link": "https://trends.google.com/trends/explore?q=spring+ai&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=spring+ai&tz=420"
+    },
+    {
+      "query": "grok ai",
+      "value": "+650%",
+      "extracted_value": 650,
+      "link": "https://trends.google.com/trends/explore?q=grok+ai&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=grok+ai&tz=420"
+    },
+    {
+      "query": "grok",
+      "value": "+550%",
+      "extracted_value": 550,
+      "link": "https://trends.google.com/trends/explore?q=grok&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=grok&tz=420"
+    },
+    {
+      "query": "ollama",
+      "value": "+450%",
+      "extracted_value": 450,
+      "link": "https://trends.google.com/trends/explore?q=ollama&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=ollama&tz=420"
+    },
+    {
+      "query": "pydantic ai",
+      "value": "+450%",
+      "extracted_value": 450,
+      "link": "https://trends.google.com/trends/explore?q=pydantic+ai&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=pydantic+ai&tz=420"
+    },
+    {
+      "query": "ai agents",
+      "value": "+350%",
+      "extracted_value": 350,
+      "link": "https://trends.google.com/trends/explore?q=ai+agents&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=ai+agents&tz=420"
+    },
+    {
+      "query": "pydantic",
+      "value": "+300%",
+      "extracted_value": 300,
+      "link": "https://trends.google.com/trends/explore?q=pydantic&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=pydantic&tz=420"
+    },
+    {
+      "query": "ai agent",
+      "value": "+250%",
+      "extracted_value": 250,
+      "link": "https://trends.google.com/trends/explore?q=ai+agent&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=ai+agent&tz=420"
+    },
+    {
+      "query": "claude ai",
+      "value": "+250%",
+      "extracted_value": 250,
+      "link": "https://trends.google.com/trends/explore?q=claude+ai&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=claude+ai&tz=420"
+    },
+    {
+      "query": "claude",
+      "value": "+250%",
+      "extracted_value": 250,
+      "link": "https://trends.google.com/trends/explore?q=claude&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=claude&tz=420"
+    },
+    {
+      "query": "langgraph",
+      "value": "+250%",
+      "extracted_value": 250,
+      "link": "https://trends.google.com/trends/explore?q=langgraph&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=langgraph&tz=420"
+    },
+    {
+      "query": "what is prompt engineering",
+      "value": "+250%",
+      "extracted_value": 250,
+      "link": "https://trends.google.com/trends/explore?q=what+is+prompt+engineering&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=what+is+prompt+engineering&tz=420"
+    },
+    {
+      "query": "crew ai",
+      "value": "+200%",
+      "extracted_value": 200,
+      "link": "https://trends.google.com/trends/explore?q=crew+ai&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=crew+ai&tz=420"
+    },
+    {
+      "query": "lovable ai",
+      "value": "+180%",
+      "extracted_value": 180,
+      "link": "https://trends.google.com/trends/explore?q=lovable+ai&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=lovable+ai&tz=420"
+    },
+    {
+      "query": "gemini",
+      "value": "+170%",
+      "extracted_value": 170,
+      "link": "https://trends.google.com/trends/explore?q=gemini&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=gemini&tz=420"
+    }
+  ],
+  "top": [
+    {
+      "query": "python for ai",
+      "value": "100",
+      "extracted_value": 100,
+      "link": "https://trends.google.com/trends/explore?q=python+for+ai&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=python+for+ai&tz=420"
+    },
+    {
+      "query": "python code",
+      "value": "46",
+      "extracted_value": 46,
+      "link": "https://trends.google.com/trends/explore?q=python+code&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=python+code&tz=420"
+    },
+    {
+      "query": "code ai",
+      "value": "46",
+      "extracted_value": 46,
+      "link": "https://trends.google.com/trends/explore?q=code+ai&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=code+ai&tz=420"
+    },
+    {
+      "query": "what is python",
+      "value": "34",
+      "extracted_value": 34,
+      "link": "https://trends.google.com/trends/explore?q=what+is+python&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=what+is+python&tz=420"
+    },
+    {
+      "query": "what is ai",
+      "value": "34",
+      "extracted_value": 34,
+      "link": "https://trends.google.com/trends/explore?q=what+is+ai&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=what+is+ai&tz=420"
+    },
+    {
+      "query": "free ai",
+      "value": "28",
+      "extracted_value": 28,
+      "link": "https://trends.google.com/trends/explore?q=free+ai&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=free+ai&tz=420"
+    },
+    {
+      "query": "api",
+      "value": "24",
+      "extracted_value": 24,
+      "link": "https://trends.google.com/trends/explore?q=api&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=api&tz=420"
+    },
+    {
+      "query": "google ai",
+      "value": "23",
+      "extracted_value": 23,
+      "link": "https://trends.google.com/trends/explore?q=google+ai&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=google+ai&tz=420"
+    },
+    {
+      "query": "open ai",
+      "value": "21",
+      "extracted_value": 21,
+      "link": "https://trends.google.com/trends/explore?q=open+ai&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=open+ai&tz=420"
+    },
+    {
+      "query": "python programming",
+      "value": "21",
+      "extracted_value": 21,
+      "link": "https://trends.google.com/trends/explore?q=python+programming&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=python+programming&tz=420"
+    },
+    {
+      "query": "ai programming",
+      "value": "21",
+      "extracted_value": 21,
+      "link": "https://trends.google.com/trends/explore?q=ai+programming&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=ai+programming&tz=420"
+    },
+    {
+      "query": "python machine learning",
+      "value": "20",
+      "extracted_value": 20,
+      "link": "https://trends.google.com/trends/explore?q=python+machine+learning&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=python+machine+learning&tz=420"
+    },
+    {
+      "query": "machine learning with python",
+      "value": "20",
+      "extracted_value": 20,
+      "link": "https://trends.google.com/trends/explore?q=machine+learning+with+python&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=machine+learning+with+python&tz=420"
+    },
+    {
+      "query": "machine learning",
+      "value": "20",
+      "extracted_value": 20,
+      "link": "https://trends.google.com/trends/explore?q=machine+learning&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=machine+learning&tz=420"
+    },
+    {
+      "query": "python online",
+      "value": "19",
+      "extracted_value": 19,
+      "link": "https://trends.google.com/trends/explore?q=python+online&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=python+online&tz=420"
+    },
+    {
+      "query": "python course",
+      "value": "19",
+      "extracted_value": 19,
+      "link": "https://trends.google.com/trends/explore?q=python+course&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=python+course&tz=420"
+    },
+    {
+      "query": "github",
+      "value": "18",
+      "extracted_value": 18,
+      "link": "https://trends.google.com/trends/explore?q=github&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=github&tz=420"
+    },
+    {
+      "query": "ai with python pdf",
+      "value": "17",
+      "extracted_value": 17,
+      "link": "https://trends.google.com/trends/explore?q=ai+with+python+pdf&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=ai+with+python+pdf&tz=420"
+    },
+    {
+      "query": "generative ai",
+      "value": "17",
+      "extracted_value": 17,
+      "link": "https://trends.google.com/trends/explore?q=generative+ai&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=generative+ai&tz=420"
+    },
+    {
+      "query": "chatgpt ai",
+      "value": "17",
+      "extracted_value": 17,
+      "link": "https://trends.google.com/trends/explore?q=chatgpt+ai&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=chatgpt+ai&tz=420"
+    },
+    {
+      "query": "learn python",
+      "value": "15",
+      "extracted_value": 15,
+      "link": "https://trends.google.com/trends/explore?q=learn+python&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=learn+python&tz=420"
+    },
+    {
+      "query": "python install",
+      "value": "14",
+      "extracted_value": 14,
+      "link": "https://trends.google.com/trends/explore?q=python+install&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=python+install&tz=420"
+    },
+    {
+      "query": "python download",
+      "value": "13",
+      "extracted_value": 13,
+      "link": "https://trends.google.com/trends/explore?q=python+download&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=python+download&tz=420"
+    },
+    {
+      "query": "ai chat",
+      "value": "12",
+      "extracted_value": 12,
+      "link": "https://trends.google.com/trends/explore?q=ai+chat&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=ai+chat&tz=420"
+    },
+    {
+      "query": "gemini",
+      "value": "11",
+      "extracted_value": 11,
+      "link": "https://trends.google.com/trends/explore?q=gemini&date=today+12-m",
+      "serpapi_link": "https://serpapi.com/search.json?data_type=RELATED_QUERIES&date=today+12-m&engine=google_trends&hl=en&q=gemini&tz=420"
+    }
+  ]
+}

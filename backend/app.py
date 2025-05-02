@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException,Request, status
+from fastapi import FastAPI, HTTPException, Request, status
 from pydantic import BaseModel, Field, ValidationError, field_validator
 from Redis.RateLimiter.rate_limiter import RateLimiter
 from Redis.LimitingAlgo.limiting_algo import RateLimitExceeded
@@ -13,26 +13,26 @@ class BlogAiRequest(BaseModel):
     target_audience: str = Field(..., title="Target Audience")
     desired_tone: str = Field(..., title="Desired Tone")
 
-
     @field_validator("blog_name", "desired_tone", "target_audience")
     @classmethod
-    def validate_blog_name(cls, value:str):
+    def validate_blog_name(cls, value: str):
         if not all(word.isalpha() for word in value.split()):
-            raise ValueError("Blog name/ Desired Token/ Target Audience must be alphabetic")
+            raise ValueError(
+                "Blog name/ Desired Token/ Target Audience must be alphabetic"
+            )
         if not (3 < len(value) < 100):
             raise ValueError("Blog name must be between 3 and 30 characters")
-        
+
         return value
 
     @field_validator("add_website_link")
     @classmethod
-    def validate_add_website_link(cls, value:list):
-
+    def validate_add_website_link(cls, value: list):
         if not isinstance(value, list):
             raise ValueError("Add website link must be a list")
 
         for url in value:
-            if not url.startswith('http://') and not url.startswith('https://'):
+            if not url.startswith("http://") and not url.startswith("https://"):
                 raise ValueError("Add website link must start with http:// or https://")
 
         return value
@@ -41,9 +41,11 @@ class BlogAiRequest(BaseModel):
         json_schema_extra = {
             "example": {
                 "blog_name": "Build an Advanced Reranking RAG",
-                "add_website_link": ["https://nayakpplaban.medium.com/build-an-advanced-reranking-rag-system-using-llama-index-llama-3-and-qdrant-a8b8654174bc"],
+                "add_website_link": [
+                    "https://nayakpplaban.medium.com/build-an-advanced-reranking-rag-system-using-llama-index-llama-3-and-qdrant-a8b8654174bc"
+                ],
                 "target_audience": "Beginner",
-                "desired_tone": "Informative"
+                "desired_tone": "Informative",
             }
         }
 
@@ -52,15 +54,17 @@ class BlogAiRequest(BaseModel):
 def read_root():
     return {"message": "InscribeAi server is working"}
 
+
 @app.get("/health", status_code=status.HTTP_200_OK)
 def get_health():
-    return {'message': status.HTTP_200_OK}
+    return {"message": status.HTTP_200_OK}
 
-@app.post('/create_blog/')
-def create_blog(request: BlogAiRequest, request_ip:Request):
+
+@app.post("/create_blog/")
+def create_blog(request: BlogAiRequest, request_ip: Request):
     try:
         ip_address = request_ip.client.host
-        if RateLimiter.get_instance('SlidingWindow').allow_request(ip_address):
+        if RateLimiter.get_instance("SlidingWindow").allow_request(ip_address):
             blog_ai = {
                 "blog_name": request.blog_name,
                 "add_website_link": request.add_website_link,
@@ -68,23 +72,25 @@ def create_blog(request: BlogAiRequest, request_ip:Request):
                 "desired_tone": request.desired_tone,
             }
 
-            blog_response = Main.main(blog_title=blog_ai["blog_name"], 
-                                    website_url_list=blog_ai["add_website_link"],
-                                    target_audience=blog_ai["target_audience"],
-                                    desired_tone=blog_ai["desired_tone"])
+            blog_response = Main.main(
+                blog_title=blog_ai["blog_name"],
+                website_url_list=blog_ai["add_website_link"],
+                target_audience=blog_ai["target_audience"],
+                desired_tone=blog_ai["desired_tone"],
+            )
 
             return blog_response
 
     except ValidationError as e:
-        HTTPException(status_code=400, detail=f'Error when creating blog: {e[0].msg}')
+        HTTPException(status_code=400, detail=f"Error when creating blog: {e[0].msg}")
 
 
-@app.get('/limited')
+@app.get("/limited")
 def limited(request: Request):
     ip_address = request.client.host
 
     try:
-        RateLimiter.get_instance('SlidingWindow').allow_request(ip_address)
+        RateLimiter.get_instance("SlidingWindow").allow_request(ip_address)
         return {"message": "You are allowed to request"}
     except RateLimitExceeded as e:
         raise e
