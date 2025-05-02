@@ -39,28 +39,28 @@ export interface HighlightContentProps {
 export const DEFAULT_HIGHLIGHT_COLORS: HighlightColor[] = [
   {
     label: "Green",
-    value: "var(--tt-highlight-green)",
-    border: "var(--tt-highlight-green-contrast)",
+    value: "rgba(144, 238, 144, 0.9)", // lightgreen bg
+    border: "rgba(0, 128, 0, 0.6)",    // darkgreen border
   },
   {
     label: "Blue",
-    value: "var(--tt-highlight-blue)",
-    border: "var(--tt-highlight-blue-contrast)",
+    value: "rgba(173, 216, 230, 0.9)", // lightblue bg
+    border: "rgba(30, 144, 255, 0.6)", // dodgerblue border
   },
   {
     label: "Red",
-    value: "var(--tt-highlight-red)",
-    border: "var(--tt-highlight-red-contrast)",
+    value: "rgba(255, 182, 193, 0.9)", // lightpink bg
+    border: "rgba(220, 20, 60, 0.6)",  // crimson border
   },
   {
     label: "Purple",
-    value: "var(--tt-highlight-purple)",
-    border: "var(--tt-highlight-purple-contrast)",
+    value: "rgba(216, 191, 216, 0.9)", // thistle bg
+    border: "rgba(128, 0, 128, 0.6)",  // purple border
   },
   {
     label: "Yellow",
-    value: "var(--tt-highlight-yellow)",
-    border: "var(--tt-highlight-yellow-contrast)",
+    value: "rgba(255, 255, 153, 0.9)", // lightyellow bg
+    border: "rgba(204, 204, 0, 0.6)",  // darker yellow border
   },
 ];
 

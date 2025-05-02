@@ -42,8 +42,9 @@ import { NodeButton } from "@/TipTap/tiptap-ui/node-button";
 import {
   HighlightPopover,
   HighlighterButton,
+  HighlightContent
 } from "@/TipTap/tiptap-ui/highlight-popover";
-import { LinkPopover, LinkButton } from "@/TipTap/tiptap-ui/link-popover";
+import { LinkPopover, LinkButton, LinkContent } from "@/TipTap/tiptap-ui/link-popover";
 import { MarkButton } from "@/TipTap/tiptap-ui/mark-button";
 import { TextAlignButton } from "@/TipTap/tiptap-ui/text-align-button";
 import { UndoRedoButton } from "@/TipTap/tiptap-ui/undo-redo-button";
@@ -105,13 +106,6 @@ const MainToolbarContent = ({
         <MarkButton type="underline" />
         {!isMobile ? (
           <HighlightPopover
-            colors={[
-              {
-                label: "Yellow",
-                value: "var(--tt-highlight-yellow)",
-                border: "var(--tt-highlight-yellow-contrast)",
-              },
-            ]}
           />
         ) : (
           <HighlighterButton onClick={onHighlighterClick} />
@@ -172,6 +166,7 @@ const MobileToolbarContent = ({
     </ToolbarGroup>
 
     <ToolbarSeparator />
+    {type === 'highlighter' ? <HighlightContent/> : <LinkContent/>}
 
     {/* {type === "highlighter" ? <HighlightContent colors={[
     {
@@ -214,7 +209,7 @@ export function SimpleEditor() {
       Underline,
       TaskList,
       TaskItem.configure({ nested: true }),
-      Highlight,
+      Highlight.configure({multicolor:true}),
       Image,
       Typography,
       Superscript,

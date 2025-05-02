@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import MetricCard from "../metrics/MetricCard";
 import ProgressChart from "../charts/ProgressChart";
-import { revenueData, purchaseData, salesTargetData } from "@/data/mockData";
+import { CreateBlog, YouTubeBlog, salesTargetData } from "@/data/mockData";
+import { BlogGeneratorForm } from "../BlogGeneratorForm";
 
 const container = {
   hidden: { opacity: 0 },
@@ -20,49 +21,81 @@ const item = {
 };
 
 const MetricsSection: React.FC = () => {
+  const [open, setOpen] = useState(false);
+  const [formConfig, setFormConfig] = useState<{
+    type: "website" | "youtube";
+    title: string;
+    subtitle: string;
+    percentage: string;
+  } | null>(null);
+
+  const handleBlogForm = (type: "website" | "youtube", title: string, subtitle: string, percentage: string) => {
+    setFormConfig({ type, title, subtitle, percentage });
+    setOpen(true);
+  }
+
   return (
-    <motion.div
-      variants={container}
-      initial="hidden"
-      animate="show"
-      className="grid grid-cols-1 md:grid-cols-3 gap-6"
-    >
+    <>
       <motion.div
-        variants={item}
-        className="bg-gradient-to-br from-green-400 via-green-500 to-teal-500 rounded-lg text-white shadow-sm"
+        variants={container}
+        initial="hidden"
+        animate="show"
+        className="grid grid-cols-1 md:grid-cols-3 gap-6"
       >
-        <MetricCard
-          title={revenueData.title}
-          value={revenueData.value}
-          change={revenueData.change}
-        />
-      </motion.div>
+        <motion.div
+          variants={item}
+          className="bg-gradient-to-br from-green-400 via-green-500 to-teal-500 rounded-lg text-white shadow-sm cursor-pointer"
 
-      <motion.div
-        variants={item}
-        className="bg-gradient-to-br from-white to-gray-50 rounded-lg shadow-sm"
-      >
-        <MetricCard
-          title={purchaseData.title}
-          value={purchaseData.value}
-          change={purchaseData.change}
-        />
-      </motion.div>
-
-      <motion.div
-        variants={item}
-        className="bg-gradient-to-br from-white to-gray-50 rounded-lg shadow-sm"
-      >
-        <div className="p-6">
-          <h3 className="text-xl font-medium mb-2">{salesTargetData.title}</h3>
-          <div className="text-4xl font-bold mb-4">{salesTargetData.value}</div>
-          <ProgressChart
-            current={salesTargetData.current}
-            target={salesTargetData.target}
+        >
+          <MetricCard
+            title={CreateBlog.title}
+            value={CreateBlog.value}
+            change={CreateBlog.change}
+            onClick={() => handleBlogForm("website", "Create Blog", "Using Website Link", "170%")}
           />
-        </div>
+        </motion.div>
+
+        <motion.div
+          variants={item}
+          className="bg-gradient-to-br from-green-400 via-green-500 to-teal-500 rounded-lg text-white shadow-sm cursor-pointer"
+        >
+          <MetricCard
+            title={YouTubeBlog.title}
+            value={YouTubeBlog.value}
+            change={YouTubeBlog.change}
+            onClick={() => handleBlogForm("youtube", "Create YouTube Blog", "Using YouTube Video", "200%")}
+          />
+        </motion.div>
+
+        <motion.div
+          variants={item}
+          className="bg-gradient-to-br from-white to-gray-50 rounded-lg shadow-sm"
+        >
+          <div className="p-6">
+            <h3 className="text-xl font-medium mb-2">{salesTargetData.title}</h3>
+            <div className="text-4xl font-bold mb-4">{salesTargetData.current} / {salesTargetData.target}</div>
+            <ProgressChart
+              current={salesTargetData.current}
+              target={salesTargetData.target}
+            />
+          </div>
+        </motion.div>
       </motion.div>
-    </motion.div>
+
+      {open && formConfig && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="bg-white rounded-xl shadow-xl p-6 w-full max-w-4xl">
+            <BlogGeneratorForm
+              type={formConfig.type}
+              title={formConfig.title}
+              subtitle={formConfig.subtitle}
+              percentage={formConfig.percentage}
+              onClose={() => setOpen(false)}
+            />
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

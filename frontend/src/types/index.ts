@@ -1,9 +1,3 @@
-export interface NavItem {
-  title: string;
-  icon: string;
-  active?: boolean;
-}
-
 export interface MetricCardProps {
   title: string;
   value: string;

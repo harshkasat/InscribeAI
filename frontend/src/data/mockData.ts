@@ -1,12 +1,5 @@
-import { ChartData, SatisfactionData, NavItem } from "@/types";
+import { ChartData, SatisfactionData } from "@/types";
 
-export const navItems: NavItem[] = [
-  { title: "Dashboard", icon: "dashboard", active: true },
-  { title: "Analytics", icon: "analytics" },
-  { title: "Products", icon: "products" },
-  { title: "Invoices", icon: "invoices" },
-  { title: "Calendar", icon: "calendar" },
-];
 
 export const monthlyData: ChartData[] = [
   { month: "Jan", value: 380 },
@@ -34,39 +27,27 @@ export const satisfactionData: SatisfactionData = {
   feedback: "Exceptional support and quick responses",
 };
 
-export const timeOptions = [
-  "Daily",
-  "Weekly",
-  "Monthly",
-  "Quarterly",
-  "Yearly",
-];
 
-export const revenueData = {
-  title: "Revenue",
-  value: "$120,873",
+export const CreateBlog = {
+  title: "Create Blog",
+  value: "Using Website Link",
   change: {
-    value: "17%",
+    value: "170%",
     direction: "up",
   },
 };
 
-export const purchaseData = {
-  title: "Total Purchase",
-  value: "$89,203",
+export const YouTubeBlog = {
+  title: "Create Youtube Blog",
+  value: "Using Youtube Video",
   change: {
-    value: "12%",
+    value: "200%",
     direction: "up",
   },
 };
 
 export const salesTargetData = {
-  title: "Sales Target",
-  value: "$50,901",
-  current: 38000,
-  target: 50901,
-  change: {
-    value: "8%",
-    direction: "up",
-  },
+  title: "Total Credit Left",
+  current: 3,
+  target: 5,
 };

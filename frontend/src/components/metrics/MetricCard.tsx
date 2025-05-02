@@ -23,7 +23,7 @@ const MetricCard: React.FC<MetricCardProps> = ({
       )}
       onClick={onClick}
     >
-      <div className="relative p-6 h-full flex flex-col bg-gradient-to-br from-white/80 to-white/40 backdrop-blur-sm">
+      <div className="relative p-6 h-full flex flex-col bg-gradient-to-br from-white/20 to-white/40 backdrop-blur-sm">
         <motion.button
           whileHover={{ rotate: 90 }}
           transition={{ duration: 0.2 }}
@@ -62,7 +62,7 @@ const MetricCard: React.FC<MetricCardProps> = ({
             )}
             {change.value}
           </motion.div>
-          <span className="text-gray-500 text-sm ml-2">Than last month</span>
+          <span className="text-gray-500 text-sm ml-2">More engagement than static blog</span>
         </div>
       </div>
 
