@@ -1,12 +1,12 @@
 // import { useTheme } from "next-themes"
 // import { Waves } from "./components/ui/waves-background";
-import Navbar from './components/Navbar';
-import HeroSection from './components/HeroSection';
-import StrategicGrowth from './components/StrategicGrowth';
-import InnovativeSolutions from './components/InnvoativeSolution';
-import FAQ from './components/FAQ';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
+import Navbar from "./components/Navbar";
+import HeroSection from "./components/HeroSection";
+import StrategicGrowth from "./components/StrategicGrowth";
+import InnovativeSolutions from "./components/InnvoativeSolution";
+import FAQ from "./components/FAQ";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
 
 function App() {
   return (
