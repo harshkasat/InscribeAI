@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import HTMLResponse, JSONResponse
 from pydantic import ValidationError
 from fastapi.middleware.cors import CORSMiddleware
+import json
 from dotenv import load_dotenv
 
 
@@ -79,6 +80,9 @@ async def create_blog_post(request: Request, blog_request: BlogAiRequest):
                                         target_audience=blog_ai["target_audience"],
                                         desired_tone=blog_ai["desired_tone"])
 
+        with open('blog_response.json', 'w') as f:
+            json.dump(blog_response, f, indent=4)
+        
         return JSONResponse(
             content={
                 "message": "Blog post created successfully",

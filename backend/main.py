@@ -4,7 +4,6 @@ import asyncio
 from Blog.Title.title import CreateTitle
 from Blog.HeadingOutline.outline import CreateHeading
 from Blog.Heading_n_Paragraph.blog_generation import BlogGeneration
-from Website.Templates.create_template import Template
 
 # Web Scraping Imports
 from Scrape.keyword import scrape_keyword
@@ -92,14 +91,6 @@ class Main:
         print("Content created")
         return content_generation
 
-    async def create_blog(self, content: str, title):
-        # Creating blog blog using Ai
-        try:
-            template = Template().generate_template(title, raw_content=content)
-            print("Blog created")
-            return template
-        except Exception as e:
-            print(f"When trying to create blog error found: {e}")
 
     @staticmethod
     async def main(
@@ -117,14 +108,14 @@ class Main:
 
         title = await res.create_title()
 
-        keywords = await res.scrape_keyword()
+        # keywords = await res.scrape_keyword()
 
         website_content = await res.scrape_website()
 
         outline = await res.create_outline(title=title, description=website_content)
 
         result = await res.content_generation(
-            content=outline, web_content=website_content, keywords=keywords
+            content=outline, web_content=website_content, keywords='keywords'
         )
 
         # blog = await res.create_blog(title=title, content=result)

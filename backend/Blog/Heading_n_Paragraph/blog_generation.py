@@ -1,17 +1,12 @@
-import os
-import sys
+# pylint: skip-file
 import json
 import time
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
-# from Blog.HeadingOutline.outline import CreateHeading
 from LLM.Config.llm_config import ConfigLLM
-# from Blog.Title.title import CreateTitle
 class BlogGeneration(ConfigLLM):
 
     def __init__(self, json_response:json,  web_scrape, seo_keyword) -> None:
-        
         self.json_response = json_response
         self.context = web_scrape
         self.seo_keyword = seo_keyword
@@ -26,34 +21,30 @@ class BlogGeneration(ConfigLLM):
             print(f'When trying to load JSON data, an error was found: {e}')
             return None  # Return None if JSON data cannot be loaded
 
-        result = ''
+        result = ""
 
         try:
             for section in sections:
                 # Include the already generated content in the prompt to avoid repetition
                 blog_prompt = blog_prompt = f"""
-I want to write a blog post. Below are the headers, context information, and key points for each paragraph. Please generate content based on this Markdown, ensuring no repetition.
+                    I want to write a json format. Below are the headers, context information, and key points for each paragraph. 
+                    - Heading: {section['Heading']}
 
-Heading: {section['Heading']}
+                    - Key points for each paragraph: {section['Description']}
 
-Key points for each paragraph:
-{section['Description']}
+                    - Context: {self.context}
 
-Context: {self.context}
+                    - SEO Keywords: {self.seo_keyword}
 
-SEO Keywords: {self.seo_keyword}
+                    - Previously generated content (to avoid repetition): {result}
 
-**NOTE**: When generating code snippets in the blog, format the code using <pre> and <code> tags only to ensure proper indentation and readability. No other HTML tags should be used.
-
-Previously generated content (to avoid repetition):
-{result}
-
-Please generate unique content for this section, ensuring it does not repeat information from previously generated sections. Focus on the specific key points provided for this section and expand on them with relevant details and examples.
-"""
+                    Please generate unique content for this section, ensuring it does not repeat information from previously generated sections. 
+                    Focus on the specific key points provided for this section and expand on them with relevant details and examples.
+                    """
 
                 generate_blog = self.llm.generate_content(blog_prompt)
                 result += generate_blog.text + "\\n"
-            
+
             return result
 
         except Exception as e:

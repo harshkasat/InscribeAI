@@ -1,27 +1,11 @@
 import os
 from dotenv import load_dotenv
 import google.generativeai as genai
+from LLM import SAFE, SYSTEM_PROMPT
 
 load_dotenv()
 
-safe = [
-    {
-        "category": "HARM_CATEGORY_HARASSMENT",
-        "threshold": "BLOCK_NONE",
-    },
-    {
-        "category": "HARM_CATEGORY_HATE_SPEECH",
-        "threshold": "BLOCK_NONE",
-    },
-    {
-        "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-        "threshold": "BLOCK_NONE",
-    },
-    {
-        "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
-        "threshold": "BLOCK_NONE",
-    },
-]
+
 
 class ConfigLLM():
 
@@ -39,12 +23,19 @@ class ConfigLLM():
         try:
             genai.configure(api_key = self.gemini_api_key)
 
-            self.gemini_pro_vision_models = genai.GenerativeModel('models/gemini-pro-vision', safety_settings=safe)
+            self.gemini_pro_vision_models = genai.GenerativeModel(
+                'models/gemini-pro-vision', 
+                safety_settings=SAFE,
+                generation_config=genai.GenerationConfig(
+                    response_mime_type="application/json",
+                ),
+                system_instruction=SYSTEM_PROMPT
+            )
         except Exception as e:
             print(f'When trying to configure the gemini pro vision model error found: {e}')
 
         # Configure the gemini pro model Content Creation
         try:
-            self.llm = genai.GenerativeModel('models/gemini-2.0-flash')
+            self.llm = genai.GenerativeModel('models/gemini-2.5-pro-exp-03-25')
         except Exception as e:
             print(f'When trying to configure the gemini pro model error found: {e}')
