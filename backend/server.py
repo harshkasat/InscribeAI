@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 # from Redis.RateLimiter.rate_limiter import RateLimiter
 # from Redis.LimitingAlgo.limiting_algo import RateLimitExceeded
 
-from main import Main
+from blog_content_generation import BlogGeneration
 
 from schemas import BlogAiRequest
 
@@ -75,7 +75,7 @@ async def create_blog_post(request: Request, blog_request: BlogAiRequest):
         # Assuming the rate limiter should be active
         # RateLimiter.get_instance('SlidingWindow').allow_request(request.client.host)
 
-        blog_response = await Main.main(blog_title=blog_ai["blog_name"],
+        blog_response = await BlogGeneration.blog_generate(blog_title=blog_ai["blog_name"],
                                         website_url_list=blog_ai["add_website_link"],
                                         target_audience=blog_ai["target_audience"],
                                         desired_tone=blog_ai["desired_tone"])

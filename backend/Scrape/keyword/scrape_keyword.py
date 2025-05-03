@@ -155,7 +155,7 @@ class ScrapKeyword(object):
             )
 
 
-async def main(title: str) -> list:
+async def scrape_seo_keyword(title: str) -> list:
     try:
         scrap_keyword = ScrapKeyword()
         import time

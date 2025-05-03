@@ -238,6 +238,8 @@ Generate high-quality blog content for the specified section following the Tipta
 - **Section Heading**: {section_heading}
 - **Section Description**: {section_description}
 - **Target Audience**: {target_audience}
+- **Desired Tone**: {desired_tone}
+- **Context**: {context}
 - **SEO Keywords**: {seo_keywords}
 - **Previously Generated Content**: {previous_content}
 
@@ -279,6 +281,9 @@ For example:
 ```
 
 ## Additional Context
+- The content should be engaging and informative, tailored to the target audience's needs and interests. 
+- Use a friendly and approachable tone, avoiding overly technical jargon unless necessary. Aim for clarity and conciseness in your writing.
+- Also consider the following context for the blog post
 - For how-to sections: Include clear step-by-step instructions with numbered lists
 - For overview sections: Incorporate definitions and explanations of key terms
 - For problem-solution sections: Present common issues followed by practical solutions

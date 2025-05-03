@@ -1,8 +1,3 @@
-import os
-import sys
-
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
-
 from LLM.Config.llm_config import ConfigLLM
 # from database import SupabaseConfig
 
@@ -12,11 +7,10 @@ class CreateTitle(ConfigLLM):
         self.title = title
         self.target_audience = target_audience
         self.desired_tone = Desired_tone
-        super().__init__()
 
     def create_title(self):
         try:
-            prompt = f"""I need a catchy and engaging title for a blog post about {self.title}. 
+            prompt = f"""I need a catchy and engaging title for a blog post about {self.title}.
             The title should be attention-grabbing and relevant to the content.
             1. Main Topic: {self.title}
             2. Target Audience: {self.target_audience} 
@@ -26,9 +20,9 @@ class CreateTitle(ConfigLLM):
             Please generate a compelling blog title based on this information.
             Give me only one title"""
 
-            response = self.llm.generate_content(prompt)
+            response = self.llm_response_handler(content=prompt)
 
-            return response.text
+            return response
         except Exception as e:
             print(f"When trying to create title error found: {e}")
 
@@ -41,7 +35,7 @@ class CreateTitle(ConfigLLM):
             ONLY GIVE ME SUBDOMAIN TEXT, NOTHING ELSE, NO ".com" OR ".net OR _ OR - , OR not even space. give me one subdomain only".
             """
 
-            response = self.llm.generate_content(prompt).text.strip().replace("\n", "")
+            response = self.llm_response_handler(content=prompt)
             return response
         except Exception as e:
             print(f"When trying to create subdomain error found: {e}")

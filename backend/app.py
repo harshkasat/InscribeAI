@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException, Request, status
 from pydantic import BaseModel, Field, ValidationError, field_validator
 from Redis.RateLimiter.rate_limiter import RateLimiter
 from Redis.LimitingAlgo.limiting_algo import RateLimitExceeded
-from main import Main
+from blog_content_generation import BlogGeneration
 
 app = FastAPI()
 
@@ -72,7 +72,7 @@ def create_blog(request: BlogAiRequest, request_ip: Request):
                 "desired_tone": request.desired_tone,
             }
 
-            blog_response = Main.main(
+            blog_response = BlogGeneration.blog_generate(
                 blog_title=blog_ai["blog_name"],
                 website_url_list=blog_ai["add_website_link"],
                 target_audience=blog_ai["target_audience"],

@@ -3,16 +3,21 @@ import asyncio
 # Blog Creation Imports
 from Blog.Title.title import CreateTitle
 from Blog.HeadingOutline.outline import CreateHeading
-from Blog.Heading_n_Paragraph.blog_generation import BlogGeneration
+from Blog.Heading_n_Paragraph.content_generation import BlogGenerator
+
+# pylint: skip-file
 
 # Web Scraping Imports
 from Scrape.keyword import scrape_keyword
 from Scrape.website.scrape_website import ScrapeWebsite
 
 
-class Main:
+class BlogGeneration:
     def __init__(
-        self, title: str, url_list: list, target_audience: str, desired_tone: str
+        self, title: str, 
+        url_list: list, 
+        target_audience: str, 
+        desired_tone: str
     ) -> None:
         self.title = title
         self.url_list = url_list
@@ -27,7 +32,6 @@ class Main:
                 target_audience=self.target_audience,
                 Desired_tone=self.desired_tone,
             ).create_title()
-            print("Title created")
             return generate_title
 
         except Exception as e:
@@ -50,8 +54,7 @@ class Main:
     async def scrape_keyword(self):
         # Scraping keywords for SEO
         try:
-            keyword = await (scrape_keyword.main(title=self.title))
-            print("Scraping keywords successfully")
+            keyword = await (scrape_keyword.scrape_seo_keyword(title=self.title))
             return keyword
 
         except Exception as e:
@@ -64,7 +67,6 @@ class Main:
             for url in self.url_list:
                 website_content.append(ScrapeWebsite(url=url).extract_data())
 
-            print("Scraping website successfully")
             return website_content
 
         except Exception as e:
@@ -73,10 +75,8 @@ class Main:
     async def create_outline(self, title, description):
         # Creating outline blog using Ai
         try:
-            generate_outline = CreateHeading(
-                title=title, description=description
-            ).create_outline()
-            print("Outline created")
+            generate_outline = CreateHeading(title=title, description=description
+                                            ).create_outline()
             return generate_outline
 
         except Exception as e:
@@ -84,22 +84,30 @@ class Main:
                 f"When trying to create outline of blog title: {title} with description: {description}  error found: {e}"
             )
 
-    async def content_generation(self, content, web_content, keywords):
-        content_generation = BlogGeneration(
-            json_response=content, web_scrape=web_content, seo_keyword=keywords
-        ).create_blog()
+    async def content_generation(self, seo_keywords, scrape_context, sections):
+        content_generation = BlogGenerator()
+
+        blog_content = content_generation.generate_blog(
+            blog_topic=self.title,
+            target_audience=self.target_audience,
+            desired_tone=self.desired_tone,
+            seo_keywords=seo_keywords,
+            sections=sections,
+            context=scrape_context
+        )
+
         print("Content created")
-        return content_generation
+        return blog_content
 
 
     @staticmethod
-    async def main(
+    async def blog_generate(
         blog_title: str,
         target_audience: str,
         website_url_list: list,
         desired_tone: str
     ):
-        res = Main(
+        res = BlogGeneration(
             title=blog_title,
             target_audience=target_audience,
             desired_tone=desired_tone,
@@ -108,14 +116,16 @@ class Main:
 
         title = await res.create_title()
 
-        # keywords = await res.scrape_keyword()
+        seo_keywords = await res.scrape_keyword()
 
         website_content = await res.scrape_website()
 
         outline = await res.create_outline(title=title, description=website_content)
 
         result = await res.content_generation(
-            content=outline, web_content=website_content, keywords='keywords'
+            seo_keywords=seo_keywords,
+            scrape_context=website_content,
+            sections=outline,
         )
 
         # blog = await res.create_blog(title=title, content=result)
@@ -131,6 +141,6 @@ class Main:
 
 #     loop = asyncio.get_event_loop()
 #     result = loop.run_until_complete(
-#         Main.main(title, target_audience, website_url_list, desired_tone)
+#         BlogGeneration.blog_generate(title, target_audience, website_url_list, desired_tone)
 #     )
-#     print(result)
+#     # print(result)

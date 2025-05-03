@@ -1,11 +1,7 @@
-import os
-import sys
 import requests
 from bs4 import BeautifulSoup
-
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
-
 from LLM.Config.llm_config import ConfigLLM
+
 
 class ScrapeWebsite(ConfigLLM):
     """
@@ -53,30 +49,32 @@ class ScrapeWebsite(ConfigLLM):
     def parse_content(self):
         # Parse the HTML content using BeautifulSoup
         try:
-            soup = BeautifulSoup(self.fetch_content(), 'html.parser')
+            soup = BeautifulSoup(self.fetch_content(), "html.parser")
 
             return soup
         except Exception as e:
-            print(f'When trying to parse content error found: {e}')
+            print(f"When trying to parse content error found: {e}")
 
     def extract_data(self):
         try:
             # Extract headers and paragraphs in order
-            data = ''
-            for element in self.parse_content().find_all(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'pre']):
+            data = ""
+            for element in self.parse_content().find_all(
+                ["h1", "h2", "h3", "h4", "h5", "h6", "p", "pre"]
+            ):
                 text = element.get_text(strip=True)
-                data += text + '\n'
+                data += text + "\n"
             return data
 
         except Exception as e:
-            print(f'When trying to extract data error found: {e}')
-    
+            print(f"When trying to extract data error found: {e}")
 
     def summary_website_content(self):
-
         try:
-            summary_content = self.llm.generate_content(f"Summary the content of the website: {self.extract_data()}")
+            summary_content = self.llm_response_handler(
+                f"Summary the content of the website: {self.extract_data()}"
+            )
 
-            return summary_content.text
+            return summary_content
         except Exception as e:
-            print(f'When trying to generate summary content error: {e}')
+            print(f"When trying to generate summary content error: {e}")
