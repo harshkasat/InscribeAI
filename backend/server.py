@@ -1,8 +1,9 @@
+import json
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import HTMLResponse, JSONResponse
 from pydantic import ValidationError
 from fastapi.middleware.cors import CORSMiddleware
-import json
+from Router import user_db_router, blog_db_router
 from dotenv import load_dotenv
 
 
@@ -92,6 +93,19 @@ async def create_blog_post(request: Request, blog_request: BlogAiRequest):
 
     except ValidationError as e:
         raise HTTPException(status_code=400, detail=f'Error when creating blog: {e}')
+
+PREFIX = '/api/v1'
+app.include_router(
+    user_db_router.router,
+    prefix=PREFIX,
+    tags=["User DB Route"]
+)
+
+app.include_router(
+    blog_db_router.router,
+    prefix=PREFIX,
+    tags=["Blog DB Route"]
+)
 
 if __name__ == "__main__":
     import uvicorn
