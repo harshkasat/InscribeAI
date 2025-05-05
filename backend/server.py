@@ -73,9 +73,6 @@ async def create_blog_post(request: Request, blog_request: BlogAiRequest):
             "desired_tone": blog_request.desired_tone,
         }
 
-        # Assuming the rate limiter should be active
-        # RateLimiter.get_instance('SlidingWindow').allow_request(request.client.host)
-
         blog_response = await BlogGeneration.blog_generate(blog_title=blog_ai["blog_name"],
                                         website_url_list=blog_ai["add_website_link"],
                                         target_audience=blog_ai["target_audience"],

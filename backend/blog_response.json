@@ -35,20 +35,7 @@
             "content": [
                 {
                     "type": "text",
-                    "text": "Large Language Models (LLMs) are great at generating text, but they sometimes confidently provide incorrect information, a problem known as "
-                },
-                {
-                    "type": "text",
-                    "marks": [
-                        {
-                            "type": "bold"
-                        }
-                    ],
-                    "text": "hallucination"
-                },
-                {
-                    "type": "text",
-                    "text": ". One way to combat this is by using Retrieval Augmented Generation (RAG)."
+                    "text": "Large Language Models (LLMs) are powerful tools, but they can sometimes generate incorrect information, a phenomenon known as hallucination. To combat this, we use Retrieval Augmented Generation (RAG) to ensure our AI models provide accurate and factual responses."
                 }
             ]
         },
@@ -60,7 +47,20 @@
             "content": [
                 {
                     "type": "text",
-                    "text": "RAG enhances LLMs by providing them with relevant, factual knowledge, kept separate from the LLM itself. This knowledge is stored externally and can be easily updated, helping to ensure the accuracy of the generated content. In basic RAG, the LLM retrieves the most relevant contexts and uses them to formulate an answer."
+                    "text": "RAG systems work by first retrieving relevant information from a knowledge base and then using this information to generate a response. This approach minimizes hallucination by grounding the LLM in verified data. This blog post explores an advanced RAG system using "
+                },
+                {
+                    "type": "text",
+                    "marks": [
+                        {
+                            "type": "bold"
+                        }
+                    ],
+                    "text": "reranking"
+                },
+                {
+                    "type": "text",
+                    "text": " techniques."
                 }
             ]
         },
@@ -72,7 +72,7 @@
             "content": [
                 {
                     "type": "text",
-                    "text": "In this blog post, we'll dive into "
+                    "text": "In this guide, you'll learn how to build a RAG system that not only retrieves information but also "
                 },
                 {
                     "type": "text",
@@ -81,11 +81,24 @@
                             "type": "bold"
                         }
                     ],
-                    "text": "Advanced Reranking RAG"
+                    "text": "reranks"
                 },
                 {
                     "type": "text",
-                    "text": ", a more sophisticated approach to RAG. We will show you how to significantly improve your RAG system's accuracy by implementing a two-stage retrieval process. You'll learn how reranking models filter the most relevant context, ensuring only the highest quality information informs the LLM's response. By the end of this article, you\u2019ll understand how to build a RAG system that minimizes hallucination and provides more trustworthy answers."
+                    "text": " the results to prioritize the most relevant content. We will use Llama-Index, Llama 3, and Qdrant to create a robust and accurate question-answering system. We'll also explore how "
+                },
+                {
+                    "type": "text",
+                    "marks": [
+                        {
+                            "type": "bold"
+                        }
+                    ],
+                    "text": "advanced reranking RAG"
+                },
+                {
+                    "type": "text",
+                    "text": " can improve the quality of your AI-powered applications."
                 }
             ]
         },
@@ -100,34 +113,9 @@
                     "content": [
                         {
                             "type": "text",
-                            "text": "Reranking enhances the retrieval stage of RAG, focusing on relevance and context quality."
+                            "text": "Reranking enhances RAG systems by ensuring only the most pertinent information informs the LLM's response, improving accuracy and reliability."
                         }
                     ]
-                }
-            ]
-        },
-        {
-            "type": "paragraph",
-            "attrs": {
-                "textAlign": "left"
-            },
-            "content": [
-                {
-                    "type": "text",
-                    "text": "Now that we have laid the groundwork, let's delve deeper into what reranking models are and how they boost the performance of RAG systems. Stay tuned to understand more about "
-                },
-                {
-                    "type": "text",
-                    "marks": [
-                        {
-                            "type": "bold"
-                        }
-                    ],
-                    "text": "Responsible Enterprise RAG"
-                },
-                {
-                    "type": "text",
-                    "text": " implementations."
                 }
             ]
         },
@@ -152,20 +140,7 @@
             "content": [
                 {
                     "type": "text",
-                    "text": "Let's kick things off by understanding what "
-                },
-                {
-                    "type": "text",
-                    "marks": [
-                        {
-                            "type": "bold"
-                        }
-                    ],
-                    "text": "Advanced Reranking RAG"
-                },
-                {
-                    "type": "text",
-                    "text": " is all about. At its core, it's an enhanced version of the standard Retrieval Augmented Generation (RAG) system. Think of RAG as giving a Large Language Model (LLM) a set of notes before asking it a question. The LLM then uses these notes to formulate a more accurate and informed answer."
+                    "text": "In the realm of AI, ensuring accuracy and relevance is crucial. This is where Advanced Reranking RAG (Retrieval Augmented Generation) comes into play. RAG systems enhance the capabilities of Large Language Models (LLMs) by providing them with access to external knowledge sources. Advanced Reranking elevates this process by intelligently prioritizing the most relevant information before feeding it to the LLM."
                 }
             ]
         },
@@ -177,7 +152,7 @@
             "content": [
                 {
                     "type": "text",
-                    "text": "Now, where does the 'Advanced Reranking' come in? In a typical RAG setup, the LLM might receive several documents, some more relevant than others. Advanced Reranking adds a smart filter, carefully selecting the "
+                    "text": "Let's define some key terms. "
                 },
                 {
                     "type": "text",
@@ -186,11 +161,24 @@
                             "type": "bold"
                         }
                     ],
-                    "text": "most relevant"
+                    "text": "Retrieval Augmented Generation (RAG)"
                 },
                 {
                     "type": "text",
-                    "text": " context to feed to the LLM. This process helps in improving the precision and reliability of the responses."
+                    "text": " is a framework that combines information retrieval with text generation. "
+                },
+                {
+                    "type": "text",
+                    "marks": [
+                        {
+                            "type": "bold"
+                        }
+                    ],
+                    "text": "Reranking"
+                },
+                {
+                    "type": "text",
+                    "text": " involves reordering the retrieved documents or passages based on their relevance to the query. Together, they ensure only the best information goes to your LLM. This contrasts standard RAG methods, which may use all retrieved information equally, even if some are less helpful."
                 }
             ]
         },
@@ -202,20 +190,7 @@
             "content": [
                 {
                     "type": "text",
-                    "text": "One key concept is the "
-                },
-                {
-                    "type": "text",
-                    "marks": [
-                        {
-                            "type": "bold"
-                        }
-                    ],
-                    "text": "Reranker Model"
-                },
-                {
-                    "type": "text",
-                    "text": ". This model acts like a quality control inspector. After the initial documents are retrieved, the reranker steps in to assess each one's relevance to the query. It then reorders or filters the documents, ensuring that the LLM only sees the best possible information. As Sylvie Shi notes in \"Understanding Reranker Models\", this significantly improves RAG performance."
+                    "text": "Imagine you're asking an LLM about the best hiking trails in Yosemite. A basic RAG system might pull information on ten different trails. An Advanced Reranking RAG system, however, would first analyze those ten results and prioritize the three most relevant trails based on factors like user reviews, trail difficulty, and recent conditions. This ensures the LLM focuses on the best possible data when generating its response."
                 }
             ]
         },
@@ -230,7 +205,7 @@
                     "content": [
                         {
                             "type": "text",
-                            "text": "Advanced Reranking RAG helps LLMs provide more accurate answers by carefully selecting the most relevant context, ultimately reducing misleading or incorrect responses. "
+                            "text": "Advanced Reranking RAG optimizes the information fed to LLMs, significantly improving the quality and accuracy of AI-driven applications."
                         }
                     ]
                 }
@@ -244,7 +219,7 @@
             "content": [
                 {
                     "type": "text",
-                    "text": "Ready to learn how to supercharge your RAG system? In the next section, we\u2019ll look at a step-by-step guide to implementing this advanced technique."
+                    "text": "In the next section, we'll explore the key components needed to build this kind of system."
                 }
             ]
         },
@@ -257,7 +232,7 @@
             "content": [
                 {
                     "type": "text",
-                    "text": "Important Components of Advanced Reranking RAG"
+                    "text": "Important Components"
                 }
             ]
         },
@@ -269,116 +244,7 @@
             "content": [
                 {
                     "type": "text",
-                    "text": "Advanced Reranking RAG systems build upon the traditional RAG framework by adding a crucial reranking step. This enhancement prioritizes the most relevant context for the LLM, leading to more accurate and coherent responses. Let's break down the key components that make this advanced system work:"
-                }
-            ]
-        },
-        {
-            "type": "bulletList",
-            "content": [
-                {
-                    "type": "listItem",
-                    "content": [
-                        {
-                            "type": "paragraph",
-                            "attrs": {
-                                "textAlign": "left"
-                            },
-                            "content": [
-                                {
-                                    "type": "text",
-                                    "marks": [
-                                        {
-                                            "type": "bold"
-                                        }
-                                    ],
-                                    "text": "Retrieval Module:"
-                                },
-                                {
-                                    "type": "text",
-                                    "text": " This component fetches the initial set of relevant documents or text chunks from a data source, typically a vector database. The "
-                                },
-                                {
-                                    "type": "text",
-                                    "marks": [
-                                        {
-                                            "type": "bold"
-                                        }
-                                    ],
-                                    "text": "vector database"
-                                },
-                                {
-                                    "type": "text",
-                                    "text": " stores documents as vector embeddings."
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "type": "listItem",
-                    "content": [
-                        {
-                            "type": "paragraph",
-                            "attrs": {
-                                "textAlign": "left"
-                            },
-                            "content": [
-                                {
-                                    "type": "text",
-                                    "marks": [
-                                        {
-                                            "type": "bold"
-                                        }
-                                    ],
-                                    "text": "Reranking Module:"
-                                },
-                                {
-                                    "type": "text",
-                                    "text": " The heart of the advanced system, it refines the initially retrieved documents. It analyzes the documents based on their semantic similarity to the query and reorders them to prioritize the most relevant ones. Examples of reranking models are "
-                                },
-                                {
-                                    "type": "text",
-                                    "marks": [
-                                        {
-                                            "type": "italic"
-                                        }
-                                    ],
-                                    "text": "SentenceTransformerRerank"
-                                },
-                                {
-                                    "type": "text",
-                                    "text": " or Cohere Rerank."
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "type": "listItem",
-                    "content": [
-                        {
-                            "type": "paragraph",
-                            "attrs": {
-                                "textAlign": "left"
-                            },
-                            "content": [
-                                {
-                                    "type": "text",
-                                    "marks": [
-                                        {
-                                            "type": "bold"
-                                        }
-                                    ],
-                                    "text": "Large Language Model (LLM):"
-                                },
-                                {
-                                    "type": "text",
-                                    "text": " This component generates the final answer or response using the reranked context. The LLM leverages the highly relevant information to provide accurate and coherent answers."
-                                }
-                            ]
-                        }
-                    ]
+                    "text": "Advanced Reranking RAG systems consist of several critical components working together. Understanding each component is essential for building an effective and accurate question-answering system. These components ensure that the most relevant information is prioritized, leading to more reliable responses from the language model."
                 }
             ]
         },
@@ -390,39 +256,81 @@
             "content": [
                 {
                     "type": "text",
-                    "text": "Each component plays a vital role in improving the accuracy and efficiency of the RAG system."
-                }
-            ]
-        },
-        {
-            "type": "paragraph",
-            "attrs": {
-                "textAlign": "left"
-            },
-            "content": [
-                {
-                    "type": "text",
-                    "text": "For instance, imagine you are asking a question about the history of AI. The retrieval module might fetch several documents related to AI, but the reranking module will specifically highlight sections discussing key figures and milestones, ensuring the LLM focuses on the most important information to answer your question effectively. More info can be found "
+                    "text": "First, there's the "
                 },
                 {
                     "type": "text",
                     "marks": [
                         {
-                            "type": "link",
-                            "attrs": {
-                                "href": "https://www.example.com/advanced-rag",
-                                "target": "_blank",
-                                "rel": "noopener noreferrer nofollow"
-                            }
+                            "type": "bold"
                         }
                     ],
-                    "text": "here"
+                    "text": "Retrieval Model"
                 },
                 {
                     "type": "text",
-                    "text": "."
+                    "text": ", which initially fetches a set of documents based on the query. Then, the "
+                },
+                {
+                    "type": "text",
+                    "marks": [
+                        {
+                            "type": "bold"
+                        }
+                    ],
+                    "text": "Reranker Model"
+                },
+                {
+                    "type": "text",
+                    "text": " comes into play, re-evaluating and re-ordering these documents to prioritize those most relevant to the user's query. This is crucial for refining the context provided to the LLM."
                 }
             ]
+        },
+        {
+            "type": "paragraph",
+            "attrs": {
+                "textAlign": "left"
+            },
+            "content": [
+                {
+                    "type": "text",
+                    "text": "Another vital element is the "
+                },
+                {
+                    "type": "text",
+                    "marks": [
+                        {
+                            "type": "bold"
+                        }
+                    ],
+                    "text": "Vector Store"
+                },
+                {
+                    "type": "text",
+                    "text": ", such as Qdrant, which efficiently stores and manages vector embeddings of the documents. The "
+                },
+                {
+                    "type": "text",
+                    "marks": [
+                        {
+                            "type": "bold"
+                        }
+                    ],
+                    "text": "LLM (Llama 3)"
+                },
+                {
+                    "type": "text",
+                    "text": " uses the reranked information to generate accurate and context-aware responses. Finally, LlamaIndex acts as the framework to orchestrate these components, streamlining data ingestion, processing, and query workflows."
+                }
+            ]
+        },
+        {
+            "type": "image",
+            "attrs": {
+                "src": "https://www.example.com/placeholder-components.jpg",
+                "alt": "Diagram of RAG system components",
+                "title": "RAG Components"
+            }
         },
         {
             "type": "blockquote",
@@ -435,7 +343,7 @@
                     "content": [
                         {
                             "type": "text",
-                            "text": "Takeaway: Advanced Reranking RAG improves upon traditional RAG by employing a reranking module, ensuring the LLM receives only the most relevant context, leading to more accurate and coherent answers."
+                            "text": "Advanced Reranking RAG integrates retrieval, reranking, and generation to provide factual and relevant responses, enhancing overall system accuracy."
                         }
                     ]
                 }
@@ -449,7 +357,7 @@
             "content": [
                 {
                     "type": "text",
-                    "text": "Now that we know the key components, in the next section, we'll dive deeper into how reranking models work."
+                    "text": "Understanding these components sets the stage for diving deeper into the implementation of an advanced Reranking RAG system. In the next section, we'll look at setting up the environment and installing the necessary libraries."
                 }
             ]
         },
@@ -474,7 +382,7 @@
             "content": [
                 {
                     "type": "text",
-                    "text": "Now that you understand the concepts behind Advanced Reranking RAG, let's walk through the steps to implement it. This guide provides a straightforward approach for beginners to enhance their RAG systems. Follow these instructions carefully to improve the relevance and accuracy of your LLM's responses."
+                    "text": "Building an advanced reranking RAG system might sound complex, but breaking it down into manageable steps makes it achievable. This guide provides a simplified, step-by-step approach to help you create your own system using Llama-Index, Llama 3, and Qdrant. Let's get started!"
                 }
             ]
         },
@@ -486,7 +394,7 @@
             "content": [
                 {
                     "type": "text",
-                    "text": "First, you'll need to prepare your data. Start by loading your documents into a suitable format using tools like "
+                    "text": "1. "
                 },
                 {
                     "type": "text",
@@ -495,11 +403,37 @@
                             "type": "bold"
                         }
                     ],
-                    "text": "LlamaIndex's SimpleDirectoryReader"
+                    "text": "Install Necessary Libraries:"
                 },
                 {
                     "type": "text",
-                    "text": ". This ensures that your documents are accessible and ready for embedding. Remember to clean and preprocess your text to remove any unnecessary noise or irrelevant information."
+                    "text": " Begin by installing the required libraries, including Llama-Index, Qdrant client, and Hugging Face transformers. Use pip to install the libraries from the "
+                },
+                {
+                    "type": "text",
+                    "marks": [
+                        {
+                            "type": "code"
+                        }
+                    ],
+                    "text": "requirements.txt"
+                },
+                {
+                    "type": "text",
+                    "text": " file, ensuring you have the correct versions for compatibility. Use the command "
+                },
+                {
+                    "type": "text",
+                    "marks": [
+                        {
+                            "type": "code"
+                        }
+                    ],
+                    "text": "!pip install -r requirements.txt"
+                },
+                {
+                    "type": "text",
+                    "text": " in your notebook."
                 }
             ]
         },
@@ -511,7 +445,7 @@
             "content": [
                 {
                     "type": "text",
-                    "text": "Next, instantiate your embedding model and LLM. For the embedding model, consider using "
+                    "text": "2. "
                 },
                 {
                     "type": "text",
@@ -520,11 +454,36 @@
                             "type": "bold"
                         }
                     ],
-                    "text": "FastEmbedEmbedding"
+                    "text": "Load and Process Data:"
                 },
                 {
                     "type": "text",
-                    "text": " for efficiency. When instantiating your LLM, such as "
+                    "text": " Load your data using "
+                },
+                {
+                    "type": "text",
+                    "marks": [
+                        {
+                            "type": "code"
+                        }
+                    ],
+                    "text": "SimpleDirectoryReader"
+                },
+                {
+                    "type": "text",
+                    "text": " from Llama-Index. Ensure your documents are in a readable format (like PDF). This step involves loading the data into a structure that Llama-Index can understand and process. This will then be used to create embeddings in the next step."
+                }
+            ]
+        },
+        {
+            "type": "paragraph",
+            "attrs": {
+                "textAlign": "left"
+            },
+            "content": [
+                {
+                    "type": "text",
+                    "text": "3. "
                 },
                 {
                     "type": "text",
@@ -533,136 +492,24 @@
                             "type": "bold"
                         }
                     ],
-                    "text": "Meta's Llama 3"
+                    "text": "Configure LLM and Embeddings:"
                 },
                 {
                     "type": "text",
-                    "text": ", ensure that you've properly set up your system prompt and query wrapper prompt for optimal performance."
-                }
-            ]
-        },
-        {
-            "type": "paragraph",
-            "attrs": {
-                "textAlign": "left"
-            },
-            "content": [
-                {
-                    "type": "text",
-                    "text": "Instantiate the vector store and then load the embeddings. After, load the reranker module. This implementation approach has a number of benefits:"
-                }
-            ]
-        },
-        {
-            "type": "bulletList",
-            "content": [
-                {
-                    "type": "listItem",
-                    "content": [
-                        {
-                            "type": "paragraph",
-                            "attrs": {
-                                "textAlign": "left"
-                            },
-                            "content": [
-                                {
-                                    "type": "text",
-                                    "text": "Returns a greater degree of relevant context."
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "type": "listItem",
-                    "content": [
-                        {
-                            "type": "paragraph",
-                            "attrs": {
-                                "textAlign": "left"
-                            },
-                            "content": [
-                                {
-                                    "type": "text",
-                                    "text": "Better overall RAG system, irrespective of the quality of the LLM"
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "type": "paragraph",
-            "attrs": {
-                "textAlign": "left"
-            },
-            "content": [
-                {
-                    "type": "text",
-                    "text": "With these steps, you're well on your way to building an advanced Reranking RAG system that delivers more accurate and reliable responses. Let's finish up by wrapping things up with our conclusion."
-                }
-            ]
-        },
-        {
-            "type": "heading",
-            "attrs": {
-                "textAlign": "left",
-                "level": 2
-            },
-            "content": [
-                {
-                    "type": "text",
-                    "text": "Section 4: Common Issues"
-                }
-            ]
-        },
-        {
-            "type": "paragraph",
-            "attrs": {
-                "textAlign": "left"
-            },
-            "content": [
-                {
-                    "type": "text",
-                    "text": "Even with advanced techniques like reranking, RAG systems can still run into some common snags. One frequent issue is the retrieval of irrelevant information. Imagine asking about 'optimizing LLM performance' and getting back documents about unrelated topics. This \"noise\" degrades the quality of the final answer, which requires careful fine-tuning of the RAG configurations and data preprocessing."
-                }
-            ]
-        },
-        {
-            "type": "paragraph",
-            "attrs": {
-                "textAlign": "left"
-            },
-            "content": [
-                {
-                    "type": "text",
-                    "text": "Another challenge is semantic drift, where the meaning of the query changes subtly during the retrieval and reranking process. This can happen when the reranker misinterprets the query's intent, leading to a mismatch between what you asked and what the system delivers. Regular evaluation and adjustment of the reranking model is vital to correct this issue."
-                }
-            ]
-        },
-        {
-            "type": "paragraph",
-            "attrs": {
-                "textAlign": "left"
-            },
-            "content": [
-                {
-                    "type": "text",
-                    "text": "Finally, a common misconception is that RAG is a \"set-it-and-forget-it\" solution. In reality, maintaining a RAG system requires ongoing effort. Data evolves, user queries change, and new techniques emerge. Staying up-to-date with the latest advancements, like those related to "
+                    "text": " Set up your LLM and embedding models. Llama 3 is used for response synthesis, while FastEmbed or similar models create vector embeddings. Make sure to define system prompts and query wrappers to guide the LLM's behavior. Configure the settings for optimal performance, such as "
                 },
                 {
                     "type": "text",
                     "marks": [
                         {
-                            "type": "bold"
+                            "type": "code"
                         }
                     ],
-                    "text": "Responsible Enterprise RAG"
+                    "text": "chunk_size"
                 },
                 {
                     "type": "text",
-                    "text": ", ensures your system continues to deliver optimal results."
+                    "text": "."
                 }
             ]
         },
@@ -677,9 +524,194 @@
                     "content": [
                         {
                             "type": "text",
-                            "text": "RAG isn't a magic bullet, but with careful attention and continuous refinement, it can greatly enhance the accuracy and reliability of your LLM applications."
+                            "text": "Tip: Experiment with different chunk sizes to find the optimal balance between context and performance."
                         }
                     ]
+                }
+            ]
+        },
+        {
+            "type": "paragraph",
+            "attrs": {
+                "textAlign": "left"
+            },
+            "content": [
+                {
+                    "type": "text",
+                    "text": "4. "
+                },
+                {
+                    "type": "text",
+                    "marks": [
+                        {
+                            "type": "bold"
+                        }
+                    ],
+                    "text": "Instantiate Vector Store:"
+                },
+                {
+                    "type": "text",
+                    "text": " Establish a vector store using Qdrant to store and manage vector embeddings. Create a collection in Qdrant and load the vector embeddings into it. Configure the storage context to connect Llama-Index with Qdrant. A vector store allows for quick similarity searches."
+                }
+            ]
+        },
+        {
+            "type": "paragraph",
+            "attrs": {
+                "textAlign": "left"
+            },
+            "content": [
+                {
+                    "type": "text",
+                    "text": "By following these steps, you'll set the stage for building a RAG system. The next section will cover the implementation of the "
+                },
+                {
+                    "type": "text",
+                    "marks": [
+                        {
+                            "type": "bold"
+                        }
+                    ],
+                    "text": "reranker"
+                },
+                {
+                    "type": "text",
+                    "text": " module, query engine and practical applications."
+                }
+            ]
+        },
+        {
+            "type": "heading",
+            "attrs": {
+                "textAlign": "left",
+                "level": 2
+            },
+            "content": [
+                {
+                    "type": "text",
+                    "text": "Common Issues"
+                }
+            ]
+        },
+        {
+            "type": "paragraph",
+            "attrs": {
+                "textAlign": "left"
+            },
+            "content": [
+                {
+                    "type": "text",
+                    "text": "When diving into Advanced Reranking RAG, it's important to be aware of common pitfalls. One frequent issue is **data relevance**. Sometimes, the initial retrieval step pulls in information that isn't directly related to the query, even if it seems similar based on embeddings. This can dilute the quality of the context provided to the LLM."
+                }
+            ]
+        },
+        {
+            "type": "paragraph",
+            "attrs": {
+                "textAlign": "left"
+            },
+            "content": [
+                {
+                    "type": "text",
+                    "text": "Another challenge is the complexity of implementing reranking models. Choosing the right reranker and fine-tuning its parameters can be tricky. A poorly configured reranker can actually worsen performance by discarding relevant information or misprioritizing context. It\u2019s like trying to filter water with a net that has holes the size of golf balls!"
+                }
+            ]
+        },
+        {
+            "type": "blockquote",
+            "content": [
+                {
+                    "type": "paragraph",
+                    "attrs": {
+                        "textAlign": null
+                    },
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": "Start with a strong baseline and iterate. Don't be afraid to experiment with different reranking models and parameters to find what works best for your specific data and use case."
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "paragraph",
+            "attrs": {
+                "textAlign": "left"
+            },
+            "content": [
+                {
+                    "type": "text",
+                    "text": "To mitigate these issues, start by carefully curating your knowledge base to ensure high-quality, relevant data. Next, experiment with different reranking algorithms. "
+                },
+                {
+                    "type": "text",
+                    "marks": [
+                        {
+                            "type": "bold"
+                        }
+                    ],
+                    "text": "Sentence Transformers"
+                },
+                {
+                    "type": "text",
+                    "text": " are a popular choice, but there are others. Monitor performance closely using metrics like "
+                },
+                {
+                    "type": "text",
+                    "marks": [
+                        {
+                            "type": "bold"
+                        }
+                    ],
+                    "text": "Mean Reciprocal Rank (MRR)"
+                },
+                {
+                    "type": "text",
+                    "text": " and "
+                },
+                {
+                    "type": "text",
+                    "marks": [
+                        {
+                            "type": "bold"
+                        }
+                    ],
+                    "text": "Normalized Discounted Cumulative Gain (NDCG)"
+                },
+                {
+                    "type": "text",
+                    "text": ". For more in-depth guidance, resources like "
+                },
+                {
+                    "type": "text",
+                    "marks": [
+                        {
+                            "type": "link",
+                            "attrs": {
+                                "href": "https://www.example.com/advanced-rag-troubleshooting",
+                                "target": "_blank",
+                                "rel": "noopener noreferrer nofollow"
+                            }
+                        }
+                    ],
+                    "text": "this article on advanced RAG troubleshooting"
+                },
+                {
+                    "type": "text",
+                    "text": " can be invaluable."
+                }
+            ]
+        },
+        {
+            "type": "paragraph",
+            "attrs": {
+                "textAlign": "left"
+            },
+            "content": [
+                {
+                    "type": "text",
+                    "text": "With a solid grasp of these common issues and the strategies to address them, you're well-equipped to build a highly effective Advanced Reranking RAG system. In the next section, we\u2019ll look at practical applications and real-world use cases where these systems shine."
                 }
             ]
         },

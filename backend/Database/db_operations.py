@@ -23,11 +23,12 @@ class UserModelOperations:
                         "status_code": 200
                     }
                 print(f"No user found with email: {self.user_email}")
-                return {
-                    "message": f"No user found with email {self.user_email}",
-                    "hint": "Please create a user first",
-                    "status_code": 404
-                    }
+                # return {
+                #     "message": f"No user found with email {self.user_email}",
+                #     "hint": "Please create a user first",
+                #     "status_code": 404
+                #     }
+                return self.create_user()
         except Exception as e:
             print(f"Error checking user: {e}")
             return {
@@ -59,7 +60,7 @@ class UserModelOperations:
                 "hint": "Please create a user first",
                 "status_code": 500
             }
-    
+
     def delete_user(self):
         """
         Delete a user from the database.
@@ -190,6 +191,12 @@ class BlogModelOperations(UserModelOperations):
                 if not user:
                     raise Exception("User not found")
 
+                if user.credits <= 0:
+                    return {
+                        "message": "Not enough credits to create a blog.",
+                        "blog_id": None,
+                        "status_code": 400
+                    }
                 user.credits -= 1
                 new_blog = Blog(user_email=self.user_email, blog_data=blog_data)
                 session.add(new_blog)
@@ -226,6 +233,63 @@ class BlogModelOperations(UserModelOperations):
             return {
                 "message": f"Error deleting blog: {e}",
                 "blog_id": blog_id,
+                "status_code": 500
+            }
+
+    def get_blog(self, blog_id):
+        """
+        Get a blog from the database.
+        """
+        try:
+            print(f"Getting blog with ID: {blog_id}")
+            with SessionLocal() as session:
+                blog = session.query(Blog).filter(Blog.blog_id == blog_id).first()
+                if not blog:
+                    return {
+                        "message": "Blog not found",
+                        "blog_data": None,
+                        "status_code": 404
+                    }
+                return {
+                        "message": "Blog found",
+                        "blog_data": blog.blog_data,
+                        "status_code": 200
+                    }
+        except Exception as e:
+            print(f"Error getting blog: {e}")
+            return {
+                "message": f"Error getting blog: {e}",
+                "blog_data": None,
+                "status_code": 500
+            }
+
+    def update_blog(self, blog_id, blog_data):
+        """
+        Update a blog in the database.
+        """
+        try:
+            with SessionLocal() as session:
+                blog = session.query(Blog).filter(Blog.blog_id == blog_id).first()
+                if not blog:
+                    return {
+                        "message": "Blog not found",
+                        "blog_id": blog_id,
+                        "status_code": 404
+                    }
+
+                blog.blog_data = blog_data
+                session.commit()
+                return {
+                    "message": "Blog updated successfully",
+                    "blog_id": blog_id,
+                    "blog_data": blog.blog_data,
+                    "status_code": 200
+                }
+        except Exception as e:
+            print(f"Error updating blog: {e}")
+            return {
+                "message": f"Error updating blog: {e}",
+                "blog_id": None,
                 "status_code": 500
             }
 

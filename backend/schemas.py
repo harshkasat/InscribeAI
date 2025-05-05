@@ -40,5 +40,6 @@ class BlogAiRequest(BaseModel):
                 ],
                 "target_audience": "Beginner",
                 "desired_tone": "Informative",
+                "email": "example.com",
             }
         }
