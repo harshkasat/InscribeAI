@@ -129,11 +129,9 @@ async def delete_blog(user_email, blog_id):
 @router.get("/get_blog/")
 async def get_blog(user_email, blog_id):
     try:
-        print(user_email, blog_id)
         get_blog = BlogModelOperations(user_email=user_email)
         if get_blog.user_details['status_code'] == 200:
             get_blog_details = get_blog.get_blog(blog_id=blog_id)
-            print(get_blog_details)
             if get_blog_details['status_code'] == 200:
                 return JSONResponse({
                     "message":"User blog successfully",

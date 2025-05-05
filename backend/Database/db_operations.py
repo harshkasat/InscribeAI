@@ -152,15 +152,18 @@ class BlogModelOperations(UserModelOperations):
                     session.query(Blog).filter(Blog.user_email == self.user_email).all()
                 )
                 if len(blogs) > 0:
-                    print(
-                        f"Blogs found for user {self.user_email}: {[blog.blog_data for blog in blogs]}"
-                    )
+                    # print(
+                    #     f"Blogs found for user {self.user_email}: {[blog.blog_data for blog in blogs]}"
+                    # )
                     for blog in blogs:
+                        # print(f"BLog date : {(blog.created_at.strftime("%Y-%m-%d"))}")
                         blogs = {
                             "blog_id": blog.blog_id,
-                            "blog_data": blog.blog_data,
+                            "blog_name": blog.blog_data['content'][0]['content'][0]['text'],
+                            "created_at": blog.created_at.strftime("%Y-%m-%d"),
                         }
                         blogs_details.append(blogs)
+                    print(blogs_details)
                     return {
                         "message": "Blogs found",
                         "blogs": blogs_details,
