@@ -159,7 +159,7 @@ class BlogModelOperations(UserModelOperations):
                         # print(f"BLog date : {(blog.created_at.strftime("%Y-%m-%d"))}")
                         blogs = {
                             "blog_id": blog.blog_id,
-                            "blog_name": blog.blog_data['content'][0]['content'][0]['text'],
+                            "title": blog.blog_data['content'][0]['content'][0]['text'],
                             "created_at": blog.created_at.strftime("%Y-%m-%d"),
                         }
                         blogs_details.append(blogs)
