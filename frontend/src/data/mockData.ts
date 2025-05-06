@@ -46,7 +46,7 @@ export const YouTubeBlog = {
   },
 };
 
-export const salesTargetData = {
+export const Credits = {
   title: "Total Credit Left",
   current: 3,
   target: 5,

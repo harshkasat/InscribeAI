@@ -1,6 +1,8 @@
 import * as React from "react";
 import { EditorContent, EditorContext, useEditor } from "@tiptap/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+
 // --- Tiptap Core Extensions ---
 import { StarterKit } from "@tiptap/starter-kit";
 import { Image } from "@tiptap/extension-image";
@@ -61,10 +63,11 @@ import { useWindowSize } from "@/hooks/use-window-size";
 // --- Lib ---
 import { handleImageUpload, MAX_FILE_SIZE } from "@/lib/tiptap-utils";
 
-import content from "@/TipTap/data/content.json";
+import defaultContent  from "@/TipTap/data/content.json";
 
-import "@/TipTap/simple-editor.scss"
-import "@/TipTap/index.scss"
+// import "@/TipTap/simple-editor.scss"
+// import "@/TipTap/index.scss"
+import { getEmailFromLocalStorage } from "@/utils/getUserEmailFromLocalStorage";
 
 
 const MainToolbarContent = ({
@@ -180,6 +183,14 @@ const MobileToolbarContent = ({
 
 export function SimpleEditor() {
   // @ts-ignore
+  const { blogId } = useParams();
+  const [isLoading, setIsLoading] = useState(true);
+  const [initialContent, setInitialContent] = useState<any>(null);
+  // @ts-ignore
+  const [blogData, setBlogData] = useState(null);
+  // @ts-ignore
+  const [error, setError] = useState(null);
+  // @ts-ignore
   const [isToolbarHovered, setIsToolbarHovered] = useState(false);
 
   const isMobile = useMobile();
@@ -189,6 +200,37 @@ export function SimpleEditor() {
   >("main");
   const [rect, setRect] = React.useState({ y: 0 });
 
+  useEffect(() => {
+    if (blogId) {
+      setIsLoading(true);
+      
+      // Fetch blog content from API
+      fetch(`http://127.0.0.1:8000/api/v1/db_operation/get_blog/?blog_id=${blogId}&user_email=${getEmailFromLocalStorage()}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Failed to fetch blog: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          setInitialContent(data['blog_data']);
+          setBlogData(data['blog_data']);
+          setIsLoading(false);
+        })
+        .catch(err => {
+          console.error("Error fetching blog content:", err);
+          setError(err.message);
+          setInitialContent(defaultContent);
+          setIsLoading(false);
+        });
+    } else {
+      // If no blogId provided, use default content
+      setInitialContent(defaultContent);
+      setIsLoading(false);
+    }
+  }, [blogId]);
+  
+  
   React.useEffect(() => {
     setRect(document.body.getBoundingClientRect());
   }, []);
@@ -209,7 +251,7 @@ export function SimpleEditor() {
       Underline,
       TaskList,
       TaskItem.configure({ nested: true }),
-      Highlight.configure({multicolor:true}),
+      Highlight.configure({ multicolor: true }),
       Image,
       Typography,
       Superscript,
@@ -226,42 +268,43 @@ export function SimpleEditor() {
       TrailingNode,
       Link.configure({ openOnClick: false }),
     ],
-    content: content,
+    content: initialContent, // Use the initial content state
   });
 
-  // Function to save content back to content.json
+  // Update editor content when initialContent changes
+  useEffect(() => {
+    if (editor && initialContent) {
+      editor.commands.setContent(initialContent);
+    }
+  }, [editor, initialContent]);
+
+  // Function to save content back to the server
   const saveContentToFile = async () => {
-    if (!editor) return;
+    if (!editor || !blogId) return;
 
     const jsonContent = editor.getJSON();
     console.log("@ Json Content: " + JSON.stringify(jsonContent));
 
-    // In a browser environment, you'll need a server endpoint to handle file saving
-    // This is a simplified example assuming you have an API endpoint
     try {
-      // Option 1: Using fetch to save to server API endpoint
-      const response = await fetch("/api/save-content", {
-        method: "POST",
+      // Save to server using the update blog API
+      const response = await fetch(`http://127.0.0.1:8000/api/v1/db_operation/update_blog/`, {
+        method: "PUT", // Or POST depending on your API
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(jsonContent),
+        body: JSON.stringify({
+          blog_id: blogId,
+          blog_data: jsonContent,
+          user_email: getEmailFromLocalStorage() || "example.com",
+        }),
       });
 
       if (response.ok) {
         alert("Content saved successfully!");
       } else {
-        alert("Failed to save content.");
+        const errorData = await response.json().catch(() => ({}));
+        alert(`Failed to save content: ${errorData.message || response.statusText}`);
       }
-
-      // Option 2: If you're in a Node.js environment (Next.js, etc.)
-      // You'd handle this in your API route
-      /*
-      fs.writeFileSync(
-        './public/TipTap/data/content.json', 
-        JSON.stringify(jsonContent, null, 2)
-      );
-      */
     } catch (error) {
       console.error("Error saving content:", error);
       alert(
@@ -271,26 +314,15 @@ export function SimpleEditor() {
     }
   };
 
-  // Load content from localStorage if available when component mounts
-  React.useEffect(() => {
-    if (editor) {
-      const savedContent = localStorage.getItem("tiptap-content");
-      if (savedContent) {
-        try {
-          const parsedContent = JSON.parse(savedContent);
-          editor.commands.setContent(parsedContent);
-        } catch (e) {
-          console.error("Error parsing saved content:", e);
-        }
-      }
-    }
-  }, [editor]);
-
-  React.useEffect(() => {
+  useEffect(() => {
     if (!isMobile && mobileView !== "main") {
       setMobileView("main");
     }
   }, [isMobile, mobileView]);
+
+  if (isLoading) {
+    return <div className="flex justify-center items-center h-screen">Loading editor...</div>;
+  }
 
   return (
     <EditorContext.Provider value={{ editor }}>

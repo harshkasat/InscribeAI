@@ -11,7 +11,7 @@ createRoot(document.getElementById("root")!).render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/editor" element={<SimpleEditor />} />
+        <Route path="/editor/:blogId" element={<SimpleEditor />} />
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </BrowserRouter>

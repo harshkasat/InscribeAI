@@ -1,13 +1,12 @@
-"use client"
-
 import React from "react"
-
 import { Button } from "@/components/ui/Button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { ArrowUpRight } from "lucide-react"
+import { useNavigate } from "react-router";
+import { getEmailFromLocalStorage } from "@/utils/getUserEmailFromLocalStorage";
 
 interface BlogGeneratorFormProps {
   type: "website" | "youtube"
@@ -22,10 +21,12 @@ interface BlogRequestBody {
   blog_name: string
   desired_tone: string
   target_audience: string
+  email: string
 }
 
 export function BlogGeneratorForm({ type, title, subtitle, percentage, onClose }: BlogGeneratorFormProps) {
   const [tone, setTone] = React.useState('professional');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,10 +38,11 @@ export function BlogGeneratorForm({ type, title, subtitle, percentage, onClose }
       blog_name: formData.get('blogTitle') as string,
       desired_tone: tone,
       target_audience: formData.get('targetAudience') as string,
+      email: getEmailFromLocalStorage() || "example.com",
     };
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/create_blog/', {
+      const response = await fetch('http://127.0.0.1:8000/api/v1/db_operation/create_blog/', {
         method: 'POST',
         headers: {
           'accept': 'application/json',
@@ -52,9 +54,14 @@ export function BlogGeneratorForm({ type, title, subtitle, percentage, onClose }
       if (!response.ok) {
         throw new Error('Failed to create blog');
       }
-
       const data = await response.json();
-      onClose();
+      const blogID = data.user_details.blog_id || data['user_details']['blog_id'];
+
+      if (!blogID){
+        console.error('No Blog ID received from the API response.');
+        return;
+      }
+      navigate(`/editor/${blogID}`);
     } catch (error) {
       console.error('Error creating blog:', error);
     }

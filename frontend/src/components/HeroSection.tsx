@@ -1,7 +1,9 @@
 import React from "react";
 import TestimonialBadge from "./TestimonialBadge";
+import { useEmail } from "@/EmailContext";
 
 const HeroSection: React.FC = () => {
+  const { email, setEmail } = useEmail();
   return (
     <section className="w-full pt-12 pb-24 px-6 md:px-16 flex flex-col items-center text-center">
       <TestimonialBadge />
@@ -21,11 +23,19 @@ const HeroSection: React.FC = () => {
         month to adapt quickly and hit your goals.
       </p>
 
+      <input
+        type="text"
+        placeholder="Your Email"
+        className="mt-8 transition-colors border-gray-400 border text-white px-6 py-3 rounded-md focus:outline-none md:w-fit"
+        onChange={(e) => setEmail(e.target.value)}
+      />
+
       <button
         onClick={() => (window.location.href = "/dashboard")}
-        className="mt-8 bg-[#9AE66E] hover:bg-[#8BD562] text-black font-medium px-6 py-3 rounded-md transition-colors cursor-pointer"
+        className={`mt-8 ${email ? 'bg-[#9AE66E] hover:bg-[#8BD562]' : 'bg-gray-500 cursor-not-allowed'} text-black font-medium px-6 py-3 rounded-md transition-colors md:w-fit cursor-pointer`}
+        disabled={!email}
       >
-        Book a Free Consultation
+        Create Blog Now
       </button>
     </section>
   );

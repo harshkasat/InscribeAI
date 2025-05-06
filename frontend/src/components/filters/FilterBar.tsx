@@ -1,6 +1,6 @@
 import React from "react";
 
-const FilterBar: React.FC = () => {
+const Header: React.FC = () => {
   return (
     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
       <div>
@@ -13,4 +13,4 @@ const FilterBar: React.FC = () => {
   );
 };
 
-export default FilterBar;
+export default Header;
