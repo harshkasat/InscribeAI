@@ -24,12 +24,13 @@ const BlogListSection = () => {
   const [blogToDelete, setBlogToDelete] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const BASE_URL = import.meta.env.VITE_PROD_URL || "http://127.0.0.1:8000"
 
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
         const res = await fetch(
-          `http://127.0.0.1:8000/api/v1/db_operation/list_blogs/?user_email=${getEmailFromLocalStorage() || "example.com"}`
+          `${BASE_URL}/api/v1/db_operation/list_blogs/?user_email=${getEmailFromLocalStorage()}`
         );
         if (!res.ok) throw new Error("Failed to fetch blogs");
         const data = await res.json();
@@ -66,7 +67,7 @@ const BlogListSection = () => {
           const fetchBlogs = async () => {
             try {
               const res = await fetch(
-                `http://127.0.0.1:8000/api/v1/db_operation/check_credits/?user_email=${getEmailFromLocalStorage()}&blog_id=${blogId}`
+                `${BASE_URL}/api/v1/db_operation/check_credits/?user_email=${getEmailFromLocalStorage()}&blog_id=${blogId}`
               );
               if (!res.ok) throw new Error("Failed to fetch blogs");
               // const data = await res.json();

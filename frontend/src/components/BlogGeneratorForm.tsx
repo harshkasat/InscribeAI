@@ -25,6 +25,8 @@ interface BlogRequestBody {
 }
 
 export function BlogGeneratorForm({ type, title, subtitle, percentage, onClose }: BlogGeneratorFormProps) {
+
+  const BASE_URL = import.meta.env.VITE_PROD_URL || "http://127.0.0.1:8000"
   const [tone, setTone] = React.useState('professional');
   const navigate = useNavigate();
 
@@ -42,7 +44,7 @@ export function BlogGeneratorForm({ type, title, subtitle, percentage, onClose }
     };
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/v1/db_operation/create_blog/', {
+      const response = await fetch(`${BASE_URL}/api/v1/db_operation/create_blog/`, {
         method: 'POST',
         headers: {
           'accept': 'application/json',

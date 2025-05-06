@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import TestimonialBadge from "./TestimonialBadge";
 import { useEmail } from "@/EmailContext";
+import checkBackendServerRunning  from "@/utils/CheckBackendServerRunning";
 
 const HeroSection: React.FC = () => {
   const { email, setEmail } = useEmail();
+  useEffect(() => {
+    checkBackendServerRunning();
+  }, []);
   return (
     <section className="w-full pt-12 pb-24 px-6 md:px-16 flex flex-col items-center text-center">
       <TestimonialBadge />

@@ -37,12 +37,13 @@ const MetricsSection: React.FC = () => {
     setFormConfig({ type, title, subtitle, percentage });
     setOpen(true);
   }
+  const BASE_URL = import.meta.env.VITE_PROD_URL || "http://127.0.0.1:8000"
 
   useEffect(() => {
       const fetchBlogs = async () => {
         try {
           const res = await fetch(
-            `http://127.0.0.1:8000/api/v1/db_operation/check_credits/?user_email=${getEmailFromLocalStorage() || "example.com"}`
+            `${BASE_URL}/api/v1/db_operation/check_credits/?user_email=${getEmailFromLocalStorage() || "example.com"}`
           );
           if (!res.ok) throw new Error("Failed to fetch blogs");
           const data = await res.json();

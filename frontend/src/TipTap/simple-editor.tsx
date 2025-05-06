@@ -65,8 +65,8 @@ import { handleImageUpload, MAX_FILE_SIZE } from "@/lib/tiptap-utils";
 
 import defaultContent  from "@/TipTap/data/content.json";
 
-// import "@/TipTap/simple-editor.scss"
-// import "@/TipTap/index.scss"
+import "@/TipTap/simple-editor.scss"
+import "@/TipTap/index.scss"
 import { getEmailFromLocalStorage } from "@/utils/getUserEmailFromLocalStorage";
 
 
@@ -199,13 +199,14 @@ export function SimpleEditor() {
     "main" | "highlighter" | "link"
   >("main");
   const [rect, setRect] = React.useState({ y: 0 });
+  const BASE_URL = import.meta.env.VITE_PROD_URL || "http://127.0.0.1:8000"
 
   useEffect(() => {
     if (blogId) {
       setIsLoading(true);
       
       // Fetch blog content from API
-      fetch(`http://127.0.0.1:8000/api/v1/db_operation/get_blog/?blog_id=${blogId}&user_email=${getEmailFromLocalStorage()}`)
+      fetch(`${BASE_URL}/api/v1/db_operation/get_blog/?blog_id=${blogId}&user_email=${getEmailFromLocalStorage()}`)
         .then(response => {
           if (!response.ok) {
             throw new Error(`Failed to fetch blog: ${response.status}`);
@@ -287,7 +288,7 @@ export function SimpleEditor() {
 
     try {
       // Save to server using the update blog API
-      const response = await fetch(`http://127.0.0.1:8000/api/v1/db_operation/update_blog/`, {
+      const response = await fetch(`${BASE_URL}/api/v1/db_operation/update_blog/`, {
         method: "PUT", // Or POST depending on your API
         headers: {
           "Content-Type": "application/json",
