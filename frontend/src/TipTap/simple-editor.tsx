@@ -67,7 +67,6 @@ import defaultContent  from "@/TipTap/data/content.json";
 
 import "@/TipTap/simple-editor.scss"
 import "@/TipTap/index.scss"
-import { getEmailFromLocalStorage } from "@/utils/getUserEmailFromLocalStorage";
 
 
 const MainToolbarContent = ({
@@ -206,7 +205,7 @@ export function SimpleEditor() {
       setIsLoading(true);
       
       // Fetch blog content from API
-      fetch(`${BASE_URL}/api/v1/db_operation/get_blog/?blog_id=${blogId}&user_email=${getEmailFromLocalStorage()}`)
+      fetch(`${BASE_URL}/api/v1/db_operation/get_blog/?blog_id=${blogId}&user_email=example.com`)
         .then(response => {
           if (!response.ok) {
             throw new Error(`Failed to fetch blog: ${response.status}`);
@@ -296,7 +295,7 @@ export function SimpleEditor() {
         body: JSON.stringify({
           blog_id: blogId,
           blog_data: jsonContent,
-          user_email: getEmailFromLocalStorage() || "example.com",
+          user_email: "example.com",
         }),
       });
 
