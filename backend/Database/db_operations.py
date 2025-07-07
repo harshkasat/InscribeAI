@@ -5,7 +5,6 @@ from Database.model import Blog, User
 class UserModelOperations:
     def __init__(self, user_email=None):
         self.user_email = user_email
-        self.user_details = self.check_user_exists()
 
     def check_user_exists(self):
         """
@@ -23,12 +22,11 @@ class UserModelOperations:
                         "status_code": 200
                     }
                 print(f"No user found with email: {self.user_email}")
-                # return {
-                #     "message": f"No user found with email {self.user_email}",
-                #     "hint": "Please create a user first",
-                #     "status_code": 404
-                #     }
-                return self.create_user()
+                return {
+                    "message": f"No user found with email {self.user_email}",
+                    "hint": "Please create a user first",
+                    "status_code": 404
+                }
         except Exception as e:
             print(f"Error checking user: {e}")
             return {
@@ -67,13 +65,13 @@ class UserModelOperations:
         """
         try:
             with SessionLocal() as session:
-                session.delete(self.user_details)
+                session.delete(self.check_user_exists())
                 session.commit()
-                print(f"User deleted with email: {self.user_details['email']}")
+                print(f"User deleted with email: {self.check_user_exists()['email']}")
                 return {
                     "message": "User deleted successfully",
-                    "email": self.user_details['email'],
-                    "credits": self.user_details['credits'],
+                    "email": self.check_user_exists()['email'],
+                    "credits": self.check_user_exists()['credits'],
                     "status_code": 200
                 }
         except Exception as e:
@@ -89,17 +87,17 @@ class UserModelOperations:
         Check if the user has enough credits to create a blog.
         """
         try:
-            if self.user_details["credits"] > 0:
+            if self.check_user_exists()["credits"] > 0:
                 return {
                     "message": "User has enough credits to create a blog.",
-                    "credits": self.user_details["credits"],
+                    "credits": self.check_user_exists()["credits"],
                     "status_code": 200
                 }
             else:
                 print("Not enough credits to create a blog.")
                 return {
                     "message": "Not enough credits to create a blog.",
-                    "credits": self.user_details["credits"],
+                    "credits": self.check_user_exists()["credits"],
                     "status_code": 400
                 }
         except Exception as e:

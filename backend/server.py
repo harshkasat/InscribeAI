@@ -1,20 +1,9 @@
-import json
-from fastapi import FastAPI, Request, HTTPException
-from fastapi.responses import HTMLResponse, JSONResponse
-from pydantic import ValidationError
+from fastapi import FastAPI, HTTPException, Request, Depends
+from fastapi.responses import  JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from Router import user_db_router, blog_db_router
-from dotenv import load_dotenv
-
-
-# from Redis.RateLimiter.rate_limiter import RateLimiter
-# from Redis.LimitingAlgo.limiting_algo import RateLimitExceeded
-
-from blog_content_generation import BlogGeneration
-
-from schemas import BlogAiRequest
-
-load_dotenv()
+from utils.jwt_simple import verify_token, create_access_token
+from utils.jwt_auth import jwt_auth_required
 
 
 app = FastAPI(
@@ -43,53 +32,38 @@ app.add_middleware(
 
 @app.get("/health")
 async def get_health():
-    return JSONResponse(content={"message": "Server working fine"}, status_code=200)
-
-# @app.get('/limited')
-# def limited(request: Request):
-#     ip_address = request.client.host
-
-#     try:
-#         RateLimiter.get_instance('SlidingWindow').allow_request(ip_address)
-#         return {"message": "You are allowed to request"}
-#     except RateLimitExceeded as e:
-#         raise e
-
-@app.get("/", response_class=HTMLResponse)
-async def read_blog(request: Request):
     try:
-        return HTMLResponse(content="Welcome to BlogAI API", status_code=200)
-    except ValidationError as e:
-        raise HTTPException(status_code=400, detail=f'Error when creating blog: {e}')
+        return JSONResponse(content={"message": "Server working fine"}, status_code=200)
+    except HTTPException as e:
+        return JSONResponse({
+            "message": e
+        }, status_code=500)
 
-@app.post("/create_blog/", status_code=200)
-async def create_blog_post(request: Request, blog_request: BlogAiRequest):
-    try:
 
-        blog_ai = {
-            "blog_name": blog_request.blog_name,
-            "add_website_link": blog_request.add_website_link,
-            "target_audience": blog_request.target_audience,
-            "desired_tone": blog_request.desired_tone,
-        }
+@app.post("/refresh_token")
+async def refresh_token_api(request: Request):
+    body = await request.json()
+    token = body.get("refresh_token")
 
-        blog_response = await BlogGeneration.blog_generate(blog_title=blog_ai["blog_name"],
-                                        website_url_list=blog_ai["add_website_link"],
-                                        target_audience=blog_ai["target_audience"],
-                                        desired_tone=blog_ai["desired_tone"])
+    if not token:
+        raise HTTPException(status_code=400, detail="Refresh token required")
 
-        with open('blog_response.json', 'w') as f:
-            json.dump(blog_response, f, indent=4)
-        
-        return JSONResponse(
-            content={
-                "message": "Blog post created successfully",
-                "blog_post": blog_response
-            },
-            status_code=200)
+    payload = verify_token(token)  # will raise if expired/invalid
+    email = payload.get("sub")
 
-    except ValidationError as e:
-        raise HTTPException(status_code=400, detail=f'Error when creating blog: {e}')
+    new_access_token = create_access_token(email)
+
+    return JSONResponse({
+        "access_token": new_access_token
+    })
+
+@app.get("/protected")
+async def protected(payload=Depends(jwt_auth_required)):
+    email = payload.get("sub")
+
+    return JSONResponse({"message": f"Hello, {email}. Access granted."})
+
+
 
 PREFIX = '/api/v1'
 app.include_router(

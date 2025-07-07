@@ -1,7 +1,9 @@
-from fastapi import APIRouter
+
+from fastapi import APIRouter, Request, HTTPException, Depends
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 from Database.db_operations import UserModelOperations
+from utils.jwt_simple import create_access_token, create_refresh_token, verify_token
 
 class UserModel(BaseModel):
     email: str = Field(min_length=5)
@@ -29,34 +31,42 @@ async def check_route_health():
 @router.post("/create_user/")
 async def create_users(user:UserModel):
     try:
-        user_info = UserModelOperations(user_email=user.email)
-        if user_info.user_details['status_code'] == 404:
-            create_user = user_info.create_user()
-            if create_users['status_code'] == 201:
+        if not user.email:
+            raise HTTPException(status_code=400, detail="Email required")
+        _user = UserModelOperations(user_email=user.email)
+        user_info = _user.check_user_exists()
+
+        if user_info["status_code"] == 200:
+            return JSONResponse(user_info)
+
+        if  user_info['status_code'] == 404:
+            create_user = _user.create_user()
+            if create_user['status_code'] == 201:
+                access_token = create_access_token(user.email)
+                refresh_token = create_refresh_token(user.email)
                 return JSONResponse({
-                    "message":"User created successfully",
-                    "user_details":create_user
-                },
-                status_code=201
-                )
+                    "message": "User created successfully",
+                    "user_details": create_user,
+                    "access_token": access_token,
+                    "refresh_token": refresh_token
+                }, status_code=201)
         return JSONResponse({
-            "message":"Internal Error",
-            "user_details":user_info.user_details
-        },
-        status_code=500
-        )
+            "message": "Internal Error",
+            "user_details": user_info
+        }, status_code=500)
     except Exception as e:
         print(f"Error when creating user: {e}")
         return JSONResponse(
-            {"message":f"Error when creating user: {e}"},
+            {"message": f"Error when creating user: {e}"},
             status_code=500
-            )
+        )
+
 
 @router.get("/list_user/")
-async def list_user(user_email):
+async def list_user(user_email, token: str = Depends(verify_token)):
     try:
         user = UserModelOperations(user_email=user_email)
-        if user.user_details['status_code'] == 200:
+        if user.check_user_exists()['status_code'] == 200:
             users_details = user.list_all_user()
             return JSONResponse(
                 {
@@ -66,10 +76,9 @@ async def list_user(user_email):
                 status_code=200
                 )
         return JSONResponse(
-            content=user.user_details,
+            content=user.check_user_exists(),
             status_code=500
             )
-
     except Exception as e:
         print(f"Error retrieving task status: {e}")
         return JSONResponse(
@@ -78,7 +87,7 @@ async def list_user(user_email):
             )
 
 @router.delete("/delete_user/")
-async def delete_user(user:UserModel):
+async def delete_user(user:UserModel, token: str = Depends(verify_token)):
     try:
         delete_user = UserModelOperations(user_email=user.email).delete_user()
         return JSONResponse({
@@ -95,11 +104,11 @@ async def delete_user(user:UserModel):
             )
 
 @router.get("/check_credits/")
-async def check_credits(user_email:str):
+async def check_credits(user_email: str, token: str = Depends(verify_token)):
     try:
         user = UserModelOperations(user_email=user_email)
-        print(user.user_details)
-        if user.user_details['status_code'] == 200:
+        print(user.check_user_exists())
+        if user.check_user_exists()['status_code'] == 200:
             user_credit = user.check_credits()
             return JSONResponse({
                 "message":"User credit checked successfully",
@@ -108,7 +117,7 @@ async def check_credits(user_email:str):
             status_code=200
             )
         return JSONResponse(
-            content=user.user_details,
+            content=user.check_user_exists(),
             status_code=500
         )
     except Exception as e:
