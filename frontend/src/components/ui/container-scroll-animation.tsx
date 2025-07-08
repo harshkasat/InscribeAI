@@ -3,7 +3,6 @@ import React, { useRef } from "react";
 import { useScroll, useTransform, motion, MotionValue } from "framer-motion";
 
 export const ContainerScroll = ({
-//   titleComponent,
   children,
 }: {
 //   titleComponent: string | React.ReactNode;
@@ -36,7 +35,7 @@ export const ContainerScroll = ({
   const translate = useTransform(scrollYProgress, [0, 1], [-100, 0]);
   return (
     <div
-      className="h-[48rem] md:h-[70rem] flex items-center justify-center relative p-2 md:p-8"
+    className="p-2 md:p-8 items-center"
       ref={containerRef}
     >
       <div
@@ -45,7 +44,6 @@ export const ContainerScroll = ({
           perspective: "1000px",
         }}
       >
-        {/* <Header translate={translate} titleComponent={titleComponent} /> */}
         <Card rotate={rotate} translate={translate} scale={scale}>
           {children}
         </Card>
@@ -53,19 +51,6 @@ export const ContainerScroll = ({
     </div>
   );
 };
-
-export const Header = ({ translate}: any) => {
-  return (
-    <motion.div
-      style={{
-        translateY: translate,
-      }}
-      className="div max-w-5xl mx-auto text-center"
-    >
-      {/* {titleComponent} */}
-    </motion.div>
-  );
-}
 
 export const Card = ({
   rotate,
@@ -85,7 +70,7 @@ export const Card = ({
         // boxShadow:
         //   "0 0 #0000004d, 0 9px 20px #0000004a, 0 37px 37px #00000042, 0 84px 50px #00000026, 0 149px 60px #0000000a, 0 233px 65px #00000003",
       }}
-      className="max-w-7xl -mt-4 mx-auto h-[40rem] md:h-[60rem] w-full"
+      className="max-w-7xl -mt-4 mx-auto w-full"
     >
       <div className="h-full w-full overflow-hidden rounded-t-2xl rounded-b-2xl md:rounded-t-2xl md:rounded-b-2xl md:p-4">
         {children}

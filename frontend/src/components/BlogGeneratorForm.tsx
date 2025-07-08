@@ -15,14 +15,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -34,7 +26,7 @@ import { toast } from "sonner"
 
 const formSchema = z.object({
   blog_name: z.string().min(1, "Blog name is required"),
-  add_website_link: z.string().url("Please enter a valid URL").optional().or(z.literal("")),
+  add_website_link: z.string().url("Please enter a valid URL"),
   target_audience: z.enum(["professional", "children", "general"]),
   desired_tone: z.enum(["friendly", "professional", "casual"]),
 });
@@ -48,7 +40,6 @@ interface BlogCreationDialogProps {
 
 const BlogCreationDialog = ({ open, onOpenChange }: BlogCreationDialogProps) => {
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -60,29 +51,34 @@ const BlogCreationDialog = ({ open, onOpenChange }: BlogCreationDialogProps) => 
     },
   });
 
-  const BASE_URL = import.meta.env.VITE_API_BASE_URL || "127.0.0.1:8000";
+  // @ts-ignore
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
 
   const onSubmit = async (data: FormData) => {
     setIsLoading(true);
+
+    const submitData = {
+      ...data,
+      add_website_link: [data.add_website_link] // Convert string to array
+    };
     
     try {
-      const response = await fetch("/create_blog/", {
+      const response = await fetch(BASE_URL + "/api/v1/db_operation/create_blog/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        credentials: "include",
+        body: JSON.stringify(submitData),
       });
 
       if (response.status === 200) {
-        const result = await response.json();
-        const blogId = result.blog_post?.id || "new"; // Fallback ID if not provided
+        await response.json();
         
         
         toast.success("Your blog has been created successfully!");
         
         onOpenChange(false);
-        navigate(`/editor/${blogId}`);
       } else {
         throw new Error("Failed to create blog");
       }
@@ -179,10 +175,10 @@ const BlogCreationDialog = ({ open, onOpenChange }: BlogCreationDialogProps) => 
 
               <FormField
                 control={form.control}
-                name="desired_tone"
+                name="target_audience"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Desired Tone</FormLabel>
+                    <FormLabel>Target Audience</FormLabel>
                     <FormControl>
                       <RadioGroup
                         onValueChange={field.onChange}

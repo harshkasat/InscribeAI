@@ -33,7 +33,7 @@ export const Footer = () => {
               <ul className="space-y-2">
                 {links.map((link) => (
                   <li key={link}>
-                    <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                    <a href="/coming-soon" className="text-gray-400 hover:text-white transition-colors">
                       {link}
                     </a>
                   </li>
@@ -55,10 +55,10 @@ export const Footer = () => {
             © 2024 GrammarWrite. All rights reserved.
           </div>
           <div className="flex space-x-6">
-            <a href="#" className="hover:text-white transition-colors">Twitter</a>
-            <a href="#" className="hover:text-white transition-colors">LinkedIn</a>
-            <a href="#" className="hover:text-white transition-colors">Facebook</a>
-            <a href="#" className="hover:text-white transition-colors">Instagram</a>
+            <a href="/coming-soon" className="hover:text-white transition-colors">Twitter</a>
+            <a href="/coming-soon" className="hover:text-white transition-colors">LinkedIn</a>
+            <a href="/coming-soon" className="hover:text-white transition-colors">Facebook</a>
+            <a href="/coming-soon" className="hover:text-white transition-colors">Instagram</a>
           </div>
         </motion.div>
 

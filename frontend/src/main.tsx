@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App.tsx";
 import { SimpleEditor } from "./TipTap/simple-editor.tsx";
 import { Toaster } from "@/components/ui/sonner"
-import { ClerkProvider, SignedIn, SignedOut, RedirectToSignIn } from "@clerk/clerk-react";
+import { ClerkProvider} from "@clerk/clerk-react";
 import Dashboard from "./components/pages/Dashboard.tsx";
 import ComingSoon from "./components/pages/ComingSoon.tsx";
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;

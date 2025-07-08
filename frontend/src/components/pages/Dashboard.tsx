@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -11,43 +11,22 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Edit, Trash2, Download, LayoutDashboard, FileText, BarChart3, Package, Settings } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Edit, Trash2, Download, FileText, BarChart3, Package, Settings } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 import BlogCreationDialog from "@/components/BlogGeneratorForm";
+import { useAuth } from "@clerk/clerk-react";
+import Loading from "./Loading";
+import { useAuthBootstrap } from "@/utils/useAuthBootstrap";
+import { fetchBackendBlogs } from "@/utils/fetchBlogData";
 
-// Sample blog data
-const blogData = [
-  {
-    id: "#2632",
-    blogName: "10 Tips for Better Writing",
-    status: "Published"
-  },
-  {
-    id: "#2633",
-    blogName: "SEO Best Practices Guide",
-    status: "Draft"
-  },
-  {
-    id: "#2634",
-    blogName: "Content Marketing Strategy",
-    status: "Published"
-  },
-  {
-    id: "#2635",
-    blogName: "Social Media Integration",
-    status: "Pending"
-  },
-  {
-    id: "#2636",
-    blogName: "Email Newsletter Templates",
-    status: "Published"
-  },
-  {
-    id: "#2637",
-    blogName: "Analytics and Reporting",
-    status: "Draft"
-  }
-];
+
+type Blog = {
+  id: string;
+  blogName: string;
+  status: string;
+};
+
+const blogData: Blog[] = []
 
 const sidebarItems = [
   // { icon: LayoutDashboard, label: "Dashboard", active: true },
@@ -58,8 +37,32 @@ const sidebarItems = [
 ];
 
 const Dashboard = () => {
-  const [blogs, setBlogs] = useState(blogData);
+  // Ensure fetchBlogData returns an array or use a default empty array
+  // const _fetchBlogData = blogData
+  const [blogs, setBlogs] = useState<Blog[]>(blogData);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const { isLoaded, isSignedIn } = useAuth();
+
+  useAuthBootstrap();
+  const navigate = useNavigate();
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      const newBlogs = await fetchBackendBlogs();
+      setBlogs(newBlogs);
+    };
+
+    fetchBlogs();
+
+    if (!isSignedIn) {
+      navigate('/');
+    }
+  }, []);
+
+
+  if (!isLoaded) {
+    return <Loading />;
+  }
+
 
   const handleEdit = (id: string) => {
     console.log(`Edit blog ${id}`);
@@ -206,109 +209,113 @@ const Dashboard = () => {
         </motion.div>
 
         {/* Main Table */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-        >
-          <Card className="border-0 shadow-xl bg-white/90 backdrop-blur-sm">
-            <CardHeader className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-t-lg">
-              <CardTitle className="text-xl font-semibold text-gray-800">All Blogs</CardTitle>
-            </CardHeader>
-            <CardContent className="p-0">
-              <Table>
-                <TableHeader>
-                  <TableRow className="border-b-2 border-gray-100">
-                    <TableHead className="w-24 font-semibold text-gray-700">ID</TableHead>
-                    <TableHead className="font-semibold text-gray-700">Blog Name</TableHead>
-                    <TableHead className="font-semibold text-gray-700">Status</TableHead>
-                    <TableHead className="text-center font-semibold text-gray-700">Actions</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {blogs.map((blog, index) => (
-                    <motion.tr
-                      key={blog.id}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                      className="group hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 transition-all duration-300 border-b border-gray-100 hover:shadow-md cursor-pointer"
-                    >
-                      <TableCell className="font-bold text-blue-600 py-4">
-                        {blog.id}
-                      </TableCell>
-                      <TableCell className="py-4">
-                        <div className="font-semibold text-gray-900 group-hover:text-blue-700 transition-colors">
-                          {blog.blogName}
-                        </div>
-                      </TableCell>
-                      <TableCell className="py-4">
-                        <Badge 
-                          variant="secondary"
-                          className={`${getStatusColor(blog.status)} border font-medium px-3 py-1`}
+        {blogs.length > 0 && (
+          <>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              <Card className="border-0 shadow-xl bg-white/90 backdrop-blur-sm">
+                <CardHeader className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-t-lg">
+                  <CardTitle className="text-xl font-semibold text-gray-800">All Blogs</CardTitle>
+                </CardHeader>
+                <CardContent className="p-0">
+                  <Table>
+                    <TableHeader>
+                      <TableRow className="border-b-2 border-gray-100">
+                        <TableHead className="w-24 font-semibold text-gray-700">ID</TableHead>
+                        <TableHead className="font-semibold text-gray-700">Blog Name</TableHead>
+                        <TableHead className="font-semibold text-gray-700">Status</TableHead>
+                        <TableHead className="text-center font-semibold text-gray-700">Actions</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      { blogs.map((blog, index) => (
+                        <motion.tr
+                          key={blog.id}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: index * 0.1 }}
+                          className="group hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 transition-all duration-300 border-b border-gray-100 hover:shadow-md cursor-pointer"
                         >
-                          {blog.status}
-                        </Badge>
-                      </TableCell>
-                      <TableCell className="py-4">
-                        <div className="flex items-center justify-center gap-2 opacity-60 group-hover:opacity-100 transition-opacity">
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => handleEdit(blog.id)}
-                            className="h-9 w-9 hover:bg-blue-100 hover:text-blue-600 transition-all duration-200"
-                          >
-                            <Edit className="h-4 w-4" />
-                          </Button>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => handleDownload(blog.id)}
-                            className="h-9 w-9 hover:bg-green-100 hover:text-green-600 transition-all duration-200"
-                          >
-                            <Download className="h-4 w-4" />
-                          </Button>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => handleDelete(blog.id)}
-                            className="h-9 w-9 hover:bg-red-100 hover:text-red-600 transition-all duration-200"
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
-                        </div>
-                      </TableCell>
-                    </motion.tr>
-                  ))}
-                </TableBody>
-              </Table>
-            </CardContent>
-          </Card>
-        </motion.div>
+                          <TableCell className="font-bold text-blue-600 py-4">
+                            {blog.id}
+                          </TableCell>
+                          <TableCell className="py-4">
+                            <div className="font-semibold text-gray-900 group-hover:text-blue-700 transition-colors">
+                              {blog.blogName}
+                            </div>
+                          </TableCell>
+                          <TableCell className="py-4">
+                            <Badge 
+                              variant="secondary"
+                              className={`${getStatusColor(blog.status)} border font-medium px-3 py-1`}
+                            >
+                              {blog.status}
+                            </Badge>
+                          </TableCell>
+                          <TableCell className="py-4">
+                            <div className="flex items-center justify-center gap-2 opacity-60 group-hover:opacity-100 transition-opacity">
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                onClick={() => handleEdit(blog.id)}
+                                className="h-9 w-9 hover:bg-blue-100 hover:text-blue-600 transition-all duration-200"
+                              >
+                                <Edit className="h-4 w-4" />
+                              </Button>
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                onClick={() => handleDownload(blog.id)}
+                                className="h-9 w-9 hover:bg-green-100 hover:text-green-600 transition-all duration-200"
+                              >
+                                <Download className="h-4 w-4" />
+                              </Button>
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                onClick={() => handleDelete(blog.id)}
+                                className="h-9 w-9 hover:bg-red-100 hover:text-red-600 transition-all duration-200"
+                              >
+                                <Trash2 className="h-4 w-4" />
+                              </Button>
+                            </div>
+                          </TableCell>
+                        </motion.tr>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </CardContent>
+              </Card>
+            </motion.div>
 
-        {/* Pagination */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="flex justify-between items-center mt-8 text-sm text-gray-600"
-        >
-          <div className="font-medium">Showing 1-{blogs.length} of {blogs.length}</div>
-          <div className="flex gap-2">
-            <Button variant="outline" size="sm" disabled className="border-gray-200">
-              Previous
-            </Button>
-            <Button variant="outline" size="sm" className="bg-blue-600 text-white border-blue-600 hover:bg-blue-700">
-              1
-            </Button>
-            <Button variant="outline" size="sm" className="border-gray-200">
-              2
-            </Button>
-            <Button variant="outline" size="sm" className="border-gray-200">
-              Next
-            </Button>
-          </div>
-        </motion.div>
+            {/* Pagination */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="flex justify-between items-center mt-8 text-sm text-gray-600"
+            >
+              <div className="font-medium">Showing 1-{blogs.length} of {blogs.length}</div>
+              <div className="flex gap-2">
+                <Button variant="outline" size="sm" disabled className="border-gray-200">
+                  Previous
+                </Button>
+                <Button variant="outline" size="sm" className="bg-blue-600 text-white border-blue-600 hover:bg-blue-700">
+                  1
+                </Button>
+                <Button variant="outline" size="sm" className="border-gray-200">
+                  2
+                </Button>
+                <Button variant="outline" size="sm" className="border-gray-200">
+                  Next
+                </Button>
+              </div>
+            </motion.div>
+          </>
+        )}
       </div>
 
       <BlogCreationDialog 

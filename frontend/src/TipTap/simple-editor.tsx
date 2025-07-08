@@ -1,7 +1,7 @@
 import * as React from "react";
 import { EditorContent, EditorContext, useEditor } from "@tiptap/react";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 // --- Tiptap Core Extensions ---
 import { StarterKit } from "@tiptap/starter-kit";
@@ -68,6 +68,8 @@ import defaultContent  from "@/TipTap/data/content.json";
 import "@/TipTap/simple-editor.scss"
 import "@/TipTap/index.scss"
 
+import { useAuth } from "@clerk/clerk-react";
+import Loading from "@/components/pages/Loading";
 
 const MainToolbarContent = ({
   onHighlighterClick,
@@ -181,6 +183,19 @@ const MobileToolbarContent = ({
 );
 
 export function SimpleEditor() {
+
+  const { isLoaded, isSignedIn } = useAuth()
+  const navigate = useNavigate();
+
+  
+  if (!isSignedIn){
+    navigate('/')
+  }
+
+  if (!isLoaded){
+    return <Loading/>
+  }
+
   // @ts-ignore
   const { blogId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
