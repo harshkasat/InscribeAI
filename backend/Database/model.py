@@ -11,7 +11,7 @@ Base = declarative_base()
 class User(Base):
     __tablename__ = "users"
     id = Column(Integer, primary_key=True, autoincrement=True)
-    email = Column(String(15), nullable=False, unique=True)
+    email = Column(String(100), nullable=False, unique=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now(), default=func.now())
     credits: int = Column(Integer, nullable=False, default=5)
@@ -19,7 +19,7 @@ class User(Base):
 class Blog(Base):
     __tablename__ = "blogs"
     blog_id = Column(Integer, primary_key=True, autoincrement=True)
-    user_email = Column(String(15), ForeignKey("users.email"), nullable=False)
+    user_email = Column(String(100), ForeignKey("users.email"), nullable=False)
     blog_data = Column(JSON, nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now(), default=func.now())

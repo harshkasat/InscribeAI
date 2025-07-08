@@ -10,7 +10,7 @@
       "content": [
         {
           "type": "text",
-          "text": "Advanced Reranking RAG"
+          "text": "Gemma"
         }
       ]
     },
@@ -35,7 +35,7 @@
       "content": [
         {
           "type": "text",
-          "text": "Large Language Models (LLMs) are great at creating human-like text but can sometimes confidently generate incorrect or misleading information \u2013 this is known as 'hallucination'. To tackle this, we use something called "
+          "text": "In the fast-evolving world of AI, Google's "
         },
         {
           "type": "text",
@@ -44,7 +44,24 @@
               "type": "bold"
             }
           ],
-          "text": "Retrieval Augmented Generation (RAG)."
+          "text": "Gemma"
+        },
+        {
+          "type": "text",
+          "text": " models are making waves, particularly the "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Gemma 3n"
+        },
+        {
+          "type": "text",
+          "text": ". This blog post dives into the exciting updates around Gemma, focusing on its open-source availability and practical applications. It\u2019s designed to provide a comprehensive yet accessible overview for professionals looking to leverage these models."
         }
       ]
     },
@@ -56,7 +73,7 @@
       "content": [
         {
           "type": "text",
-          "text": "RAG helps improve LLMs by pulling in facts from external sources before generating an answer. This means the LLM has access to up-to-date and accurate information, helping reduce the risk of hallucination. RAG combines the power of information "
+          "text": "Gemma 3n was initially introduced as a preview during Google I/O, sparking interest due to its design for local hardware execution and native multimodal support. Now, Gemma 3n is fully accessible on widely used open-source libraries, including "
         },
         {
           "type": "text",
@@ -65,11 +82,11 @@
               "type": "bold"
             }
           ],
-          "text": "retrieval"
+          "text": "transformers"
         },
         {
           "type": "text",
-          "text": " with the LLM's "
+          "text": ", "
         },
         {
           "type": "text",
@@ -78,11 +95,24 @@
               "type": "bold"
             }
           ],
-          "text": "generation"
+          "text": "MLX"
         },
         {
           "type": "text",
-          "text": " capabilities."
+          "text": ", and "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "llama.cpp"
+        },
+        {
+          "type": "text",
+          "text": ", making it easier than ever to integrate into various projects. This availability marks a significant step towards democratizing access to advanced AI models."
         }
       ]
     },
@@ -94,7 +124,7 @@
       "content": [
         {
           "type": "text",
-          "text": "In this post, we're diving deeper into "
+          "text": "In this post, you'll learn how to use Gemma 3n with these libraries through practical code snippets, and how straightforward it is to "
         },
         {
           "type": "text",
@@ -103,24 +133,24 @@
               "type": "bold"
             }
           ],
-          "text": "Advanced Reranking RAG"
+          "text": "fine-tune"
         },
         {
           "type": "text",
-          "text": ", a technique that enhances standard RAG systems. We'll explore how "
+          "text": " it for specific tasks. We'll explore models, architecture, performance, and detailed inference examples. Whether you're working with text, images, or audio, this guide will provide you with the tools to get started with "
         },
         {
           "type": "text",
           "marks": [
             {
-              "type": "italic"
+              "type": "bold"
             }
           ],
-          "text": "reranking"
+          "text": "Gemma AI"
         },
         {
           "type": "text",
-          "text": " improves the relevance of retrieved information, ultimately leading to more accurate and reliable answers. By the end of this guide, you'll understand how to build your own advanced RAG system using Llama-Index, Llama 3, and Qdrant."
+          "text": "."
         }
       ]
     },
@@ -135,34 +165,9 @@
           "content": [
             {
               "type": "text",
-              "text": "Advanced Reranking RAG helps LLMs focus on the most relevant information, improving the accuracy of their answers."
+              "text": "Gemma 3n's open-source availability unlocks new possibilities for on-device AI applications, making advanced AI accessible to a broader range of developers and use cases."
             }
           ]
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "attrs": {
-        "textAlign": "left"
-      },
-      "content": [
-        {
-          "type": "text",
-          "text": "Next, we\u2019ll take a closer look at what makes RAG so important and explain how "
-        },
-        {
-          "type": "text",
-          "marks": [
-            {
-              "type": "bold"
-            }
-          ],
-          "text": "reranker models"
-        },
-        {
-          "type": "text",
-          "text": " play a vital role in the overall process."
         }
       ]
     },
@@ -187,7 +192,7 @@
       "content": [
         {
           "type": "text",
-          "text": "Welcome! In this section, we'll break down the essentials of "
+          "text": "Gemma, particularly the "
         },
         {
           "type": "text",
@@ -196,11 +201,11 @@
               "type": "bold"
             }
           ],
-          "text": "Advanced Reranking RAG"
+          "text": "Gemma 3n"
         },
         {
           "type": "text",
-          "text": ". Think of it as upgrading your regular RAG system to be smarter and more efficient. We'll explore what it is, why it matters, and how it works without getting lost in complicated details. "
+          "text": ", represents a significant stride in accessible AI. It's designed to operate efficiently on local hardware while supporting multiple data types, opening new possibilities for on-device applications. This section provides a concise overview of what makes Gemma 3n noteworthy."
         }
       ]
     },
@@ -212,7 +217,7 @@
       "content": [
         {
           "type": "text",
-          "text": "First, let's define a couple of key terms. "
+          "text": "At its core, Gemma 3n is a family of open-source models crafted by Google. The '3n' designation signifies its effective parameter size. These models are intended to balance performance and resource efficiency. Key to Gemma's appeal is its "
         },
         {
           "type": "text",
@@ -221,24 +226,11 @@
               "type": "bold"
             }
           ],
-          "text": "RAG (Retrieval Augmented Generation)"
+          "text": "multimodal capability"
         },
         {
           "type": "text",
-          "text": " combines retrieving relevant information from a knowledge base with the generation skills of Large Language Models (LLMs). "
-        },
-        {
-          "type": "text",
-          "marks": [
-            {
-              "type": "italic"
-            }
-          ],
-          "text": "Reranking"
-        },
-        {
-          "type": "text",
-          "text": ", on the other hand, is the process of intelligently reordering the retrieved documents to prioritize the most pertinent ones. This technique is crucial for filtering out noise and improving the quality of the information fed to the LLM."
+          "text": ", meaning it can process and generate content using images, text, audio, and video. "
         }
       ]
     },
@@ -250,7 +242,7 @@
       "content": [
         {
           "type": "text",
-          "text": "Imagine you're searching for information about a specific topic. A regular RAG system might give you a bunch of documents, some of which are only loosely related. An Advanced Reranking RAG system acts like a librarian, sorting through those documents and highlighting the ones that are most relevant to your query, saving you time and improving accuracy."
+          "text": "Think of it as a versatile tool that can analyze an image and provide a textual description or transcribe spoken audio into written text. For instance, you could input a photo of a product and ask Gemma to generate a marketing tagline. For example, you can provide an image and ask a specific question. You can also provide a speech segment and ask Gemma to transcribe the speech segment in English. "
         }
       ]
     },
@@ -265,7 +257,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Advanced Reranking RAG is like giving your AI a pair of glasses that helps it see the most important information clearly."
+              "text": "Gemma 3n makes advanced AI more accessible, empowering developers and researchers to explore innovative applications without requiring extensive computational resources."
             }
           ]
         }
@@ -279,38 +271,7 @@
       "content": [
         {
           "type": "text",
-          "text": "Now that we've covered the basics, let's dive into how these "
-        },
-        {
-          "type": "text",
-          "marks": [
-            {
-              "type": "bold"
-            }
-          ],
-          "text": "reranker models"
-        },
-        {
-          "type": "text",
-          "text": " work in the next section. We'll explore the specific components and processes that make Advanced Reranking RAG systems so effective. "
-        },
-        {
-          "type": "text",
-          "marks": [
-            {
-              "type": "link",
-              "attrs": {
-                "href": "https://www.example.com/advanced-rag-details",
-                "target": "_blank",
-                "rel": "noopener noreferrer nofollow"
-              }
-            }
-          ],
-          "text": "Learn more about RAG systems"
-        },
-        {
-          "type": "text",
-          "text": "."
+          "text": "In the next section, we\u2019ll delve into the specific model releases within the Gemma 3n family and their unique characteristics."
         }
       ]
     },
@@ -323,7 +284,7 @@
       "content": [
         {
           "type": "text",
-          "text": "Important Components"
+          "text": "Section 2: Important Components"
         }
       ]
     },
@@ -335,7 +296,7 @@
       "content": [
         {
           "type": "text",
-          "text": "Advanced Reranking RAG systems rely on several crucial components working together. Understanding these components is essential for building a robust and effective system. We'll break down each part, making it easy to grasp even if you're new to this topic. Let's dive in and see what makes Advanced Reranking RAG tick!"
+          "text": "Gemma 3n, like other models in the Gemma family, is built on several key components that enable its capabilities. Understanding these components is crucial for leveraging the model effectively. Let\u2019s explore some of the most important aspects of its design."
         }
       ]
     },
@@ -347,7 +308,7 @@
       "content": [
         {
           "type": "text",
-          "text": "First, you have the "
+          "text": "At its core, Gemma 3n features both an "
         },
         {
           "type": "text",
@@ -356,11 +317,37 @@
               "type": "bold"
             }
           ],
-          "text": "Retrieval Model"
+          "text": "audio encoder"
         },
         {
           "type": "text",
-          "text": ", which is responsible for initially fetching potentially relevant documents from a vector store. Think of it as a broad search to gather as much context as possible."
+          "text": " and a "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "vision encoder"
+        },
+        {
+          "type": "text",
+          "text": ", in addition to its language decoder. This multimodal support means the model can process and understand various types of inputs, including text, images, and audio. This is particularly relevant for use cases requiring interaction with multiple data types. The "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "language decoder"
+        },
+        {
+          "type": "text",
+          "text": " is responsible for generating coherent and contextually relevant text outputs based on the inputs it receives."
         }
       ]
     },
@@ -372,7 +359,33 @@
       "content": [
         {
           "type": "text",
-          "text": "Next comes the "
+          "text": "Another critical aspect of Gemma 3n is its size. The models are released in two variants: "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "code"
+            }
+          ],
+          "text": "gemma-3n-E2B"
+        },
+        {
+          "type": "text",
+          "text": " and "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "code"
+            }
+          ],
+          "text": "gemma-3n-E4B"
+        },
+        {
+          "type": "text",
+          "text": ". Despite having "
         },
         {
           "type": "text",
@@ -381,36 +394,11 @@
               "type": "bold"
             }
           ],
-          "text": "Reranker Model"
+          "text": "effective parameter counts"
         },
         {
           "type": "text",
-          "text": ", the star of our advanced system. Unlike the initial retrieval, which focuses on broad similarity, the reranker intelligently sorts the retrieved documents by relevance to the specific query. This ensures the most pertinent information is prioritized."
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "attrs": {
-        "textAlign": "left"
-      },
-      "content": [
-        {
-          "type": "text",
-          "text": "Finally, there's the "
-        },
-        {
-          "type": "text",
-          "marks": [
-            {
-              "type": "bold"
-            }
-          ],
-          "text": "Large Language Model (LLM)"
-        },
-        {
-          "type": "text",
-          "text": ", which uses the reranked, high-quality context to generate accurate and reliable answers. This makes sure the LLM focuses on the best possible information."
+          "text": " of 2B and 4B respectively, they deliver performance comparable to larger models. This is achieved through improvements in memory efficiency, allowing these models to run on hardware with limited VRAM. This makes them accessible for local execution on devices with modest GPU capabilities."
         }
       ]
     },
@@ -425,7 +413,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Reranking acts as a filter, ensuring the LLM gets the most relevant information, leading to better, more accurate responses."
+              "text": "Gemma 3n's architecture and design choices make it a versatile model for various applications, from on-device processing to multimodal tasks. Understanding these components allows you to optimize its usage in your projects."
             }
           ]
         }
@@ -439,7 +427,7 @@
       "content": [
         {
           "type": "text",
-          "text": "Now that we've covered the main components, let's delve into the various reranking techniques available and how they contribute to the overall effectiveness of your RAG system."
+          "text": "Now that we've covered the key components, the next section will show you how to run inference using various libraries."
         }
       ]
     },
@@ -464,7 +452,7 @@
       "content": [
         {
           "type": "text",
-          "text": "Ready to dive in? This section breaks down the steps for building an advanced reranking RAG system. We'll guide you through the entire process. Don't worry if you're new to this \u2013 we'll keep it straightforward and easy to follow."
+          "text": "Let's walk through the steps to get started with Gemma 3n. This section provides a clear, step-by-step guide to help you integrate Gemma into your projects. From setting up the environment to running your first inference, we've got you covered. Remember to adapt the instructions to your specific needs and always refer to the official documentation for detailed information."
         }
       ]
     },
@@ -476,44 +464,188 @@
       "content": [
         {
           "type": "text",
-          "text": "First, ensure you have the necessary libraries installed. We use Llama-Index, Qdrant, and Llama 3, so install the libraries. This step is crucial for enabling all the functionalities we'll be using. A requirements.txt file will ensure all necessary libraries will be installed."
-        }
-      ]
-    },
-    {
-      "type": "codeBlock",
-      "attrs": {
-        "language": "python"
-      },
-      "content": [
-        {
-          "type": "text",
-          "text": "%%writefile requirements.txt\nllama-index\nllama-index-llms-huggingface\nllama-index-embeddings-fastembed\nfastembed\nUnstructured[md]\nqdrant\nllama-index-vector-stores-qdrant\neinops\naccelerate\nsentence-transformers\n#!pip install -r requirements.txt"
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "attrs": {
-        "textAlign": "left"
-      },
-      "content": [
-        {
-          "type": "text",
-          "text": "Next, define your system prompt for the LLM. This sets the stage for how the LLM will interact with your queries. Think of it as giving your LLM a persona \u2013 a helpful and accurate Q&A assistant. Now proceed with the code implementations. This whole configuration needs to be done carefully for "
+          "text": "Follow these steps to use Gemma 3n with "
         },
         {
           "type": "text",
           "marks": [
             {
-              "type": "bold"
+              "type": "code"
             }
           ],
-          "text": "Advanced Reranking RAG."
+          "text": "transformers"
         },
         {
           "type": "text",
-          "text": " Remember, the quality of your prompt can greatly impact the accuracy of your responses. You can use a query wrapper prompt, by defining \"<|USER|>\", and \"<|ASSISTANT|>\" roles."
+          "text": ":"
+        }
+      ]
+    },
+    {
+      "type": "bulletList",
+      "content": [
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "attrs": {
+                "textAlign": "left"
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Install the necessary libraries. Make sure you have the latest versions of "
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "code"
+                    }
+                  ],
+                  "text": "timm"
+                },
+                {
+                  "type": "text",
+                  "text": " and "
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "code"
+                    }
+                  ],
+                  "text": "transformers"
+                },
+                {
+                  "type": "text",
+                  "text": " installed:"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "attrs": {
+                "textAlign": "left"
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Use the "
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "code"
+                    }
+                  ],
+                  "text": "pipeline"
+                },
+                {
+                  "type": "text",
+                  "text": " abstraction for a quick start. This is the easiest way to start using Gemma 3n:"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "attrs": {
+                "textAlign": "left"
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Initialize the model and processor. Load the "
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "code"
+                    }
+                  ],
+                  "text": "AutoProcessor"
+                },
+                {
+                  "type": "text",
+                  "text": " and "
+                },
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "code"
+                    }
+                  ],
+                  "text": "AutoModelForImageTextToText"
+                },
+                {
+                  "type": "text",
+                  "text": " from the Hub:"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "attrs": {
+                "textAlign": "left"
+              },
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Define a function for model generation. This function should handle processing the prompts and running inference on the model."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "attrs": {
+        "textAlign": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "To run multimodal inference, you can input text, audio, or images. For video, process it as a sequence of image frames. Be sure to explore the "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://example.com/gemma-3n-documentation",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow"
+              }
+            }
+          ],
+          "text": "official documentation"
+        },
+        {
+          "type": "text",
+          "text": " for more details."
         }
       ]
     },
@@ -528,7 +660,7 @@
           "content": [
             {
               "type": "text",
-              "text": "Tip: Keep your instructions clear and concise in the system prompt. This helps the LLM understand its role and deliver better results."
+              "text": "Tip: When working with multimodal inputs, ensure your data is preprocessed correctly to match the model's expected input format. This often involves resizing images, normalizing audio, or tokenizing text."
             }
           ]
         }
@@ -542,20 +674,7 @@
       "content": [
         {
           "type": "text",
-          "text": "With these steps completed, you're well on your way to harnessing the power of "
-        },
-        {
-          "type": "text",
-          "marks": [
-            {
-              "type": "bold"
-            }
-          ],
-          "text": "Advanced Reranking RAG"
-        },
-        {
-          "type": "text",
-          "text": ". Next, we'll explore the intricacies of incorporating Llama 3 and Qdrant into your system, ensuring seamless integration and optimal performance."
+          "text": "With these steps, you are now equipped to begin using Gemma 3n in your projects. Next, we\u2019ll explore fine-tuning the Gemma 3n in a free Google Colab."
         }
       ]
     },
@@ -580,31 +699,7 @@
       "content": [
         {
           "type": "text",
-          "text": "Reranking RAG can hit a few snags if you're not careful. One common issue is the \"lost in the middle\" problem, where the most relevant information gets buried among less important stuff. This happens when the reranker struggles to prioritize the right context. Another challenge is dealing with diverse data sources. If your information comes from different places with varying formats, the reranker might have trouble understanding what's truly relevant."
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "attrs": {
-        "textAlign": "left"
-      },
-      "content": [
-        {
-          "type": "text",
-          "text": "Also, don't underestimate the impact of the reranker model itself. Choosing the wrong model or not fine-tuning it properly can lead to subpar results. The reranker needs to be well-suited to your specific data and use case to effectively boost the most relevant information. Finally, like any AI system, reranking RAG can sometimes be a black box. It's not always clear why the reranker made certain decisions, which can make debugging and optimization tricky."
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "attrs": {
-        "textAlign": "left"
-      },
-      "content": [
-        {
-          "type": "text",
-          "text": "To tackle these challenges, focus on a few key strategies. First, experiment with different reranking models and fine-tune them on your data to improve accuracy. Make sure the model has been trained on a dataset suitable for RAG systems, this will improve your "
+          "text": "As with any new technology, users may encounter some common challenges when working with the "
         },
         {
           "type": "text",
@@ -613,11 +708,37 @@
               "type": "bold"
             }
           ],
-          "text": "Advanced Reranking RAG"
+          "text": "Gemma"
         },
         {
           "type": "text",
-          "text": " system. Second, clean and standardize your data sources to ensure consistency. This helps the reranker better understand and prioritize the relevant context. Keep in mind the techniques discussed in the article 'Understanding Reranker Models With Sylvie Shi'."
+          "text": " models. One frequent misconception is assuming that smaller models like "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Gemma 3n"
+        },
+        {
+          "type": "text",
+          "text": " can perform equally well as larger models in all tasks. While Gemma 3n is highly capable, understanding its limitations is crucial for optimal use. Another issue is related to the "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Graphics processing unit"
+        },
+        {
+          "type": "text",
+          "text": " requirements; ensure your hardware meets the necessary specifications for smooth operation."
         }
       ]
     },
@@ -629,7 +750,139 @@
       "content": [
         {
           "type": "text",
-          "text": "Moreover, implement monitoring and evaluation metrics to track the reranker's performance and identify areas for improvement. Techniques discussed in \"AI's Memory Upgrade: Max Rumpf on how to build advanced RAG systems\" could be helpful here. By actively addressing these common issues, you can build a more robust and effective reranking RAG system."
+          "text": "A common problem is running out of GPU memory when using larger "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Gemma"
+        },
+        {
+          "type": "text",
+          "text": " models. To mitigate this, try reducing the batch size or using mixed precision techniques. Another challenge is ensuring that you have the latest versions of required libraries like "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "transformers"
+        },
+        {
+          "type": "text",
+          "text": " and "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "timm"
+        },
+        {
+          "type": "text",
+          "text": ". Keep your dependencies updated to avoid compatibility issues."
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "https://www.example.com/placeholder-troubleshooting.jpg",
+        "alt": "Troubleshooting diagram for common AI model issues",
+        "title": "Troubleshooting Gemma Models"
+      }
+    },
+    {
+      "type": "paragraph",
+      "attrs": {
+        "textAlign": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "For those new to "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "fine-tuning"
+        },
+        {
+          "type": "text",
+          "text": ", the process can seem daunting. Start with smaller datasets and experiment with different learning rates to find the optimal configuration. Consider using pre-built notebooks and scripts from the "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://example.com/gemma-recipes",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow"
+              }
+            }
+          ],
+          "text": "Hugging Face Gemma Recipes"
+        },
+        {
+          "type": "text",
+          "text": " repository as a starting point. If you encounter unexpected results, check your data preprocessing steps and ensure your data is properly formatted."
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "content": [
+        {
+          "type": "paragraph",
+          "attrs": {
+            "textAlign": null
+          },
+          "content": [
+            {
+              "type": "text",
+              "text": "Remember, the key to successfully using Gemma is understanding its strengths and limitations, and adapting your approach accordingly."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "attrs": {
+        "textAlign": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "By addressing these common issues and misconceptions head-on, you'll be well-equipped to make the most of the "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Gemma"
+        },
+        {
+          "type": "text",
+          "text": " models in your projects. Next, we'll explore some of the exciting use cases where Gemma shines."
         }
       ]
     },
@@ -654,7 +907,7 @@
       "content": [
         {
           "type": "text",
-          "text": "In conclusion, we've explored Advanced Reranking RAG in detail. "
+          "text": "In conclusion, we've explored Gemma in detail. "
         },
         {
           "type": "text",

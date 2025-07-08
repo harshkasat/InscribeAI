@@ -3,7 +3,7 @@ from fastapi.responses import  JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from Router import user_db_router, blog_db_router
 from utils.jwt_simple import verify_token, create_access_token
-from utils.jwt_auth import jwt_auth_required
+from utils.jwt_auth import get_tokens_from_cookie, get_refresh_tokens_from_cookie
 
 
 app = FastAPI(
@@ -18,7 +18,6 @@ origins = [
     "http://localhost:3000",  # Your React app URL
     "https://your-react-app-domain.com", # Your deployed React app URL
     "http://localhost:5173",
-    "*"
 ]
 
 app.add_middleware(
@@ -41,16 +40,9 @@ async def get_health():
 
 
 @app.post("/refresh_token")
-async def refresh_token_api(request: Request):
-    body = await request.json()
-    token = body.get("refresh_token")
+async def refresh_token_api(payload = Depends(get_refresh_tokens_from_cookie)):
 
-    if not token:
-        raise HTTPException(status_code=400, detail="Refresh token required")
-
-    payload = verify_token(token)  # will raise if expired/invalid
     email = payload.get("sub")
-
     new_access_token = create_access_token(email)
 
     return JSONResponse({
@@ -58,11 +50,10 @@ async def refresh_token_api(request: Request):
     })
 
 @app.get("/protected")
-async def protected(payload=Depends(jwt_auth_required)):
+async def protected(payload=Depends(get_tokens_from_cookie)):
+
     email = payload.get("sub")
-
     return JSONResponse({"message": f"Hello, {email}. Access granted."})
-
 
 
 PREFIX = '/api/v1'

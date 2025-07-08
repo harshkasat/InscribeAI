@@ -41,6 +41,7 @@ class UserModelOperations:
         """
         try:
             with SessionLocal() as session:
+                print("New user email id ", len(self.user_email))
                 new_user = User(email=self.user_email)
                 session.add(new_user)
                 session.commit()

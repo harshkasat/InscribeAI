@@ -37,19 +37,57 @@ async def create_users(user:UserModel):
         user_info = _user.check_user_exists()
 
         if user_info["status_code"] == 200:
-            return JSONResponse(user_info)
+            access_token = create_access_token(user.email)
+            refresh_token = create_refresh_token(user.email)
+            response = JSONResponse({
+                    "message": "User created successfully",
+                    "user_details": user_info,
+                }, status_code=201)
+            response.set_cookie(
+                key="access_token",
+                value=access_token,
+                httponly=True,
+                secure=False,
+                max_age=60 * 30
+            )
+            response.set_cookie(
+                key="refresh_token",
+                value=refresh_token,
+                httponly=True,
+                secure=False,
+                max_age=60 * 30
+            )
+            return response
 
         if  user_info['status_code'] == 404:
             create_user = _user.create_user()
             if create_user['status_code'] == 201:
                 access_token = create_access_token(user.email)
                 refresh_token = create_refresh_token(user.email)
-                return JSONResponse({
+                response = JSONResponse({
                     "message": "User created successfully",
                     "user_details": create_user,
-                    "access_token": access_token,
-                    "refresh_token": refresh_token
                 }, status_code=201)
+
+                response.set_cookie(
+                    key="access_token",
+                    value=access_token,
+                    httponly=True,
+                    secure=False,
+                    max_age=60 * 30
+                )
+                response.set_cookie(
+                        key="refresh_token",
+                        value=refresh_token,
+                        httponly=True,
+                        secure=False,
+                        max_age=60 * 30
+                    )
+                return response
+            else:
+                return JSONResponse({
+                    "message" : create_user
+                }, status_code=500)
         return JSONResponse({
             "message": "Internal Error",
             "user_details": user_info

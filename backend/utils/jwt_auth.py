@@ -2,12 +2,15 @@ from fastapi import Request, HTTPException, status
 from fastapi.responses import JSONResponse
 from utils.jwt_simple import verify_token
 
-def jwt_auth_required(request: Request):
-    auth_header = request.headers.get("Authorization")
-    if not auth_header or not auth_header.startswith("Bearer "):
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Missing or invalid Authorization header"
-        )
-    token = auth_header.split(" ", 1)[1]
-    return verify_token(token)
+def get_tokens_from_cookie(request:Request):
+    access_token = request.cookies.get("access_token")
+    print("access token", access_token)
+    return verify_token(access_token)
+
+
+def get_refresh_tokens_from_cookie(request:Request):
+    refresh_token = request.cookies.get("refresh_token")
+    if not refresh_token:
+        raise HTTPException(status_code=400, detail="Refresh token required")
+    
+    return verify_token(refresh_token)

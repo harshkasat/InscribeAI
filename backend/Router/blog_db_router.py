@@ -5,11 +5,11 @@ from Database.db_operations import BlogModelOperations
 from schemas import BlogAiRequest
 
 from blog_content_generation import BlogGeneration
-from utils.jwt_auth import jwt_auth_required
+from utils.jwt_auth import get_tokens_from_cookie
 
 
-class BlogModel(BlogAiRequest):
-    email: str = Field(min_length=5)
+# class BlogModel(BlogAiRequest):
+#     email: str = Field(min_length=5)
 
 
 class BlogUpdate(BaseModel):
@@ -23,7 +23,7 @@ router = APIRouter(
 
 
 @router.post("/create_blog/")
-async def create_blog(blog_request: BlogModel, payload=Depends(jwt_auth_required)):
+async def create_blog(blog_request: BlogAiRequest, payload=Depends(get_tokens_from_cookie)):
     try:
         blog_ai = {
             "blog_name": blog_request.blog_name,
@@ -71,7 +71,7 @@ async def create_blog(blog_request: BlogModel, payload=Depends(jwt_auth_required
 
 
 @router.get("/list_blogs/")
-async def list_blogs(payload=Depends(jwt_auth_required)):
+async def list_blogs(payload=Depends(get_tokens_from_cookie)):
     try:
         user_email = payload.get("sub") if payload and "sub" in payload else None
         if not user_email:
@@ -93,7 +93,7 @@ async def list_blogs(payload=Depends(jwt_auth_required)):
 
 
 @router.delete("/delete_blog/")
-async def delete_blog(blog_id, payload=Depends(jwt_auth_required)):
+async def delete_blog(blog_id, payload=Depends(get_tokens_from_cookie)):
     try:
         user_email = payload.get("sub") if payload and "sub" in payload else None
         if not user_email:
@@ -123,7 +123,7 @@ async def delete_blog(blog_id, payload=Depends(jwt_auth_required)):
 
 
 @router.get("/get_blog/")
-async def get_blog(blog_id, payload=Depends(jwt_auth_required)):
+async def get_blog(blog_id, payload=Depends(get_tokens_from_cookie)):
     try:
         user_email = payload.get("sub") if payload and "sub" in payload else None
         if not user_email:
@@ -153,7 +153,7 @@ async def get_blog(blog_id, payload=Depends(jwt_auth_required)):
 
 
 @router.put("/update_blog/")
-async def update_blog(user_data: BlogUpdate, payload=Depends(jwt_auth_required)):
+async def update_blog(user_data: BlogUpdate, payload=Depends(get_tokens_from_cookie)):
     try:
         user_email = payload.get("sub") if payload and "sub" in payload else None
         if not user_email:
